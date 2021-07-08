@@ -183,14 +183,7 @@ public class RestController {
 		}
 		return new ModelAndView("member/mypage.html");
 	}
-/*
-	@GetMapping("/getMetaDetail")
-	public Meta getMetaDetail(@RequestParam String id, HttpServletRequest request) throws Exception {
-		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		String team = sessionMember.getTeam();
-		return metaService.getMetaDetail(id, team);
-	}
-*/
+
 	@GetMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -211,14 +204,13 @@ public class RestController {
 		return mav;
 	}
 
-	
 	@GetMapping("/metaSearchList")
 	public ModelAndView getSearchMetaList(@RequestParam String id, HttpServletRequest request) {
 		System.out.println("RestController - getSearchMetaList : " + id + " : " + request);
 		ModelAndView mav = new ModelAndView();
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		String team = sessionMember.getTeam();
-		List<Meta> metalist = metaService.getMetaListByName(id,team);
+		List<Meta> metalist = metaService.getMetaListByName(id, team);
 		System.out.println(metalist);
 		mav.addObject("metalist", metalist);
 		mav.setViewName("meta/metaSearchList.html");
@@ -254,37 +246,37 @@ public class RestController {
 
 	@PostMapping("/insertMeta")
 	public String loginInsertMeta(@RequestBody MetaCreateRequestDto dto, HttpServletRequest request) throws Exception {
-		System.out.println("RestController - loginInsertMeta : " + dto  + " : " + request);
+		System.out.println("RestController - loginInsertMeta : " + dto + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		return metaService.createMeta(dto, sessionMember);
 	}
 
-	/*
-	 * 
-	 * 
-	 * @GetMapping("/metaUpdate") public ModelAndView
-	 * loginUpdateMetaForm(@RequestParam String id, HttpServletRequest request) {
-	 * Member sessionMember = (Member) request.getSession().getAttribute("member");
-	 * String team = sessionMember.getTeam(); String searchid = id+"_"+team; Meta
-	 * meta = null; try { meta = firebaseServiceMeta.getMetaDetail(searchid,team); }
-	 * catch (Exception e) { e.printStackTrace(); }
-	 * meta.setId(meta.getId().substring(0,meta.getId().length() -
-	 * meta.getSave_team().length()-1)); ModelAndView mav = new ModelAndView();
-	 * mav.addObject("meta",meta); mav.setViewName("meta/metaupdate.html"); return
-	 * mav; }
-	 * 
-	 * @PostMapping("/metaUpdate") public String loginUpdateMeta(@RequestBody Meta
-	 * inputMeta, HttpServletRequest request) { Member sessionMember = (Member)
-	 * request.getSession().getAttribute("member"); String team =
-	 * sessionMember.getTeam(); String searchid = inputMeta.getId()+"_"+team; Meta
-	 * meta = null; try { meta = firebaseServiceMeta.getMetaDetail(searchid,team);
-	 * if(firebaseServiceMeta.updateMeta(inputMeta, sessionMember) != null) { return
-	 * "success"; } } catch (Exception e) { e.printStackTrace(); } return "fail"; }
-	 * 
-	 * @GetMapping("/metaDelete") public ModelAndView loginDeleteMeta(@RequestParam
-	 * String id) { try { firebaseServiceMeta.deleteMeta(id); } catch (Exception e)
-	 * { e.printStackTrace(); } return new ModelAndView("main/index.html"); }
-	 */
+	@GetMapping("/metaUpdate")
+	public ModelAndView loginUpdateMetaForm(@RequestParam String id, HttpServletRequest request) {
+		System.out.println("RestController - loginUpdateMetaForm : " + id + " : " + request);
+		Meta meta = metaService.getMetaDetail(Long.parseLong(id));
+		ModelAndView mav = new ModelAndView();
+		System.out.println(meta);
+		mav.addObject("meta", meta);
+		mav.setViewName("meta/metaupdate.html");
+		return mav;
+	}
+
+	@PostMapping("/metaUpdate")
+	public String loginUpdateMeta(@RequestBody Meta inputMeta, HttpServletRequest request) {
+		System.out.println("RestController - loginUpdateMeta : " + inputMeta + " : " + request);
+		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		if(metaService.updateMeta(inputMeta, sessionMember)) {
+			return "success";
+		}
+		return "fail";
+	}
+
+	@GetMapping("/metaDelete")
+	public ModelAndView loginDeleteMeta(@RequestParam String id) {
+		metaService.deleteMeta(Long.parseLong(id));
+		return new ModelAndView("main/index.html");
+	}
 
 	@GetMapping("/insertBoard")
 	public ModelAndView insertBoard() {

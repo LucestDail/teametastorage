@@ -195,9 +195,9 @@ main = {
     },metaupdate : function () {
     	console.log("meta update activated");
 		var data={
-			id:$('#id').val(),
-			name_eng:$('#name_eng').val(),
-			name_kor:$('#name_kor').val(),
+			metaSeq:$('#metaSeq').val(),
+			nameEng:$('#nameEng').val(),
+			nameKor:$('#nameKor').val(),
 			explanation:$('#explanation').val(),
 			type:$('#type').val()
 			}

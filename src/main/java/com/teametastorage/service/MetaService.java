@@ -62,4 +62,16 @@ public class MetaService {
 		return metaRepository.getById(metaSeq);
 	}
 
+	public boolean updateMeta(Meta inputMeta, Member sessionMember) {
+		System.out.println("MetaService - updateMeta : " + inputMeta + " : " + sessionMember);
+		metaRepository.update(inputMeta.getMetaSeq(), inputMeta.getNameKor(), inputMeta.getNameEng(), inputMeta.getExplanation(),inputMeta.getType(), sessionMember.getName());
+		return true;
+	}
+
+	public void deleteMeta(long id) {
+		System.out.println("MetaService - deleteMeta : " + id);
+		// TODO Auto-generated method stub
+		metaRepository.deleteById(id);
+	}
+
 }

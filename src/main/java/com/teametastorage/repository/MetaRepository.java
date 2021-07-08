@@ -18,7 +18,7 @@ public interface MetaRepository extends JpaRepository<Meta, Long> {
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE FROM Meta m SET m.nameKor=:nameKor, m.nameEng=:nameEng,  m.explanation=:explanation, m.saveName =:saveName WHERE m.metaSeq=:metaSeq")
+	@Query("UPDATE FROM Meta m SET m.nameKor=:nameKor, m.nameEng=:nameEng,  m.explanation=:explanation, m.type=:type, m.saveName =:saveName WHERE m.metaSeq=:metaSeq")
 	void update(@Param("metaSeq") Long metaSeq, @Param("nameKor") String nameKor, @Param("nameEng") String nameEng,
-			@Param("explanation") String explanation, @Param("saveName") String saveName);
+			@Param("explanation") String explanation, @Param("type") String type, @Param("saveName") String saveName);
 }
