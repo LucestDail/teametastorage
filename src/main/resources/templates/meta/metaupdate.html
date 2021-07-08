@@ -4,37 +4,44 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!--부트스트랩 css 추가-->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<!--부트스트랩 css 추가-->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
-<h1>메타 데이터 수정</h1><br>
-<input type="hidden" th:value="${meta.metaSeq}" id="metaSeq">
-<table class = "table">
-	<tr><th>영문명칭</th>
-		<td><input type="text" id="nameEng" th:value="${meta.nameEng}"></td></tr>
-	<tr>
-		<th>한글명칭</th>
-		<td><input type="text" id="nameKor" th:value="${meta.nameKor}"></td></tr>
+	<h1>메타 데이터 수정</h1>
+	<br>
+	<input type="hidden" th:value="${meta.metaSeq}" id="metaSeq">
+	<table class="table">
 		<tr>
-		<th>변수타입</th>
-		<td><input type="text" id="type" th:value="${meta.type}"></td></tr>
-	<tr>
-		<th>설명</th>
-		<td><input type="text" id="explanation" th:value="${meta.explanation}"></td></tr>
-	<tr>
-		<td colspan="2" align="center">
-			<input type="button" value="수정" id="btnmetaupdate" class="btn btn-primary">
-			<a th:href="@{'getMetaInfo?id='+${meta.metaSeq}}" class="btn btn-primary">돌아가기</a>
-		</td>
-	</tr>
-</table>
-    <!--부트스트랩 js, jquery 추가-->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-<!--custom js 추가-->
-    <script src="/js/main.js"></script>
+			<th>영문명칭</th>
+			<td><input type="text" id="nameEng" th:value="${meta.nameEng}"></td>
+		</tr>
+		<tr>
+			<th>한글명칭</th>
+			<td><input type="text" id="nameKor" th:value="${meta.nameKor}"></td>
+		</tr>
+		<tr>
+			<th>변수타입</th>
+			<td><input type="text" id="type" th:value="${meta.type}"></td>
+		</tr>
+		<tr>
+			<th>설명</th>
+			<td><input type="text" id="explanation"
+				th:value="${meta.explanation}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="button" value="수정"
+				id="btnmetaupdate" class="btn btn-primary"> <a
+				th:href="@{'getMetaInfo?id='+${meta.metaSeq}}"
+				class="btn btn-primary">돌아가기</a></td>
+		</tr>
+	</table>
+	<!--부트스트랩 js, jquery 추가-->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<!--custom js 추가-->
+	<script src="/js/main.js"></script>
 </body>
 </html>

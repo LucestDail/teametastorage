@@ -266,7 +266,7 @@ public class RestController {
 	public String loginUpdateMeta(@RequestBody Meta inputMeta, HttpServletRequest request) {
 		System.out.println("RestController - loginUpdateMeta : " + inputMeta + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		if(metaService.updateMeta(inputMeta, sessionMember)) {
+		if (metaService.updateMeta(inputMeta, sessionMember)) {
 			return "success";
 		}
 		return "fail";
