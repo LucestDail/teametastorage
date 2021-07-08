@@ -1,0 +1,7 @@
+@charset "UTF-8";
+.menu a{
+    cursor:pointer;
+}
+.menu .hide{
+    display: none;
+}

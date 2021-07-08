@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--부트스트랩 css 추가-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<h1>메타 데이터 수정 : <span th:text="${meta.id}"></span></h1><br>
+<input type="hidden" th:value="${meta.id}" id="id">
+<table class = "table">
+	<tr><th>영문명칭</th>
+		<td><input type="text" id="name_eng" th:value="${meta.name_eng}"></td></tr>
+	<tr>
+		<th>한글명칭</th>
+		<td><input type="text" id="name_kor" th:value="${meta.name_kor}"></td></tr>
+		<tr>
+		<th>변수타입</th>
+		<td><input type="text" id="type" th:value="${meta.type}"></td></tr>
+	<tr>
+		<th>설명</th>
+		<td><input type="text" id="explanation" th:value="${meta.explanation}"></td></tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="button" value="수정" id="btnmetaupdate" class="btn btn-primary">
+			<a th:href="@{'getMetaDetail?id='+${meta.id}}" class="btn btn-primary">돌아가기</a>
+		</td>
+	</tr>
+</table>
+    <!--부트스트랩 js, jquery 추가-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+<!--custom js 추가-->
+    <script src="/js/main.js"></script>
+</body>
+</html>

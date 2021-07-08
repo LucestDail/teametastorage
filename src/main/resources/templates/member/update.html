@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--부트스트랩 css 추가-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<table class = "table">
+<tr>
+	<th>
+		id
+	</th>
+	<td>
+		<input th:value="${session.member.id}" type="text" id="id" readonly>
+	</td>
+	</tr>
+	<tr>
+	<th>
+		password
+	</th>
+	<td>
+		<input th:value="${session.member.password}" type="text" id="password">
+	</td>
+	</tr>
+	<tr>
+	<th>
+		name
+	</th>
+	<td>
+		<input th:value="${session.member.name}" type="text" id="name">
+	</td>
+	</tr>
+	<tr>
+	<th>
+		team
+	</th>
+	<td>
+		<input th:value="${session.member.team}" type="text" id="team">
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="button" value = "register" id="btnmemberupdate" class="btn btn-primary">
+	</td>
+</tr>
+</table>
+    <!--부트스트랩 js, jquery 추가-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!--custom js 추가-->
+    <script src="/js/main.js"></script>
+</body>
+</html>

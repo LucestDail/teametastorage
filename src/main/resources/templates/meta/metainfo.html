@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--부트스트랩 css 추가-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<h1>검색 결과 : <span th:text="${meta.id}"></span></h1><br>
+<table class = "table">
+	<tr><th>영문명칭</th>
+	<td><span th:text="${meta.name_eng}"></span></td></tr>
+	<tr>
+		<th>한글명칭</th>
+		<td><span th:text="${meta.name_kor}"></span></td></tr>
+		<tr>
+		<th>변수타입</th>
+		<td><span th:text="${meta.type}"></span></td></tr>
+		<tr>
+		<th>작성팀</th>
+		<td><span th:text="${meta.save_team}"></span></td></tr>
+		<tr>
+		<th>작성자</th>
+		<td><span th:text="${meta.save_name}"></span></td></tr>
+		<tr>
+		<th>작성일자</th>
+		<td><span th:text="${meta.save_date}"></span></td></tr>
+		<tr>
+		<th>설명</th>
+		<td><span th:text="${meta.explanation}"></span></td></tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="button" class="btn btn-primary" value="돌아가기" onclick="location.href='metasearch'">
+			<a th:href="@{'metaUpdate?id='+${meta.id}}" class="btn btn-primary">수정</a>
+			<input type="button" value="삭제" onclick="delete_confirm()" class = "btn btn-primary">
+			<script type="text/javascript">
+				function delete_confirm(){
+					if(confirm("delete?")){
+						location.href="/metaDelete?id=[[${meta.id}]]";
+					}else{
+						location.reload();
+					}
+				}
+			</script>
+		</td>
+	</tr>
+</table>
+
+
+    <!--부트스트랩 js, jquery 추가-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>

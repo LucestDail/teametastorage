@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--부트스트랩 css 추가-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<h1>정보</h1><br>
+<table class = "table">
+	<tr>
+		<th>아이디</th>
+		<td><span th:text="${session.member.id}"></span></td>
+	</tr>
+	<tr>
+		<th>패스워드</th>
+		<td><span th:text="${session.member.password}"></span></td>
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><span th:text="${session.member.name}"></span></td>
+	</tr>
+	<tr>
+		<th>팀명칭</th>
+		<td><span th:text="${session.member.team}"></span></td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<a href="main" class = "btn btn-primary">돌아가기</a>
+			<a href="updateMember" class = "btn btn-primary">수정</a>
+			<input type="button" value="삭제" onclick="delete_confirm()" class = "btn btn-primary">
+			<script type="text/javascript">
+				function delete_confirm(){
+					if(confirm("delete?")){
+						location.href="/deleteMember?id=[[${session.member.id}]]";
+					}else{
+						location.reload();
+					}
+				}
+			</script>
+		</td>
+	</tr>
+</table>
+    <!--부트스트랩 js, jquery 추가-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>

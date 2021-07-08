@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: local #basic configuration select
+    
+#local environment
+---
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mariadb://webservice.ce5zdjsnjhyy.ap-northeast-2.rds.amazonaws.com:3306/teametastorage
+    username: admin
+    password: admin1234
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update

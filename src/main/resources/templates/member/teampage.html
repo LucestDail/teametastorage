@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--부트스트랩 css 추가-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<h1>you result</h1><br>
+<table class = "table">
+	<tr align="center">
+		<td><strong>아이디</strong></td>
+		<td><strong>이름</strong></td>
+	</tr>
+	<tr th:each="team:${teamlist}" align="center">
+		<td><span th:text="${team.memberId}"></span></td>
+		<td><span th:text="${team.name}"></span></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<a href="/main" class="btn btn-primary">돌아가기</a>
+		</td>
+	</tr>
+</table>
+    <!--부트스트랩 js, jquery 추가-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

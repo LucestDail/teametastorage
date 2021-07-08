@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Index Page</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+<h1><span th:text="${session.member.team}"></span>팀, <span th:text="${session.member.name}"></span>님!</h1><br>
+<table class="table">
+	<tr>
+		<th>
+			메타데이터 검색을 하세요!
+		</th>
+		<td>
+			<a href="metasearch" class="btn btn-primary">검색</a><br>
+		</td>
+	</tr>
+	<tr>
+		<th>
+			개인 정보를 확인하세요!
+		</th>
+		<td>
+			<a th:href="@{'getMemberDetail?id='+${session.member.id}}" class="btn btn-primary">내정보</a><br>	
+	</tr>
+	<tr>
+		<th>
+			팀의 맴버를 확인하세요!
+		</th>
+		<td>
+<a th:href="@{'getTeamDetail?team='+${session.member.team}}" class="btn btn-primary">팀 맴버</a><br>
+		</td>
+	</tr>
+	<tr>
+		<th>
+			팀의 전체 메타 데이터를 확인하세요!
+		</th>
+		<td>
+<a href="getAllMeta" class="btn btn-primary">팀 메타데이터</a>
+		</td>
+	</tr>
+		<tr>
+		<th>
+			팀과 의논하세요!
+		</th>
+		<td>
+<a href="boardlist" class="btn btn-primary">팀 게시판</a>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<a href="logout" class="btn btn-primary">로그아웃</a>
+		</td>
+	</tr>
+</table>
+</div>
+    <!--custom js 추가-->
+    <script src="/js/main.js"></script>
+</body>
+</html>

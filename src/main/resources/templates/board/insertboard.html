@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--부트스트랩 css 추가-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<table class = "table">
+<tr>
+	<th>
+		제목
+	</th>
+	<td>
+		<input type="text" id="title">
+	</td>
+	</tr>
+	<tr>
+	<th>
+		내용
+	</th>
+	<td>
+		<textarea class="form-control" id="content" rows="5"></textarea>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2" align="center">
+		<input type="button" value = "등록" id="btnboardinsert" class="btn btn-primary">
+		<input type="button" value ="돌아가기" class="btn btn-primary" onclick="location.href='boardlist'">
+	</td>
+	</tr>
+</table>
+    <!--부트스트랩 js, jquery 추가-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!--custom js 추가-->
+    <script src="/js/main.js"></script>
+</body>
+</html>
