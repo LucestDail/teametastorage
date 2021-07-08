@@ -10,9 +10,6 @@ main = {
         $('#btnmetasearch').on('click', function () {
             _this.msearch();
         });
-        $('#btnmetasearchlist').on('click', function () {
-            _this.msearchlist();
-        });
 		$('#btnmemberregister').on('click', function () {
             _this.mregister();
         });
@@ -49,32 +46,9 @@ main = {
     },
     msearch : function () {
     	console.log("meta-search activated");
-		var data={
-			nameEng:$('#searchtarget').val(),
-			nameKor:$('#searchtarget').val(),
-			}
-		var url="/getMetaSearchList";
-		$.ajax({
-            type: 'GET',
-            url:url,
-            dataType: "text",
-            contentType:'application/json; charset=utf-8',
-            data:data,
-        })
-        .done(function() {
-        	console.log("msearch complete");
-			location.href="result";
-        })
-        .fail(function (error) {
-        	console.log("msearch fail");
-        	console.log(JSON.stringify(error));
-			location.href="failurl";
-        });
-    },
-    msearchlist : function () {
-    	console.log("meta-search activated");
 		var data="id="+$('#searchtarget').val()
-		var url="/getMetaList";
+		//location.href=url;
+		var url="/metaSearchList";
 		$.ajax({
             type: 'GET',
             url:url,

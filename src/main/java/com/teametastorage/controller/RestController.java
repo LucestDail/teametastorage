@@ -200,44 +200,39 @@ public class RestController {
 
 	@GetMapping("/getAllMeta")
 	public ModelAndView loginGetAllMeta(HttpServletRequest request) throws Exception {
+		System.out.println("RestController - loginGetAllMeta : " + request);
 		ModelAndView mav = new ModelAndView();
 		List<Meta> metalist = new ArrayList<>();
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		String team = sessionMember.getTeam();
 		metalist = metaService.getAllMetaByTeam(team);
 		mav.addObject("metalist", metalist);
-		mav.setViewName("meta/result.html");
+		mav.setViewName("meta/metaSearchList.html");
 		return mav;
 	}
+
 	
-	@GetMapping("/getMetaSearchList")
-	public ModelAndView loginGetMetaDetail(@RequestBody MetaReadRequestDto dto, HttpServletRequest request) throws Exception {
-		System.out.println("RestController - loginGetMetaDetail : " + dto);
+	@GetMapping("/metaSearchList")
+	public ModelAndView getSearchMetaList(@RequestParam String id, HttpServletRequest request) {
+		System.out.println("RestController - getSearchMetaList : " + id + " : " + request);
 		ModelAndView mav = new ModelAndView();
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		String team = sessionMember.getTeam();
-		List<Meta> metalist = metaService.getMetaListByName(dto.getNameEng());
+		List<Meta> metalist = metaService.getMetaListByName(id,team);
+		System.out.println(metalist);
 		mav.addObject("metalist", metalist);
-		mav.setViewName("meta/result.html");
+		mav.setViewName("meta/metaSearchList.html");
 		return mav;
 	}
 
 	@GetMapping("/getMetaInfo")
 	public ModelAndView loginGetMetaInfo(@RequestParam String id, HttpServletRequest request) throws Exception {
-		System.out.println("metadetail run");
+		System.out.println("RestController - loginGetMetaInfo : " + id + " : " + request);
 		ModelAndView mav = new ModelAndView();
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		String team = sessionMember.getTeam();
-		String searchid = id + "_" + team;
-		Meta meta = metaService.getMetaDetail(searchid, team);
-		/*
-		meta.setId(meta.getId().substring(0, meta.getId().length() - meta.getSave_team().length() - 1));
-		mav.addObject("metaid", meta.getId());
-		*/
-		List<Meta> metalist = new ArrayList<>();
-		metalist.add(meta);
+		Meta meta = metaService.getMetaDetail(Long.parseLong(id));
 		mav.addObject("meta", meta);
-		mav.addObject("metalist", metalist);
 		mav.setViewName("meta/metainfo.html");
 		return mav;
 	}

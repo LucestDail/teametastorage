@@ -23,12 +23,12 @@
 		<th>설명</th>
 	</tr>
 	<tr th:each="meta:${metalist}">
-		<td><a th:href="@{'getMetaInfo?id='+${meta.id}}"><span th:text="${meta.id}"></span></a></td>
-		<td><span th:text="${meta.name_kor}"></span></td>
+		<td><a th:href="@{'getMetaInfo?id='+${meta.metaSeq}}"><span th:text="${meta.nameEng}"></span></a></td>
+		<td><span th:text="${meta.nameKor}"></span></td>
 		<td><span th:text="${meta.type}"></span></td>
-		<td><span th:text="${meta.save_team}"></span></td>
-		<td><span th:text="${meta.save_name}"></span></td>
-		<td><span th:text="${meta.save_date}"></span></td>
+		<td><span th:text="${meta.saveTeam}"></span></td>
+		<td><span th:text="${meta.saveName}"></span></td>
+		<td><span th:text="${meta.saveName}"></span></td>
 		<td><span th:text="${meta.explanation}"></span></td>
 	</tr>
 	<tr>

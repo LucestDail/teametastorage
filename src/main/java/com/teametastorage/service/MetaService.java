@@ -16,23 +16,25 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class MetaService {
-	
+
 	private MetaRepository metaRepository;
-	
+
 	@Transactional
 	public String createMeta(MetaCreateRequestDto dto, Member sessionMember) {
 		System.out.println("MetaService - createMeta : " + dto);
 		metaRepository.save(dto.toEntity(sessionMember));
 		return null;
 	}
-	
-	public List<Meta> getMetaListByName(String name) {
+
+	public List<Meta> getMetaListByName(String name, String team) {
 		System.out.println("MetaService - getMetaListByName");
 		List<Meta> findMetaList = new ArrayList<>();
 		List<Meta> currentMetaList = metaRepository.findAll();
-		for(Meta targetMeta : currentMetaList) {
-			if(targetMeta.getNameEng().contains(name) || targetMeta.getNameKor().contains(name)) {
-				findMetaList.add(targetMeta);
+		for (Meta targetMeta : currentMetaList) {
+			if (targetMeta.getNameEng().contains(name) || targetMeta.getNameKor().contains(name)) {
+				if (targetMeta.getSaveTeam().equals(team)) {
+					findMetaList.add(targetMeta);
+				}
 			}
 		}
 		return findMetaList;
@@ -40,7 +42,14 @@ public class MetaService {
 
 	public List<Meta> getAllMetaByTeam(String team) {
 		System.out.println("MetaService - getAllMetaName : " + team);
-		return null;
+		List<Meta> findMetaList = new ArrayList<>();
+		List<Meta> currentMetaList = metaRepository.findAll();
+		for (Meta targetMeta : currentMetaList) {
+			if (targetMeta.getSaveTeam().equals(team)) {
+				findMetaList.add(targetMeta);
+			}
+		}
+		return findMetaList;
 	}
 
 	public List<Meta> getAllMetaByName(String name) {
@@ -48,11 +57,9 @@ public class MetaService {
 		return null;
 	}
 
-	public Meta getMetaDetail(String searchid, String team) {
-		System.out.println("MetaService - getMetaDetail : " + searchid + " : " + team);
-		return null;
+	public Meta getMetaDetail(Long metaSeq) {
+		System.out.println("MetaService - getMetaDetail : " + metaSeq);
+		return metaRepository.getById(metaSeq);
 	}
-
-
 
 }
