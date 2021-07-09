@@ -21,7 +21,6 @@ public class TeamService {
 	@Transactional
 	public Long createTeam(TeamCreateRequestDto dto) {
 		System.out.println("TeamService - createTeam : " + dto);
-		// TODO Auto-generated method stub
 		if(!validateTeam(dto)) {
 			return teamRepository.save(dto.toEntityNormal()).getTeamSeq();
 		}

@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.teametastorage.domain.Member;
 import com.teametastorage.domain.Team;
 
 public interface TeamRepository extends JpaRepository<Team, Long>{

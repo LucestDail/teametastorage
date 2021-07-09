@@ -71,7 +71,6 @@ public class MetaService {
 
 	public void deleteMeta(long id) {
 		System.out.println("MetaService - deleteMeta : " + id);
-		// TODO Auto-generated method stub
 		metaRepository.deleteById(id);
 	}
 

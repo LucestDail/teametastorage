@@ -10,11 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,12 +23,10 @@ import com.teametastorage.domain.Team;
 import com.teametastorage.dto.BoardCreateRequestDto;
 import com.teametastorage.dto.BoardUpdateRequestDto;
 import com.teametastorage.dto.CommentCreateRequestDto;
-import com.teametastorage.dto.CommentUpdateRequestDto;
 import com.teametastorage.dto.MemberCreateRequestDto;
 import com.teametastorage.dto.MemberReadRequestDto;
 import com.teametastorage.dto.MemberUpdateRequestDto;
 import com.teametastorage.dto.MetaCreateRequestDto;
-import com.teametastorage.dto.MetaReadRequestDto;
 import com.teametastorage.dto.TeamCreateRequestDto;
 import com.teametastorage.service.BoardService;
 import com.teametastorage.service.CommentService;
@@ -40,12 +35,10 @@ import com.teametastorage.service.MetaService;
 import com.teametastorage.service.TeamService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @org.springframework.web.bind.annotation.RestController
 @CrossOrigin
 @RequiredArgsConstructor
-@Slf4j
 public class RestController {
 
 	@Autowired
@@ -233,8 +226,6 @@ public class RestController {
 	public ModelAndView loginGetMetaInfo(@RequestParam String id, HttpServletRequest request) throws Exception {
 		System.out.println("RestController - loginGetMetaInfo : " + id + " : " + request);
 		ModelAndView mav = new ModelAndView();
-		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		String team = sessionMember.getTeam();
 		Meta meta = metaService.getMetaDetail(Long.parseLong(id));
 		mav.addObject("meta", meta);
 		mav.setViewName("meta/metainfo.html");
@@ -322,7 +313,6 @@ public class RestController {
 	public String updateBoard(@RequestBody BoardUpdateRequestDto dto, HttpServletRequest request) {
 		System.out.println("RestController - updateboard : " + dto + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		String team = sessionMember.getTeam();
 		if (boardService.updateBoard(dto, sessionMember)) {
 			return "success";
 		}
