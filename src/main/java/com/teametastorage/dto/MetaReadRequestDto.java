@@ -1,6 +1,5 @@
 package com.teametastorage.dto;
 
-import com.teametastorage.domain.Member;
 import com.teametastorage.domain.Meta;
 
 import lombok.Builder;

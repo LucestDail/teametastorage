@@ -252,7 +252,7 @@ main = {
     },boardupdate : function () {
     	console.log("board update activated");
 		var data={
-			id:$('#id').val(),
+			boardSeq:$('#boardSeq').val(),
 			title:$('#title').val(),
 			content:$('#content').val()
 			}
@@ -269,7 +269,7 @@ main = {
         	console.log("board update complete");
             if(data==="success"){
 				alert("Update!");
-				location.reload();
+				location.href="boardlist";
 			}else{
 				alert("Update fail");
 				location.href="boardlist";
@@ -283,7 +283,7 @@ main = {
     },commentinsert : function () {
     	console.log("comment insert activated");
 		var data={
-			boardId:$('#boardId').val(),
+			boardId:$('#boardSeq').val(),
 			content:$('#content').val()
 			}
 		console.log(data);
@@ -297,33 +297,10 @@ main = {
         })
         .done(function() {
         	console.log("comment insert complete");
-            location.reload();
+			location.href="infoBoard?id="+data.boardId;
         })
         .fail(function (error) {
         	console.log("comment insert fail");
-        	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
-        });
-    },commentdelete : function () {
-    	console.log("comment delete activated");
-		var data={
-			id:$('#commentid').val()
-			}
-		console.log(data);
-		var url="/deleteComment";
-		$.ajax({
-            type:'POST',
-            url:url,
-            dataType:"text",
-            contentType:'application/json; charset=utf-8',
-            data:JSON.stringify(data),
-        })
-        .done(function() {
-        	console.log("comment delete complete");
-            location.reload();
-        })
-        .fail(function (error) {
-        	console.log("comment delete fail");
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });

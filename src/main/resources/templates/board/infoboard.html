@@ -13,10 +13,8 @@
 <h1>게시글 상세 : <span th:text="${board.title}"></span></h1><br>
 <table class = "table">
 	<tr><th>작성자</th>
-	<td><span th:text="${board.save_name}"></span></td></tr>
+	<td><span th:text="${board.saveName}"></span></td></tr>
 	<tr>
-		<th>작성일시</th>
-		<td><span th:text="${board.save_date}"></span></td></tr>
 		<tr>
 		<th>내용</th>
 		<td><span th:text="${board.content}"></span></td></tr>
@@ -24,12 +22,12 @@
 	<tr>
 		<td colspan="2" align="center">
 			<input type="button" class="btn btn-primary" value="돌아가기" onclick="location.href='boardlist'">
-			<a th:if="${session.member.name.equals(board.save_name)}" th:href="@{'updateBoard?id='+${board.id}}" class="btn btn-primary">수정</a>
-			<input th:if="${session.member.name.equals(board.save_name)}" type="button" value="삭제" onclick="delete_confirm()" class = "btn btn-primary">
+			<a th:if="${session.member.name.equals(board.saveName)}" th:href="@{'updateBoard?id='+${board.boardSeq}}" class="btn btn-primary">수정</a>
+			<input th:if="${session.member.name.equals(board.saveName)}" type="button" value="삭제" onclick="delete_confirm()" class = "btn btn-primary">
 			<script type="text/javascript">
 				function delete_confirm(){
 					if(confirm("delete?")){
-						location.href="/deleteBoard?id=[[${board.id}]]";
+						location.href="/deleteBoard?id=[[${board.boardSeq}]]";
 					}else{
 						location.reload();
 					}
@@ -39,7 +37,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="hidden" th:value="${board.id}" id="boardId">
+			<input type="hidden" th:value="${board.boardSeq}" id="boardSeq">
 			<input type="text" class="form-control" placeholder="의견을 입력하세요" id="content">
 			<input type="button" value="등록" id="btncommentinsert" class="btn btn-primary">
 		</td>
@@ -49,11 +47,10 @@
 <input type="hidden" id="commentid" value="0">
 <table class="table">
 	<tr th:each="comment:${commentlist}">
-		<td><span th:text="${comment.save_name}"></span></td>
+		<td><span th:text="${comment.saveName}"></span></td>
 		<td><span th:text="${comment.content}"></span></td>
 		<td>
-			<span th:text="${comment.save_date}"></span>
-			<input th:if="${session.member.name.equals(comment.save_name)}" type="button" value="삭제" class = "btn btn-primary">
+			<a th:if="${session.member.name.equals(comment.saveName)}" type="button" th:href="@{'deleteComment?id='+${comment.commentSeq}}" class = "btn btn-primary">삭제</a>
 		</td>
 	</tr>
 </table>

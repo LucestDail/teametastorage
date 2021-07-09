@@ -23,12 +23,18 @@ import com.teametastorage.domain.Comment;
 import com.teametastorage.domain.Member;
 import com.teametastorage.domain.Meta;
 import com.teametastorage.domain.Team;
+import com.teametastorage.dto.BoardCreateRequestDto;
+import com.teametastorage.dto.BoardUpdateRequestDto;
+import com.teametastorage.dto.CommentCreateRequestDto;
+import com.teametastorage.dto.CommentUpdateRequestDto;
 import com.teametastorage.dto.MemberCreateRequestDto;
 import com.teametastorage.dto.MemberReadRequestDto;
 import com.teametastorage.dto.MemberUpdateRequestDto;
 import com.teametastorage.dto.MetaCreateRequestDto;
 import com.teametastorage.dto.MetaReadRequestDto;
 import com.teametastorage.dto.TeamCreateRequestDto;
+import com.teametastorage.service.BoardService;
+import com.teametastorage.service.CommentService;
 import com.teametastorage.service.MemberService;
 import com.teametastorage.service.MetaService;
 import com.teametastorage.service.TeamService;
@@ -50,6 +56,12 @@ public class RestController {
 
 	@Autowired
 	MetaService metaService;
+
+	@Autowired
+	BoardService boardService;
+
+	@Autowired
+	CommentService commentService;
 
 	@GetMapping("/hello")
 	public String hello() {
@@ -284,72 +296,90 @@ public class RestController {
 		return new ModelAndView("board/insertboard.html");
 	}
 
-	/*
-	 * @PostMapping("/insertBoard") public String insertBoard(@RequestBody Board
-	 * board, HttpServletRequest request) throws Exception{ Member sessionMember =
-	 * (Member) request.getSession().getAttribute("member"); return
-	 * firebaseServiceBoard.insertBoard(board,sessionMember); }
-	 * 
-	 * @GetMapping("/updateBoard") public ModelAndView updateBoard(@RequestParam
-	 * String id, HttpServletRequest request) { Member sessionMember = (Member)
-	 * request.getSession().getAttribute("member"); String team =
-	 * sessionMember.getTeam(); String searchid = id; Board board = null; try {
-	 * board = firebaseServiceBoard.getBoardDetail(searchid,team); } catch
-	 * (Exception e) { e.printStackTrace(); } ModelAndView mav = new ModelAndView();
-	 * mav.addObject("board",board); mav.setViewName("board/updateboard.html");
-	 * return mav; }
-	 * 
-	 * @PostMapping("/updateBoard") public String updateBoard(@RequestBody Board
-	 * inputBoard, HttpServletRequest request) { System.out.println("update : " +
-	 * inputBoard); Member sessionMember = (Member)
-	 * request.getSession().getAttribute("member"); String team =
-	 * sessionMember.getTeam(); String searchid = inputBoard.getId(); Board board =
-	 * null; try { board = firebaseServiceBoard.getBoardDetail(searchid,team);
-	 * if(firebaseServiceBoard.updateBoard(inputBoard, sessionMember) != null) {
-	 * return "success"; } } catch (Exception e) { e.printStackTrace(); } return
-	 * "fail"; }
-	 * 
-	 * @GetMapping("/boardlist") public ModelAndView boardlist(HttpServletRequest
-	 * request) throws Exception{ ModelAndView mav = new ModelAndView(); List<Board>
-	 * boardlist = new ArrayList<>(); Member sessionMember = (Member)
-	 * request.getSession().getAttribute("member"); String team =
-	 * sessionMember.getTeam(); boardlist = firebaseServiceBoard.getAllBoard(team);
-	 * mav.addObject("boardlist",boardlist);
-	 * mav.setViewName("board/boardlist.html"); return mav; }
-	 * 
-	 * @GetMapping("/infoBoard") public ModelAndView infoBoard(@RequestParam String
-	 * id, HttpServletRequest request) throws Exception{ ModelAndView mav = new
-	 * ModelAndView(); Member sessionMember = (Member)
-	 * request.getSession().getAttribute("member"); String team =
-	 * sessionMember.getTeam(); String searchid = id; Board board =
-	 * firebaseServiceBoard.getBoardDetail(searchid,team); List<Comment> commentlist
-	 * = new ArrayList<>(); commentlist =
-	 * firebaseServiceComment.getAllComment(board,sessionMember);
-	 * System.out.println(board); mav.addObject("board",board);
-	 * mav.addObject("commentlist",commentlist);
-	 * mav.setViewName("board/infoboard.html"); return mav; }
-	 * 
-	 * @GetMapping("/deleteBoard") public ModelAndView deleteBoard(@RequestParam
-	 * String id) { try { firebaseServiceBoard.deleteBoard(id); } catch (Exception
-	 * e) { e.printStackTrace(); } return new ModelAndView("main/main.html"); }
-	 * 
-	 * @PostMapping("/insertComment") public String insertComment(@RequestBody
-	 * Comment comment, HttpServletRequest request) { System.out.println(comment);
-	 * Member sessionMember = (Member) request.getSession().getAttribute("member");
-	 * String team = sessionMember.getTeam(); String id = comment.getBoardId();
-	 * Board board = null; try { board =
-	 * firebaseServiceBoard.getBoardDetail(id,team); return
-	 * firebaseServiceComment.insertComment(comment,board,sessionMember); } catch
-	 * (Exception e) { e.printStackTrace(); } return null; }
-	 * 
-	 * @PostMapping("/deleteComment") public void deleteComment(@RequestBody Comment
-	 * comment) { System.out.println("delete Comment : " + comment); try {
-	 * firebaseServiceComment.deleteComment(comment.getId()); }catch (Exception e) {
-	 * e.printStackTrace(); } }
-	 */
-	@PostMapping("/updateComment")
-	public String updateComment(@RequestBody Comment comment, HttpServletRequest request) {
-		System.out.println("RestController - updatecomment : " + comment);
-		return null;
+	@PostMapping("/insertBoard")
+	public boolean insertBoard(@RequestBody BoardCreateRequestDto dto, HttpServletRequest request) throws Exception {
+		System.out.println("RestController - insertBoard : " + dto + " : " + request);
+		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		if(boardService.insertBoard(dto, sessionMember)) {
+			return true;
+		}
+		return false;
+	}
+
+	@GetMapping("/updateBoard")
+	public ModelAndView updateBoard(@RequestParam String id, HttpServletRequest request) {
+		System.out.println("RestController - updateBoard : ");
+		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		String team = sessionMember.getTeam();
+		Board board = boardService.getBoardDetail(Long.parseLong(id), team);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("board", board);
+		mav.setViewName("board/updateboard.html");
+		return mav;
+	}
+
+	@PostMapping("/updateBoard")
+	public String updateBoard(@RequestBody BoardUpdateRequestDto dto, HttpServletRequest request) {
+		System.out.println("RestController - updateboard : " + dto + " : " + request);
+		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		String team = sessionMember.getTeam();
+		if (boardService.updateBoard(dto, sessionMember)) {
+			return "success";
+		}
+		return "fail";
+	}
+
+	@GetMapping("/boardlist")
+	public ModelAndView boardlist(HttpServletRequest request){
+		System.out.println("RestController - boardlist : " + request);
+		ModelAndView mav = new ModelAndView();
+		List<Board> boardlist = new ArrayList<>();
+		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		String team = sessionMember.getTeam();
+		boardlist = boardService.getAllBoard(team);
+		mav.addObject("boardlist", boardlist);
+		mav.setViewName("board/boardlist.html");
+		return mav;
+	}
+
+	@GetMapping("/infoBoard")
+	public ModelAndView infoBoard(@RequestParam String id, HttpServletRequest request){
+		System.out.println("RestController - infoBoard : " + id + " : " + request);
+		ModelAndView mav = new ModelAndView();
+		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		String team = sessionMember.getTeam();
+		Board board = boardService.getBoardDetail(Long.parseLong(id), team);
+		List<Comment> commentlist = new ArrayList<>();
+		commentlist = commentService.getAllComment(board, sessionMember);
+		mav.addObject("board", board);
+		mav.addObject("commentlist", commentlist);
+		System.out.println("commentlist : " + commentlist);
+		mav.setViewName("board/infoboard.html");
+		return mav;
+	}
+
+	@GetMapping("/deleteBoard")
+	public ModelAndView deleteBoard(@RequestParam String id, HttpServletRequest request) {
+		System.out.println("RestController - deleteBoard : " + id);
+		boardService.deleteBoard(id);
+		return boardlist(request);
+	}
+
+	@PostMapping("/insertComment")
+	public String insertComment(@RequestBody CommentCreateRequestDto dto, HttpServletRequest request) {
+		System.out.println("Restcontroller - insertComment : " + dto + " : " + request);
+		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		if(commentService.createComment(dto,sessionMember)) {
+			return "success";
+		}
+		return "fail";
+	}
+
+	@GetMapping("/deleteComment")
+	public ModelAndView deleteComment(@RequestParam String id, HttpServletRequest request) {
+		System.out.println("RestController - deleteComment : " + id);
+		String boardId = commentService.getCommentDetail(id);
+		commentService.deleteComment(id);
+		return infoBoard(boardId, request);
 	}
 }

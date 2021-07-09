@@ -10,16 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.teametastorage.domain.Board;
 import com.teametastorage.domain.Comment;
-/*
+
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 
-	@Query("SELECT b FROM Board b WHERE b.saveTeam=:saveTeam ORDER BY b.boardSeq DESC")
-	Stream<Board> findAllDesc(@Param("saveTeam") String saveTeam);
+	@Query("SELECT c FROM Comment c WHERE c.boardId=:boardId ORDER BY c.commentSeq DESC")
+	Stream<Comment> findAllDesc(@Param("boardId") String boardId);
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE FROM Board b SET b.title=:title, b.content=:content,  b.saveTeam=:saveTeam, b.saveName =:saveName WHERE b.id=:id")
-	void update(@Param("boardSeq") Long boardSeq, @Param("title") String title, @Param("content") String content,
-			@Param("saveTeam") String saveTeam, @Param("saveName") String saveName);
+	@Query("UPDATE FROM Comment c SET c.boardId=:boardId, c.content=:content, c.saveTeam=:saveTeam, c.saveName =:saveName WHERE c.commentSeq=:commentSeq")
+	void update(@Param("boardId") Long boardId, @Param("content") String content, @Param("saveTeam") String saveTeam,
+			@Param("saveName") String saveName, @Param("commentSeq") String commentSeq);
 }
-*/

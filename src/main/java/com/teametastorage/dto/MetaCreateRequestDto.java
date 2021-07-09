@@ -4,7 +4,13 @@ import com.teametastorage.domain.Member;
 import com.teametastorage.domain.Meta;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class MetaCreateRequestDto {
 	
 	private String nameKor;
