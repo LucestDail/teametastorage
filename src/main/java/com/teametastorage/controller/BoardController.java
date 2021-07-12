@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teametastorage.domain.Board;
 import com.teametastorage.domain.Member;
+import com.teametastorage.domain.Meta;
 import com.teametastorage.service.BoardService;
 
 @RestController
@@ -39,7 +41,7 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 
-		Page<Board> boardPage = boardService.findPaginated(PageRequest.of(currentPage - 1, pageSize), team);
+		Page<Board> boardPage = boardService.findPaginated(PageRequest.of(currentPage - 1, pageSize), team, null);
 		System.out.println("boardPage : " + boardPage);
 		mav.addObject("boardPage", boardPage);
 
@@ -49,11 +51,45 @@ public class BoardController {
 			mav.addObject("pageNumbers", pageNumbers);
 			System.out.println("pageNumbers : " + pageNumbers);
 		}
-		mav.addObject("pageNumberForward",currentPage-1);
-		mav.addObject("pageNumberNext",currentPage+1);
-		mav.addObject("pageNumberCurrent",currentPage);
-		mav.addObject("pageNumberEnd",totalPages);
+		mav.addObject("pageNumberForward", currentPage - 1);
+		mav.addObject("pageNumberNext", currentPage + 1);
+		mav.addObject("pageNumberCurrent", currentPage);
+		mav.addObject("pageNumberEnd", totalPages);
+		mav.addObject("keyword","");
 		mav.setViewName("board/listBoards.html");
 		return mav;
 	}
+
+	@RequestMapping(value = "/boardSearchList", method = RequestMethod.GET)
+	public ModelAndView getBoardSearchList(Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size, @RequestParam String searchTarget,
+			HttpServletRequest request) {
+		System.out.println("BoardController - getBoardSearchList : " + searchTarget + " : " + request);
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(5);
+
+		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		String team = sessionMember.getTeam();
+
+		ModelAndView mav = new ModelAndView();
+
+		Page<Board> boardPage = boardService.findPaginated(PageRequest.of(currentPage - 1, pageSize), team, searchTarget);
+		System.out.println("boardPage : " + boardPage);
+		mav.addObject("boardPage", boardPage);
+
+		int totalPages = boardPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			mav.addObject("pageNumbers", pageNumbers);
+			System.out.println("pageNumbers : " + pageNumbers);
+		}
+		mav.addObject("pageNumberForward", currentPage - 1);
+		mav.addObject("pageNumberNext", currentPage + 1);
+		mav.addObject("pageNumberCurrent", currentPage);
+		mav.addObject("pageNumberEnd", totalPages);
+		mav.addObject("searchTarget",searchTarget);
+		mav.setViewName("board/listBoards.html");
+		return mav;
+	}
+
 }

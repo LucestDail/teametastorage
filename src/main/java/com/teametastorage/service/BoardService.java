@@ -56,21 +56,14 @@ public class BoardService {
 		return targetBoardList;
 	}
 	
-	public List<Board> searchBoard(String team, String filter, String keyword){
+	public List<Board> searchBoard(String team, String keyword){
 		List<Board> currentBoardList = getAllBoardReverse(team);
 		List<Board> targetBoardList = new ArrayList<>();
-		switch(filter) {
-		case "title":
-		case "name":
-		case "content":
-		case "titlename":
-		case "titlecontent":
-		case "namecontent":
-		case "total":
-		}
 		for(Board targetBoard : currentBoardList) {
+			if(targetBoard.getTitle().contains(keyword) || targetBoard.getSaveName().contains(keyword) || targetBoard.getContent().contains(keyword)) {
+				targetBoardList.add(targetBoard);
+			}
 		}
-		
 		return targetBoardList;
 	}
 
@@ -88,9 +81,15 @@ public class BoardService {
 		return true;
 	}
 
-	public Page<Board> findPaginated(Pageable pageable, String team) {
+	public Page<Board> findPaginated(Pageable pageable, String team, String keyword) {
 		
-		final List<Board> boards = getAllBoardReverse(team);
+		List<Board> boards = null;
+		
+		if(Objects.isNull(keyword)) {
+			boards = searchBoard(team,keyword);
+		}else {
+			boards = getAllBoardReverse(team);
+		}
 		
 		int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();

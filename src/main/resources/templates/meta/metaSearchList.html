@@ -4,43 +4,45 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!--부트스트랩 css 추가-->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<!--부트스트랩 css 추가-->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
 
-<h1>검색 결과</h1><br>
-<table class = "table">
-	<tr>
-		<th>영문명칭</th>
-		<th>한글명칭</th>
-		<th>변수타입</th>
-		<th>작성팀</th>
-		<th>작성자</th>
-		<th>작성일</th>
-		<th>설명</th>
-	</tr>
-	<tr th:each="meta:${metalist}">
-		<td><a th:href="@{'getMetaInfo?id='+${meta.metaSeq}}"><span th:text="${meta.nameEng}"></span></a></td>
-		<td><span th:text="${meta.nameKor}"></span></td>
-		<td><span th:text="${meta.type}"></span></td>
-		<td><span th:text="${meta.saveTeam}"></span></td>
-		<td><span th:text="${meta.saveName}"></span></td>
-		<td><span th:text="${meta.saveName}"></span></td>
-		<td><span th:text="${meta.explanation}"></span></td>
-	</tr>
-	<tr>
-		<td colspan="7" align="center">
-			<input type="button" class="btn btn-primary" value="돌아가기" onclick="location.href='metasearch'">
-		</td>
-	</tr>
-</table>
-    <!--부트스트랩 js, jquery 추가-->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <!--custom js 추가-->
-    <script src="/js/main.js"></script>
+	<h1>검색 결과</h1>
+	<br>
+	<table class="table">
+		<tr>
+			<th>영문명칭</th>
+			<th>한글명칭</th>
+			<th>변수타입</th>
+			<th>작성팀</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<th>설명</th>
+		</tr>
+		<tr th:each="meta:${metalist}">
+			<td><a th:href="@{'getMetaInfo?id='+${meta.metaSeq}}"><span
+					th:text="${meta.nameEng}"></span></a></td>
+			<td><span th:text="${meta.nameKor}"></span></td>
+			<td><span th:text="${meta.type}"></span></td>
+			<td><span th:text="${meta.saveTeam}"></span></td>
+			<td><span th:text="${meta.saveName}"></span></td>
+			<td><span th:text="${meta.saveName}"></span></td>
+			<td><span th:text="${meta.explanation}"></span></td>
+		</tr>
+		<tr>
+			<td colspan="7" align="center"><input type="button"
+				class="btn btn-primary" value="돌아가기"
+				onclick="location.href='metasearch'"></td>
+		</tr>
+	</table>
+	<!--부트스트랩 js, jquery 추가-->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<!--custom js 추가-->
+	<script src="/js/main.js"></script>
 </body>
 </html>

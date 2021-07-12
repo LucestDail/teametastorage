@@ -66,7 +66,8 @@ main = {
         	console.log(JSON.stringify(error));
 			location.href="/failurl?"+data;
         });
-    },mregister : function () {
+    },
+    mregister : function () {
     	console.log("member-register activated");
 		var data={
 			id:$('#id').val(),
@@ -95,7 +96,8 @@ main = {
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
-    },minsert : function () {
+    },
+    minsert : function () {
     	console.log("meta-insert activated");
 		var data={
 			id:$('#id').val(),
@@ -125,7 +127,8 @@ main = {
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
-    },mlogin : function () {
+    },
+    mlogin : function () {
     	console.log("member-login activated");
 		var data={
 			id:$('#id').val(),
@@ -158,7 +161,8 @@ main = {
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
-    },mupdate : function () {
+    },
+    mupdate : function () {
     	console.log("member update activated");
 		var data={
 			id:$('#id').val(),
@@ -192,7 +196,8 @@ main = {
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
-    },metaupdate : function () {
+    },
+    metaupdate : function () {
     	console.log("meta update activated");
 		var data={
 			metaSeq:$('#metaSeq').val(),
@@ -225,7 +230,8 @@ main = {
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
-    },boardinsert : function () {
+    },
+    boardinsert : function () {
     	console.log("board insert activated");
 		var data={
 			title:$('#title').val(),
@@ -249,7 +255,8 @@ main = {
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
-    },boardupdate : function () {
+    },
+    boardupdate : function () {
     	console.log("board update activated");
 		var data={
 			boardSeq:$('#boardSeq').val(),
@@ -280,7 +287,8 @@ main = {
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
-    },commentinsert : function () {
+    },
+    commentinsert : function () {
     	console.log("comment insert activated");
 		var data={
 			boardId:$('#boardSeq').val(),
@@ -304,7 +312,8 @@ main = {
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
-    },idvalidate : function () {
+    },
+    idvalidate : function () {
     	console.log("id validate activated");
 		var data={
 			id:$('#id').val()
@@ -332,7 +341,8 @@ main = {
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
-    },teamvalidate : function () {
+    },
+    teamvalidate : function () {
     	console.log("team validate activated");
 		var data={
 			team:$('#team').val()
