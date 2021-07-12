@@ -41,7 +41,7 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 
-		Page<Board> boardPage = boardService.findPaginated(PageRequest.of(currentPage - 1, pageSize), team, null);
+		Page<Board> boardPage = boardService.findPaginated(PageRequest.of(currentPage - 1, pageSize), team);
 		System.out.println("boardPage : " + boardPage);
 		mav.addObject("boardPage", boardPage);
 
@@ -59,7 +59,7 @@ public class BoardController {
 		mav.setViewName("board/listBoards.html");
 		return mav;
 	}
-
+/*
 	@RequestMapping(value = "/boardSearchList", method = RequestMethod.GET)
 	public ModelAndView getBoardSearchList(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size, @RequestParam String searchTarget,
@@ -91,5 +91,5 @@ public class BoardController {
 		mav.setViewName("board/listBoards.html");
 		return mav;
 	}
-
+*/
 }

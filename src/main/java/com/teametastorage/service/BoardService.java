@@ -81,16 +81,16 @@ public class BoardService {
 		return true;
 	}
 
-	public Page<Board> findPaginated(Pageable pageable, String team, String keyword) {
+	public Page<Board> findPaginated(Pageable pageable, String team) {
 		
-		List<Board> boards = null;
-		
+		List<Board> boards = getAllBoardReverse(team);
+		/*
 		if(Objects.isNull(keyword)) {
 			boards = searchBoard(team,keyword);
 		}else {
 			boards = getAllBoardReverse(team);
 		}
-		
+		*/
 		int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
