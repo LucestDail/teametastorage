@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--부트스트랩 css 추가-->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+	<h1>
+		<span th:text="${session.member.team}"></span> 팀 게시판
+	</h1>
+	<br>
+	<table class="table">
+		<thead>
+			<tr>
+				<th th:text="Title" />
+				<th th:text="Author" />
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="board:${boardPage}">
+				<td th:text="${board.title}" />
+				<td th:text="${board.saveName}" />
+			</tr>
+		</tbody>
+	</table>
+	<nav style="text-align: center;">
+		<ul class="pagination">
+			<li><a th:href="@{/listBoards(size=${boardPage.size}, page=1)}"
+				aria-label="First"> <span aria-hidden="true">처음</span>
+			</a></li>
+			<li>
+			<span th:if="${pageNumberCurrent} > 1">
+				<a
+				th:href="@{/listBoards(size=${boardPage.size}, page=${pageNumberForward})}"
+				aria-label="Previous"> <span aria-hidden="true">&lt;</span>
+			</a>
+			</span>
+			</li>
+			<li th:if="${boardPage.totalPages > 0}" class="pagination"
+				th:each="pageNumber : ${pageNumbers}"><a
+				th:href="@{/listBoards(size=${boardPage.size}, page=${pageNumber})}"
+				th:text=${pageNumber}
+				th:class="${pageNumber==boardPage.number + 1} ? active"> </a></li>
+			<li>
+			<span th:if="${pageNumberCurrent} < ${pageNumberEnd}">
+				<a
+				th:href="@{/listBoards(size=${boardPage.size}, page=${pageNumberNext})}"
+				aria-label="Next"> <span aria-hidden="true">&gt;</span>
+			</a>
+			</span>
+			</li>
+			<li><a
+				th:href="@{/listBoards(size=${boardPage.size}, page=${pageNumberEnd})}"
+				aria-label="Last"> <span aria-hidden="true">마지막</span>
+			</a></li>
+		</ul>
+	</nav>
+	
+	
+	<!--부트스트랩 js, jquery 추가-->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<!--custom js 추가-->
+	<script src="/js/main.js"></script>
+</body>
+</html>
