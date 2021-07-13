@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -56,11 +57,16 @@ public class BoardService {
 		return targetBoardList;
 	}
 	
-	public List<Board> searchBoard(String team, String keyword){
+	public List<Board> searchBoard(String team, Optional<String> keyword){
+		System.out.println("BoardService - searchBoard : " + team + " : " + keyword);
 		List<Board> currentBoardList = getAllBoardReverse(team);
 		List<Board> targetBoardList = new ArrayList<>();
+		String targetKeyword = keyword.get();
+		System.out.println("targetKeyword : " + targetKeyword);
 		for(Board targetBoard : currentBoardList) {
-			if(targetBoard.getTitle().contains(keyword) || targetBoard.getSaveName().contains(keyword) || targetBoard.getContent().contains(keyword)) {
+			if(targetBoard.getTitle().contains(targetKeyword)
+					|| targetBoard.getContent().contains(targetKeyword)
+					|| targetBoard.getSaveName().contains(targetKeyword)) {
 				targetBoardList.add(targetBoard);
 			}
 		}
@@ -81,16 +87,16 @@ public class BoardService {
 		return true;
 	}
 
-	public Page<Board> findPaginated(Pageable pageable, String team) {
-		
+	public Page<Board> findPaginated(Pageable pageable, String team, Optional<String> keyword) {
+		System.out.println("BoardService - findPaginated : " + pageable + " : " + team + " : " + keyword);
 		List<Board> boards = getAllBoardReverse(team);
-		/*
-		if(Objects.isNull(keyword)) {
+		if(keyword.isPresent()) {
 			boards = searchBoard(team,keyword);
 		}else {
+			System.out.println("keyword is null");
 			boards = getAllBoardReverse(team);
 		}
-		*/
+		System.out.println("boards : " + boards);
 		int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;

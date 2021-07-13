@@ -31,65 +31,27 @@ public class BoardController {
 
 	@RequestMapping(value = "/listBoards", method = RequestMethod.GET)
 	public ModelAndView listBoard(Model model, @RequestParam("page") Optional<Integer> page,
-			@RequestParam("size") Optional<Integer> size, HttpServletRequest request) {
-		System.out.println("BoardController - listBoard : " + page + " : " + size + " : " + request);
+			@RequestParam("size") Optional<Integer> size, @RequestParam("keyword") Optional<String> keyword, HttpServletRequest request) {
+		System.out.println("BoardController - listBoard : " + page + " : " + size + " : " + keyword + " : "+ request);
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(5);
-
+		String currentKeyword = keyword.orElse(null);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		String team = sessionMember.getTeam();
-
 		ModelAndView mav = new ModelAndView();
-
-		Page<Board> boardPage = boardService.findPaginated(PageRequest.of(currentPage - 1, pageSize), team);
-		System.out.println("boardPage : " + boardPage);
+		Page<Board> boardPage = boardService.findPaginated(PageRequest.of(currentPage - 1, pageSize), team, keyword);
 		mav.addObject("boardPage", boardPage);
-
 		int totalPages = boardPage.getTotalPages();
 		if (totalPages > 0) {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			mav.addObject("pageNumbers", pageNumbers);
-			System.out.println("pageNumbers : " + pageNumbers);
 		}
 		mav.addObject("pageNumberForward", currentPage - 1);
 		mav.addObject("pageNumberNext", currentPage + 1);
 		mav.addObject("pageNumberCurrent", currentPage);
 		mav.addObject("pageNumberEnd", totalPages);
-		mav.addObject("keyword","");
+		mav.addObject("keyword",currentKeyword);
 		mav.setViewName("board/listBoards.html");
 		return mav;
 	}
-/*
-	@RequestMapping(value = "/boardSearchList", method = RequestMethod.GET)
-	public ModelAndView getBoardSearchList(Model model, @RequestParam("page") Optional<Integer> page,
-			@RequestParam("size") Optional<Integer> size, @RequestParam String searchTarget,
-			HttpServletRequest request) {
-		System.out.println("BoardController - getBoardSearchList : " + searchTarget + " : " + request);
-		int currentPage = page.orElse(1);
-		int pageSize = size.orElse(5);
-
-		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		String team = sessionMember.getTeam();
-
-		ModelAndView mav = new ModelAndView();
-
-		Page<Board> boardPage = boardService.findPaginated(PageRequest.of(currentPage - 1, pageSize), team, searchTarget);
-		System.out.println("boardPage : " + boardPage);
-		mav.addObject("boardPage", boardPage);
-
-		int totalPages = boardPage.getTotalPages();
-		if (totalPages > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-			mav.addObject("pageNumbers", pageNumbers);
-			System.out.println("pageNumbers : " + pageNumbers);
-		}
-		mav.addObject("pageNumberForward", currentPage - 1);
-		mav.addObject("pageNumberNext", currentPage + 1);
-		mav.addObject("pageNumberCurrent", currentPage);
-		mav.addObject("pageNumberEnd", totalPages);
-		mav.addObject("searchTarget",searchTarget);
-		mav.setViewName("board/listBoards.html");
-		return mav;
-	}
-*/
 }
