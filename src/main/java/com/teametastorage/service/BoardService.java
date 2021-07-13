@@ -57,11 +57,11 @@ public class BoardService {
 		return targetBoardList;
 	}
 	
-	public List<Board> searchBoard(String team, Optional<String> keyword){
+	public List<Board> searchBoard(String team, String keyword){
 		System.out.println("BoardService - searchBoard : " + team + " : " + keyword);
 		List<Board> currentBoardList = getAllBoardReverse(team);
 		List<Board> targetBoardList = new ArrayList<>();
-		String targetKeyword = keyword.get();
+		String targetKeyword = keyword;
 		System.out.println("targetKeyword : " + targetKeyword);
 		for(Board targetBoard : currentBoardList) {
 			if(targetBoard.getTitle().contains(targetKeyword)
@@ -91,7 +91,7 @@ public class BoardService {
 		System.out.println("BoardService - findPaginated : " + pageable + " : " + team + " : " + keyword);
 		List<Board> boards = getAllBoardReverse(team);
 		if(keyword.isPresent()) {
-			boards = searchBoard(team,keyword);
+			boards = searchBoard(team,keyword.get());
 		}else {
 			System.out.println("keyword is null");
 			boards = getAllBoardReverse(team);

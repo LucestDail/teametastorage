@@ -25,6 +25,10 @@ public class TeamCreateRequestDto {
 		this.rank = rank;
 	}
 
+	public Team toEntityNone() {
+		return Team.builder().memberId(memberId).team(team).name(name).rank("none").build();
+	}
+	
 	public Team toEntityNormal() {
 		return Team.builder().memberId(memberId).team(team).name(name).rank("normal").build();
 	}

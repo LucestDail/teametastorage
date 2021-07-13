@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teametastorage.domain.Board;
 import com.teametastorage.domain.Member;
-import com.teametastorage.domain.Meta;
 import com.teametastorage.service.BoardService;
 
 @RestController
@@ -31,8 +29,9 @@ public class BoardController {
 
 	@RequestMapping(value = "/listBoards", method = RequestMethod.GET)
 	public ModelAndView listBoard(Model model, @RequestParam("page") Optional<Integer> page,
-			@RequestParam("size") Optional<Integer> size, @RequestParam("keyword") Optional<String> keyword, HttpServletRequest request) {
-		System.out.println("BoardController - listBoard : " + page + " : " + size + " : " + keyword + " : "+ request);
+			@RequestParam("size") Optional<Integer> size, @RequestParam("keyword") Optional<String> keyword,
+			HttpServletRequest request) {
+		System.out.println("BoardController - listBoard : " + page + " : " + size + " : " + keyword + " : " + request);
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(5);
 		String currentKeyword = keyword.orElse(null);
@@ -50,7 +49,7 @@ public class BoardController {
 		mav.addObject("pageNumberNext", currentPage + 1);
 		mav.addObject("pageNumberCurrent", currentPage);
 		mav.addObject("pageNumberEnd", totalPages);
-		mav.addObject("keyword",currentKeyword);
+		mav.addObject("keyword", currentKeyword);
 		mav.setViewName("board/listBoards.html");
 		return mav;
 	}

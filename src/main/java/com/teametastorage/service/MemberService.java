@@ -20,14 +20,14 @@ import lombok.AllArgsConstructor;
 public class MemberService {
 
 	private MemberRepository memberRepository;
-	
+
 	@Autowired
 	TeamService teamService;
-	
+
 	@Transactional
 	public Long createMember(MemberCreateRequestDto dto) {
 		System.out.println("MemberService - createMember : " + dto);
-		if(!Objects.isNull(memberRepository.save(dto.toEntity()).getMemberSeq())) {
+		if (!Objects.isNull(memberRepository.save(dto.toEntity()).getMemberSeq())) {
 			return teamService.createTeam(dto.toEntityTeam());
 		}
 		return null;
@@ -36,8 +36,8 @@ public class MemberService {
 	public boolean validateMember(MemberCreateRequestDto dto) {
 		System.out.println("MemberService - validateMember : " + dto);
 		List<Member> currentMemberList = memberRepository.findAll();
-		for(Member currentMember : currentMemberList) {
-			if(currentMember.getId().equals(dto.getId())) {
+		for (Member currentMember : currentMemberList) {
+			if (currentMember.getId().equals(dto.getId())) {
 				return false;
 			}
 		}
@@ -47,20 +47,20 @@ public class MemberService {
 	public boolean loginMember(MemberReadRequestDto dto) {
 		System.out.println("MemberService - loginMember : " + dto);
 		List<Member> currentMemberList = memberRepository.findAll();
-		for(Member currentMember : currentMemberList) {
-			if(currentMember.getId().equals(dto.getId()) && currentMember.getPassword().equals(dto.getPassword())) {
+		for (Member currentMember : currentMemberList) {
+			if (currentMember.getId().equals(dto.getId()) && currentMember.getPassword().equals(dto.getPassword())) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public Member getMemberById(String id) {
 		System.out.println("MemberService - getMemberById : " + id);
 		List<Member> currentMemberList = memberRepository.findAll();
 		Member findMember = null;
-		for(Member currentMember : currentMemberList) {
-			if(currentMember.getId().equals(id)) {
+		for (Member currentMember : currentMemberList) {
+			if (currentMember.getId().equals(id)) {
 				findMember = currentMember;
 			}
 		}
@@ -70,7 +70,8 @@ public class MemberService {
 	public boolean updateMember(MemberUpdateRequestDto dto) {
 		System.out.println("MemberService - updateMember : " + dto);
 		Member currentMember = getMemberById(dto.getId());
-		memberRepository.update(currentMember.getMemberSeq(), currentMember.getId(), dto.getPassword(), dto.getName(), dto.getTeam());
+		memberRepository.update(currentMember.getMemberSeq(), currentMember.getId(), dto.getPassword(), dto.getName(),
+				dto.getTeam());
 		memberRepository.flush();
 		return true;
 	}
@@ -78,12 +79,10 @@ public class MemberService {
 	public boolean deleteMember(String id) {
 		System.out.println("MemberService - deleteMember : " + id);
 		memberRepository.deleteById(getMemberById(id).getMemberSeq());
-		if(Objects.isNull(getMemberById(id))){
+		if (Objects.isNull(getMemberById(id))) {
 			return true;
 		}
 		return false;
 	}
-
-
 
 }

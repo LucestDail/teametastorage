@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--부트스트랩 css 추가-->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+	<h1>
+		<span th:text="${session.member.team}"></span> 팀
+	</h1>
+	<br>
+	<table class="table">
+		<tr align="center">
+			<td><strong>아이디</strong></td>
+			<td><strong>이름</strong></td>
+			<td>관리</td>
+		</tr>
+		<tr th:each="team:${teamlist}" align="center">
+			<td><a th:href="@{'getMemberDetail?id='+${team.memberId}}"><span
+					th:text="${team.memberId}"></span></a></td>
+			<td><span th:text="${team.name}"></span></td>
+			<td><input th:if="${!team.rank.equals('admin')}" type="button"
+				value="삭제" onclick="delete_confirm()" class="btn btn-primary">
+				<script type="text/javascript">
+				function delete_confirm(){
+					if(confirm("delete?")){
+						location.href="/deleteMember?id=[[${team.memberId}]]";
+						
+					}else{
+						location.reload();
+					}
+				}
+			</script> <input th:if="${team.rank.equals('none')}" type="button" value="허가"
+				onclick="join_confirm()" class="btn btn-primary"> <script
+					type="text/javascript">
+				function join_confirm(){
+					if(confirm("confirm?")){
+						location.href="/noneToNormal?id=[[${team.teamSeq}]]";
+					}else{
+						location.reload();
+					}
+				}
+			</script></td>
+
+		</tr>
+		<tr>
+			<td colspan="3" align="center"><a href="/main"
+				class="btn btn-primary">돌아가기</a></td>
+		</tr>
+	</table>
+	<!--부트스트랩 js, jquery 추가-->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

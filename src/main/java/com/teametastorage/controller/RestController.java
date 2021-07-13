@@ -103,9 +103,20 @@ public class RestController {
 		System.out.println("RestController - postMemberLogin : " + dto + " : " + request);
 		if (memberService.loginMember(dto)) {
 			HttpSession session = request.getSession();
-			session.setAttribute("member", memberService.getMemberById(dto.getId()));
-			return true;
+			Member currentMember = memberService.getMemberById(dto.getId());
+			Team currentTeam = teamService.getTeamObject(currentMember.getTeam(), currentMember.getId());
+
+			if (!currentTeam.getRank().equals("none")) {
+				System.out.println("Auth user login : " + dto);
+				session.setAttribute("member", currentMember);
+				session.setAttribute("rank", teamService.getRank(currentMember.getTeam(), currentMember.getId()));
+				return true;
+			} else {
+				System.out.println("unAuth user access : " + dto);
+				return false;
+			}
 		} else {
+			System.out.println("login failed : " + dto);
 			return false;
 		}
 	}
@@ -181,12 +192,30 @@ public class RestController {
 
 	@GetMapping("/deleteMember")
 	public ModelAndView loginDeleteMember(@RequestParam String id, HttpServletRequest request) throws Exception {
-		if (memberService.deleteMember(id)) {
-			HttpSession session = request.getSession();
-			session.invalidate();
-			return new ModelAndView("member/login.html");
+		System.out.println("RestController - loginDeleteMember : " + id);
+		String rank = (String) request.getSession().getAttribute("rank");
+		Member targetMember = memberService.getMemberById(id);
+		Team targetTeam = teamService.getTeamObject(targetMember.getTeam(), targetMember.getId());
+		System.out.println("targetTeam : " + targetTeam);
+		ModelAndView mav = new ModelAndView();
+		if (teamService.deleteTeamMember(targetTeam)) {
+			if (memberService.deleteMember(id)) {
+				if (!rank.equals("admin")) {
+					HttpSession session = request.getSession();
+					session.invalidate();
+					mav.setViewName("member/login.html");
+					return mav;
+				} else {
+					List<Team> teamlist = new ArrayList<>();
+					teamlist = teamService.getAllMember(targetMember.getTeam());
+					mav.addObject("teamlist", teamlist);
+					mav.setViewName("member/listMembers.html");
+					return mav;
+				}
+			}
 		}
-		return new ModelAndView("member/mypage.html");
+		mav.setViewName("member/mypage.html");
+		return mav;
 	}
 
 	@GetMapping("/logout")
@@ -291,7 +320,7 @@ public class RestController {
 	public boolean insertBoard(@RequestBody BoardCreateRequestDto dto, HttpServletRequest request) throws Exception {
 		System.out.println("RestController - insertBoard : " + dto + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		if(boardService.insertBoard(dto, sessionMember)) {
+		if (boardService.insertBoard(dto, sessionMember)) {
 			return true;
 		}
 		return false;
@@ -320,7 +349,7 @@ public class RestController {
 	}
 
 	@GetMapping("/boardlist")
-	public ModelAndView boardlist(HttpServletRequest request){
+	public ModelAndView boardlist(HttpServletRequest request) {
 		System.out.println("RestController - boardlist : " + request);
 		ModelAndView mav = new ModelAndView();
 		List<Board> boardlist = new ArrayList<>();
@@ -333,7 +362,7 @@ public class RestController {
 	}
 
 	@GetMapping("/infoBoard")
-	public ModelAndView infoBoard(@RequestParam String id, HttpServletRequest request){
+	public ModelAndView infoBoard(@RequestParam String id, HttpServletRequest request) {
 		System.out.println("RestController - infoBoard : " + id + " : " + request);
 		ModelAndView mav = new ModelAndView();
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
@@ -359,7 +388,7 @@ public class RestController {
 	public String insertComment(@RequestBody CommentCreateRequestDto dto, HttpServletRequest request) {
 		System.out.println("Restcontroller - insertComment : " + dto + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		if(commentService.createComment(dto,sessionMember)) {
+		if (commentService.createComment(dto, sessionMember)) {
 			return "success";
 		}
 		return "fail";

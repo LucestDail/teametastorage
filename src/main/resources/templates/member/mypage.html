@@ -15,25 +15,25 @@
 <table class = "table">
 	<tr>
 		<th>아이디</th>
-		<td><span th:text="${session.member.id}"></span></td>
+		<td><span th:text="${member.id}"></span></td>
 	</tr>
-	<tr>
+	<tr th:if="${session.member.id.equals(member.id)}">
 		<th>패스워드</th>
-		<td><span th:text="${session.member.password}"></span></td>
+		<td><span th:text="${member.password}"></span></td>
 	</tr>
 	<tr>
 		<th>이름</th>
-		<td><span th:text="${session.member.name}"></span></td>
+		<td><span th:text="${member.name}"></span></td>
 	</tr>
 	<tr>
 		<th>팀명칭</th>
-		<td><span th:text="${session.member.team}"></span></td>
+		<td><span th:text="${member.team}"></span></td>
 	</tr>
 	<tr>
 		<td colspan="4">
 			<a href="main" class = "btn btn-primary">돌아가기</a>
-			<a href="updateMember" class = "btn btn-primary">수정</a>
-			<input type="button" value="삭제" onclick="delete_confirm()" class = "btn btn-primary">
+			<a th:if="${session.member.id.equals(member.id)}" href="updateMember" class = "btn btn-primary">수정</a>
+			<input th:if="${session.member.id.equals(member.id)}" type="button" value="삭제" onclick="delete_confirm()" class = "btn btn-primary">
 			<script type="text/javascript">
 				function delete_confirm(){
 					if(confirm("delete?")){

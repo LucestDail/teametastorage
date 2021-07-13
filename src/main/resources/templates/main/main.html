@@ -45,6 +45,10 @@
 				<th>팀과 의논하세요!</th>
 				<td><a href="listBoards" class="btn btn-primary">팀 게시판</a></td>
 			</tr>
+			<tr th:if="${session.rank.equals('admin')}">
+				<th>팀원을 관리하세요</th>
+				<td><a href="listMembers" class="btn btn-primary">팀원 관리</a></td>
+			</tr>
 			<tr>
 				<td colspan="2" align="center"><a href="logout"
 					class="btn btn-primary">로그아웃</a></td>

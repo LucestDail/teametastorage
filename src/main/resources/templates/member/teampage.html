@@ -11,14 +11,14 @@
 </head>
 <body>
 
-<h1>you result</h1><br>
+<h1><span th:text="${session.member.team}"></span> 팀 </h1><br>
 <table class = "table">
 	<tr align="center">
 		<td><strong>아이디</strong></td>
 		<td><strong>이름</strong></td>
 	</tr>
 	<tr th:each="team:${teamlist}" align="center">
-		<td><span th:text="${team.memberId}"></span></td>
+		<td><a th:href="@{'getMemberDetail?id='+${team.memberId}}"><span th:text="${team.memberId}"></span></a></td>
 		<td><span th:text="${team.name}"></span></td>
 	</tr>
 	<tr>
