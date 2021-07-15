@@ -33,20 +33,31 @@ public class Board extends BaseTimeEntity {
 
 	@Column(length = 500, nullable = false)
 	private String saveName;
+	
+	@Column(length = 500, nullable = false)
+	private Long count;
+	
+	@Column(length = 500, nullable = false)
+	private Long good;
+	
 
 	@Builder
-	public Board(Long boardSeq, String title, String content, String saveTeam, String saveName) {
+	public Board(Long boardSeq, String title, String content, String saveTeam, String saveName, Long count, Long good) {
 		this.boardSeq = boardSeq;
 		this.title = title;
 		this.content = content;
 		this.saveTeam = saveTeam;
 		this.saveName = saveName;
+		this.count = count;
+		this.good = good;
 	}
+
 
 	@Override
 	public String toString() {
 		return "Board [boardSeq=" + boardSeq + ", title=" + title + ", content=" + content + ", saveTeam=" + saveTeam
-				+ ", saveName=" + saveName + "]";
+				+ ", saveName=" + saveName + ", count=" + count + ", good=" + good + "]";
 	}
+
 
 }

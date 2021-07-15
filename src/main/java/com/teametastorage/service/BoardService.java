@@ -62,7 +62,6 @@ public class BoardService {
 		List<Board> currentBoardList = getAllBoardReverse(team);
 		List<Board> targetBoardList = new ArrayList<>();
 		String targetKeyword = keyword;
-		System.out.println("targetKeyword : " + targetKeyword);
 		for(Board targetBoard : currentBoardList) {
 			if(targetBoard.getTitle().contains(targetKeyword)
 					|| targetBoard.getContent().contains(targetKeyword)
@@ -88,15 +87,12 @@ public class BoardService {
 	}
 
 	public Page<Board> findPaginated(Pageable pageable, String team, Optional<String> keyword) {
-		System.out.println("BoardService - findPaginated : " + pageable + " : " + team + " : " + keyword);
 		List<Board> boards = getAllBoardReverse(team);
 		if(keyword.isPresent()) {
 			boards = searchBoard(team,keyword.get());
 		}else {
-			System.out.println("keyword is null");
 			boards = getAllBoardReverse(team);
 		}
-		System.out.println("boards : " + boards);
 		int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
@@ -114,6 +110,19 @@ public class BoardService {
         return boardPage;
 	}
 	
+	public void addCount(Long boardSeq) {
+		boardRepository.addCount(boardSeq);
+	}
+
+	public void addGood(String id) {
+		boardRepository.addGood(Long.parseLong(id));
+		
+	}
+
+	public void minusGood(String id) {
+		boardRepository.minusGood(Long.parseLong(id));
+		
+	}
 	
 
 }
