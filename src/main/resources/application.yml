@@ -1,7 +1,35 @@
 spring:
   profiles:
     active: local #basic configuration select
-    
+
+
+#springboot logback configuration settings
+---
+spring:
+  profiles: local
+logging:
+  pattern:
+    console: "[%d{yyyy-MM-dd HH:mm:ss.SSS}][%clr(%-10p)][%logger.%method:line%line] - %msg%n"
+  level:
+    org:
+      springframework: INFO
+---
+spring:
+  profiles: dev
+logging:
+  pattern:
+    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  file:
+    name: ./logs/tmsLog.log
+    max-history: 30
+  level:
+    org:
+    springframework: INFO
+  logback:
+    rollingpolicy:
+      file-name-pattern: "/logs/abc.%d{yyyy-MM-dd}.%i"
+
+
 #local environment
 ---
 spring:

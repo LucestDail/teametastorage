@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,16 +40,17 @@ public class BoardController {
 
 	@Autowired
 	CommentService commentService;
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
 	@GetMapping("/insertBoard")
 	public ModelAndView insertBoard() {
-		System.out.println("RestController - insertBoard");
 		return new ModelAndView("board/insertboard.html");
 	}
 
 	@PostMapping("/insertBoard")
 	public boolean insertBoard(@RequestBody BoardCreateRequestDto dto, HttpServletRequest request) throws Exception {
-		System.out.println("RestController - insertBoard : " + dto + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		if (boardService.insertBoard(dto, sessionMember)) {
 			return true;
@@ -57,7 +60,6 @@ public class BoardController {
 
 	@GetMapping("/updateBoard")
 	public ModelAndView updateBoard(@RequestParam String id, HttpServletRequest request) {
-		System.out.println("RestController - updateBoard : ");
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		String team = sessionMember.getTeam();
 		Board board = boardService.getBoardDetail(Long.parseLong(id), team);
@@ -69,7 +71,6 @@ public class BoardController {
 
 	@PostMapping("/updateBoard")
 	public String updateBoard(@RequestBody BoardUpdateRequestDto dto, HttpServletRequest request) {
-		System.out.println("RestController - updateboard : " + dto + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		if (boardService.updateBoard(dto, sessionMember)) {
 			return "success";
@@ -79,7 +80,6 @@ public class BoardController {
 
 	@GetMapping("/boardlist")
 	public ModelAndView boardlist(HttpServletRequest request) {
-		System.out.println("RestController - boardlist : " + request);
 		ModelAndView mav = new ModelAndView();
 		List<Board> boardlist = new ArrayList<>();
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
@@ -92,7 +92,6 @@ public class BoardController {
 
 	@GetMapping("/infoBoard")
 	public ModelAndView infoBoard(@RequestParam String id, HttpServletRequest request) {
-		System.out.println("RestController - infoBoard : " + id + " : " + request);
 		ModelAndView mav = new ModelAndView();
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		String team = sessionMember.getTeam();
@@ -108,14 +107,12 @@ public class BoardController {
 
 	@GetMapping("/deleteBoard")
 	public ModelAndView deleteBoard(@RequestParam String id, HttpServletRequest request) {
-		System.out.println("RestController - deleteBoard : " + id);
 		boardService.deleteBoard(id);
 		return boardlist(request);
 	}
 
 	@PostMapping("/insertComment")
 	public String insertComment(@RequestBody CommentCreateRequestDto dto, HttpServletRequest request) {
-		System.out.println("Restcontroller - insertComment : " + dto + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		if (commentService.createComment(dto, sessionMember)) {
 			return "success";
@@ -125,7 +122,6 @@ public class BoardController {
 
 	@GetMapping("/deleteComment")
 	public ModelAndView deleteComment(@RequestParam String id, HttpServletRequest request) {
-		System.out.println("RestController - deleteComment : " + id);
 		String boardId = commentService.getCommentDetail(id);
 		commentService.deleteComment(id);
 		return infoBoard(boardId, request);
@@ -135,7 +131,6 @@ public class BoardController {
 	public ModelAndView listBoard(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size, @RequestParam("keyword") Optional<String> keyword,
 			HttpServletRequest request) {
-		System.out.println("BoardController - listBoard : " + page + " : " + size + " : " + keyword + " : " + request);
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(5);
 		String currentKeyword = keyword.orElse(null);

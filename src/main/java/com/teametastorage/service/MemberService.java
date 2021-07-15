@@ -26,7 +26,6 @@ public class MemberService {
 
 	@Transactional
 	public Long createMember(MemberCreateRequestDto dto) {
-		System.out.println("MemberService - createMember : " + dto);
 		if (!Objects.isNull(memberRepository.save(dto.toEntity()).getMemberSeq())) {
 			return teamService.createTeam(dto.toEntityTeam());
 		}
@@ -34,7 +33,6 @@ public class MemberService {
 	}
 
 	public boolean validateMember(MemberCreateRequestDto dto) {
-		System.out.println("MemberService - validateMember : " + dto);
 		List<Member> currentMemberList = memberRepository.findAll();
 		for (Member currentMember : currentMemberList) {
 			if (currentMember.getId().equals(dto.getId())) {
@@ -45,7 +43,6 @@ public class MemberService {
 	}
 
 	public boolean loginMember(MemberReadRequestDto dto) {
-		System.out.println("MemberService - loginMember : " + dto);
 		List<Member> currentMemberList = memberRepository.findAll();
 		for (Member currentMember : currentMemberList) {
 			if (currentMember.getId().equals(dto.getId()) && currentMember.getPassword().equals(dto.getPassword())) {
@@ -56,7 +53,6 @@ public class MemberService {
 	}
 
 	public Member getMemberById(String id) {
-		System.out.println("MemberService - getMemberById : " + id);
 		List<Member> currentMemberList = memberRepository.findAll();
 		Member findMember = null;
 		for (Member currentMember : currentMemberList) {
@@ -68,7 +64,6 @@ public class MemberService {
 	}
 
 	public boolean updateMember(MemberUpdateRequestDto dto) {
-		System.out.println("MemberService - updateMember : " + dto);
 		Member currentMember = getMemberById(dto.getId());
 		memberRepository.update(currentMember.getMemberSeq(), currentMember.getId(), dto.getPassword(), dto.getName(),
 				dto.getTeam());
@@ -77,7 +72,6 @@ public class MemberService {
 	}
 
 	public boolean deleteMember(String id) {
-		System.out.println("MemberService - deleteMember : " + id);
 		memberRepository.deleteById(getMemberById(id).getMemberSeq());
 		if (Objects.isNull(getMemberById(id))) {
 			return true;

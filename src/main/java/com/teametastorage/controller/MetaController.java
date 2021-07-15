@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +26,12 @@ public class MetaController {
 
 	@Autowired
 	MetaService metaService;
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
 	@GetMapping("/metasearch")
 	public ModelAndView loginIndex(Model model) {
-		System.out.println("RestController - metasearch : " + model);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main/index.html");
 		return mav;
@@ -35,7 +39,6 @@ public class MetaController {
 	
 	@GetMapping("/getAllMeta")
 	public ModelAndView loginGetAllMeta(HttpServletRequest request) throws Exception {
-		System.out.println("RestController - loginGetAllMeta : " + request);
 		ModelAndView mav = new ModelAndView();
 		List<Meta> metalist = new ArrayList<>();
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
@@ -48,7 +51,6 @@ public class MetaController {
 
 	@GetMapping("/metaSearchList")
 	public ModelAndView getSearchMetaList(@RequestParam String id, HttpServletRequest request) {
-		System.out.println("RestController - getSearchMetaList : " + id + " : " + request);
 		ModelAndView mav = new ModelAndView();
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		String team = sessionMember.getTeam();
@@ -61,7 +63,6 @@ public class MetaController {
 
 	@GetMapping("/getMetaInfo")
 	public ModelAndView loginGetMetaInfo(@RequestParam String id, HttpServletRequest request) throws Exception {
-		System.out.println("RestController - loginGetMetaInfo : " + id + " : " + request);
 		ModelAndView mav = new ModelAndView();
 		Meta meta = metaService.getMetaDetail(Long.parseLong(id));
 		mav.addObject("meta", meta);
@@ -71,7 +72,6 @@ public class MetaController {
 
 	@GetMapping("/failurl")
 	public ModelAndView loginGetFailUrl(@RequestParam String id) {
-		System.out.println("RestController - loginGetFailUrl : " + id);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("id", id);
 		mav.setViewName("meta/failurl.html");
@@ -80,20 +80,17 @@ public class MetaController {
 
 	@GetMapping("/insertMeta")
 	public ModelAndView loginInsertMetaForm() {
-		System.out.println("RestController - loginInsertMetaForm");
 		return new ModelAndView("meta/insertmeta.html");
 	}
 
 	@PostMapping("/insertMeta")
 	public String loginInsertMeta(@RequestBody MetaCreateRequestDto dto, HttpServletRequest request) throws Exception {
-		System.out.println("RestController - loginInsertMeta : " + dto + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		return metaService.createMeta(dto, sessionMember);
 	}
 
 	@GetMapping("/metaUpdate")
 	public ModelAndView loginUpdateMetaForm(@RequestParam String id, HttpServletRequest request) {
-		System.out.println("RestController - loginUpdateMetaForm : " + id + " : " + request);
 		Meta meta = metaService.getMetaDetail(Long.parseLong(id));
 		ModelAndView mav = new ModelAndView();
 		System.out.println(meta);
@@ -104,7 +101,6 @@ public class MetaController {
 
 	@PostMapping("/metaUpdate")
 	public String loginUpdateMeta(@RequestBody Meta inputMeta, HttpServletRequest request) {
-		System.out.println("RestController - loginUpdateMeta : " + inputMeta + " : " + request);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		if (metaService.updateMeta(inputMeta, sessionMember)) {
 			return "success";
