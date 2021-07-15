@@ -11,4 +11,7 @@ public interface GoodRepository extends JpaRepository<Good, Long>{
 
 	@Query("SELECT g FROM Good g WHERE g.goodId=:goodId AND g.boardId=:boardId")
 	Good getByIdAndBoardSeq(@Param("goodId") String id, @Param("boardId") Long boardSeq);
+
+	@Query("DELETE FROM Good g WHERE g.goodId=:goodId AND g.boardId=:boardId")
+	void deleteGoodByBoardIdAndMemberId(@Param("goodId") String goodId, @Param("boardId") Long boardId);
 }

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teametastorage.domain.Board;
 import com.teametastorage.domain.Comment;
+import com.teametastorage.domain.Good;
 import com.teametastorage.domain.Member;
 import com.teametastorage.dto.BoardCreateRequestDto;
 import com.teametastorage.dto.BoardUpdateRequestDto;
@@ -163,10 +164,14 @@ public class BoardController {
 	public ModelAndView goodBoard(Model model, @RequestParam("id") String id, HttpServletRequest request) {
 		System.out.println("goodBoard : " + id);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		String currentMemberId = sessionMember.getId();
 		if(goodService.checkGood(Long.parseLong(sessionMember.getId()), Long.parseLong(id))) {
 			System.out.println("already good");
 			boardService.minusGood(id);
-			goodService.deleteGood(goodService.getGoodDetailByIdAndBoardSeq(sessionMember.getId(), Long.parseLong(id)).getGoodSeq());
+			Good targetGood = goodService.getTargetGood(Long.parseLong(sessionMember.getId()), Long.parseLong(id));
+			goodService.deleteGood(targetGood.getGoodSeq());
+			//goodService.deleteGood(currentMemberId, Long.parseLong(id));
+//			goodService.deleteGood(goodService.getGoodDetailByIdAndBoardSeq(sessionMember.getId(), Long.parseLong(id)).getGoodSeq());
 		}else{
 			System.out.println("add good");
 			boardService.addGood(id);

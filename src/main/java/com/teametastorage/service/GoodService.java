@@ -22,8 +22,8 @@ public class GoodService {
 		return goodRepository.getById(goodSeq);
 	}
 	
-	public Good getGoodDetailByIdAndBoardSeq(String id, Long boardSeq) {
-		return goodRepository.getByIdAndBoardSeq(id, boardSeq);
+	public Good getGoodDetailByIdAndBoardSeq(String goodId, Long boardId) {
+		return goodRepository.getByIdAndBoardSeq(goodId, boardId);
 		
 	}
 	
@@ -52,6 +52,17 @@ public class GoodService {
 			}
 		}
 		return false;
+	}
+	
+	public Good getTargetGood(Long id, Long boardSeq) {
+		List<Good> currentGoodList = getAllGood(boardSeq);
+		System.out.println("currentGoodList : " + currentGoodList);
+		for(Good targetGood : currentGoodList) {
+			if(targetGood.getGoodId().equals(String.valueOf(id))) {
+				return targetGood;
+			}
+		}
+		return null;
 	}
 
 
