@@ -17,9 +17,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE FROM Board b SET b.title=:title, b.content=:content,  b.saveTeam=:saveTeam, b.saveName =:saveName WHERE b.boardSeq=:boardSeq")
+	@Query("UPDATE FROM Board b SET b.title=:title, b.content=:content,  b.saveTeam=:saveTeam, b.saveName =:saveName, b.saveId =:saveId WHERE b.boardSeq=:boardSeq")
 	void update(@Param("boardSeq") Long boardSeq, @Param("title") String title, @Param("content") String content,
-			@Param("saveTeam") String saveTeam, @Param("saveName") String saveName);
+			@Param("saveTeam") String saveTeam, @Param("saveName") String saveName, @Param("saveId") String saveId);
 
 	@Transactional
 	@Modifying

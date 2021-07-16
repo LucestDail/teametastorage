@@ -1,16 +1,17 @@
 package com.teametastorage.dto;
 
-import com.teametastorage.domain.Comment;
 import com.teametastorage.domain.Good;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class GoodCreateRequestDto {
 	
 	private String boardId;
@@ -28,12 +29,4 @@ public class GoodCreateRequestDto {
 	public Good toEntity() {
 		return Good.builder().boardId(boardId).goodName(goodName).goodId(goodId).build();
 	}
-
-
-	@Override
-	public String toString() {
-		return "GoodCreateRequestDto [boardId=" + boardId + ", goodName=" + goodName + ", goodId=" + goodId + "]";
-	}
-	
-	
 }

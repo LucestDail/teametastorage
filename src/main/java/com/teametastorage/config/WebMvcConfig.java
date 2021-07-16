@@ -16,6 +16,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		LoginInterceptor loginIntercepter = new LoginInterceptor();
 		LogInterceptor logInterceptor = new LogInterceptor();
 		registry.addInterceptor(logInterceptor).addPathPatterns("/**/**").excludePathPatterns();
-		registry.addInterceptor(loginIntercepter).addPathPatterns("/**/**").excludePathPatterns("/");
+		registry.addInterceptor(loginIntercepter).addPathPatterns("/**/**").excludePathPatterns("/", "/register", "/validateId", "/validateTeam", "/createMember");
 	}
 }

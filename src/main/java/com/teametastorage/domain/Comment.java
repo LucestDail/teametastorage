@@ -12,10 +12,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@ToString
 public class Comment extends BaseTimeEntity {
 
 	@Id
@@ -33,20 +35,17 @@ public class Comment extends BaseTimeEntity {
 
 	@Column(length = 500, nullable = false)
 	private String saveName;
+	
+	@Column(length = 500, nullable = false)
+	private String saveId;
 
 	@Builder
-	public Comment(Long commentSeq, String boardId, String content, String saveTeam, String saveName) {
+	public Comment(Long commentSeq, String boardId, String content, String saveTeam, String saveName, String saveId) {
 		this.commentSeq = commentSeq;
 		this.boardId = boardId;
 		this.content = content;
 		this.saveTeam = saveTeam;
 		this.saveName = saveName;
+		this.saveId = saveId;
 	}
-
-	@Override
-	public String toString() {
-		return "Comment [commentSeq=" + commentSeq + ", boardId=" + boardId + ", content=" + content + ", saveTeam="
-				+ saveTeam + ", saveName=" + saveName + "]";
-	}
-
 }

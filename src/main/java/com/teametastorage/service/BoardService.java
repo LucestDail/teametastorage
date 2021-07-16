@@ -73,13 +73,14 @@ public class BoardService {
 	}
 
 	public boolean updateBoard(BoardUpdateRequestDto dto, Member sessionMember) {
-		boardRepository.update(dto.getBoardSeq(), dto.getTitle(), dto.getContent(), sessionMember.getTeam(), sessionMember.getName());
+		boardRepository.update(dto.getBoardSeq(), dto.getTitle(), dto.getContent(), sessionMember.getTeam(), sessionMember.getName(), sessionMember.getId());
 		return true;
 	}
 
 	public boolean insertBoard(BoardCreateRequestDto dto, Member sessionMember) {
 		dto.setSaveName(sessionMember.getName());
 		dto.setSaveTeam(sessionMember.getTeam());
+		dto.setSaveId(sessionMember.getId());
 		if(Objects.isNull(boardRepository.save(dto.toEntity()))) {
 			return false;
 		}

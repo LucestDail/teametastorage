@@ -6,10 +6,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class MemberCreateRequestDto {
 	
 	private String id;
@@ -32,12 +34,5 @@ public class MemberCreateRequestDto {
 	public TeamCreateRequestDto toEntityTeam() {
 		return TeamCreateRequestDto.builder().memberId(id).rank("normal").name(name).team(team).build();
 	}
-
-	@Override
-	public String toString() {
-		return "MemberCreateRequestDto [id=" + id + ", password=" + password + ", name=" + name + ", team=" + team
-				+ "]";
-	}
-	
 
 }

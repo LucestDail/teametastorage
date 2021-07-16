@@ -43,22 +43,22 @@ public class GoodService {
 		return targetGoodList;
 	}
 	
-	public boolean checkGood(Long id, Long boardSeq) {
+	public boolean checkGood(String id, Long boardSeq) {
 		List<Good> currentGoodList = getAllGood(boardSeq);
 		System.out.println("currentGoodList : " + currentGoodList);
 		for(Good targetGood : currentGoodList) {
-			if(targetGood.getGoodId().equals(String.valueOf(id))) {
+			if(targetGood.getGoodId().equals(id)) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public Good getTargetGood(Long id, Long boardSeq) {
+	public Good getTargetGood(String id, Long boardSeq) {
 		List<Good> currentGoodList = getAllGood(boardSeq);
 		System.out.println("currentGoodList : " + currentGoodList);
 		for(Good targetGood : currentGoodList) {
-			if(targetGood.getGoodId().equals(String.valueOf(id))) {
+			if(targetGood.getGoodId().equals(id)) {
 				return targetGood;
 			}
 		}

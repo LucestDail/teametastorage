@@ -6,10 +6,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class MetaReadRequestDto {
 
 	private String nameKor;
@@ -34,11 +36,4 @@ public class MetaReadRequestDto {
 		return Meta.builder().nameEng(nameEng).nameKor(nameKor).explanation(explanation).saveTeam(saveTeam)
 				.saveName(saveName).build();
 	}
-
-	@Override
-	public String toString() {
-		return "MetaReadRequestDto [nameKor=" + nameKor + ", nameEng=" + nameEng + ", explanation=" + explanation
-				+ ", saveTeam=" + saveTeam + ", saveName=" + saveName + ", type=" + type + "]";
-	}
-
 }

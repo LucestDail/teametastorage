@@ -31,6 +31,7 @@ public class CommentService {
 		System.out.println("RestController - createcomment : " + dto + " : " + sessionMember);
 		dto.setSaveName(sessionMember.getName());
 		dto.setSaveTeam(sessionMember.getTeam());
+		dto.setSaveId(sessionMember.getId());
 		if(Objects.isNull(commentRepository.save(dto.toEntity()))){
 			commentRepository.flush();
 			return false;

@@ -13,10 +13,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@ToString
 public class Member extends BaseTimeEntity {
 
 	@Id
@@ -48,11 +50,4 @@ public class Member extends BaseTimeEntity {
 		this.name = name;
 		this.team = team;
 	}
-
-	@Override
-	public String toString() {
-		return "Member [memberSeq=" + memberSeq + ", id=" + id + ", password=" + password + ", name=" + name + ", team="
-				+ team + "]";
-	}
-
 }

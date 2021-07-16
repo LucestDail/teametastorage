@@ -17,7 +17,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long>{
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE FROM Comment c SET c.boardId=:boardId, c.content=:content, c.saveTeam=:saveTeam, c.saveName =:saveName WHERE c.commentSeq=:commentSeq")
+	@Query("UPDATE FROM Comment c SET c.boardId=:boardId, c.content=:content, c.saveTeam=:saveTeam, c.saveName =:saveName, c.saveId =:saveId WHERE c.commentSeq=:commentSeq")
 	void update(@Param("boardId") Long boardId, @Param("content") String content, @Param("saveTeam") String saveTeam,
-			@Param("saveName") String saveName, @Param("commentSeq") String commentSeq);
+			@Param("saveName") String saveName, @Param("saveId") String saveId, @Param("commentSeq") String commentSeq);
 }

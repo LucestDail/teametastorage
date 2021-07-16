@@ -84,7 +84,7 @@ public class BoardController {
 		}
 		return "fail";
 	}
-
+/*
 	@GetMapping("/boardlist")
 	public ModelAndView boardlist(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -93,10 +93,10 @@ public class BoardController {
 		String team = sessionMember.getTeam();
 		boardlist = boardService.getAllBoard(team);
 		mav.addObject("boardlist", boardlist);
-		mav.setViewName("board/boardlist.html");
+		mav.setViewName("board/listBoards.html");
 		return mav;
 	}
-
+*/
 	@GetMapping("/infoBoard")
 	public ModelAndView infoBoard(@RequestParam String id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -115,7 +115,8 @@ public class BoardController {
 	@GetMapping("/deleteBoard")
 	public ModelAndView deleteBoard(@RequestParam String id, HttpServletRequest request) {
 		boardService.deleteBoard(id);
-		return boardlist(request);
+		
+		return listBoard(null, Optional.of(1), Optional.of(5), Optional.of(""), request);
 	}
 
 	@PostMapping("/insertComment")
@@ -134,7 +135,7 @@ public class BoardController {
 		return infoBoard(boardId, request);
 	}
 
-	@RequestMapping(value = "/listBoards", method = RequestMethod.GET)
+	@RequestMapping(value = {"/listBoards","/boardlist"}, method = RequestMethod.GET)
 	public ModelAndView listBoard(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size, @RequestParam("keyword") Optional<String> keyword,
 			HttpServletRequest request) {
@@ -164,14 +165,11 @@ public class BoardController {
 	public ModelAndView goodBoard(Model model, @RequestParam("id") String id, HttpServletRequest request) {
 		System.out.println("goodBoard : " + id);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		String currentMemberId = sessionMember.getId();
-		if(goodService.checkGood(Long.parseLong(sessionMember.getId()), Long.parseLong(id))) {
+		if(goodService.checkGood(sessionMember.getId(), Long.parseLong(id))) {
 			System.out.println("already good");
 			boardService.minusGood(id);
-			Good targetGood = goodService.getTargetGood(Long.parseLong(sessionMember.getId()), Long.parseLong(id));
+			Good targetGood = goodService.getTargetGood(sessionMember.getId(), Long.parseLong(id));
 			goodService.deleteGood(targetGood.getGoodSeq());
-			//goodService.deleteGood(currentMemberId, Long.parseLong(id));
-//			goodService.deleteGood(goodService.getGoodDetailByIdAndBoardSeq(sessionMember.getId(), Long.parseLong(id)).getGoodSeq());
 		}else{
 			System.out.println("add good");
 			boardService.addGood(id);
