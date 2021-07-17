@@ -1,67 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!--부트스트랩 css 추가-->
-    <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>TeametaStorage</title>
+	<!-- Core theme CSS (includes Bootstrap)-->
+	 <link href="/css/style.css" rel="stylesheet" />
+	<link href="/css/login.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body style="width:100%; height:963px; overflow:hidden">
-<table style="width:100%; height:100%">
-<tr>
-	<td style="width:60%">
-		<img src="img/frontimg.jpg" style="width:100%; height:auto">
-	</td>
-	<td style="width:20%; background-color:ghostwhite" align="center">
-		<h1>Meta Storage</h1>
-		<br><br><h3>
-		프로젝트 계획할 때<br>
-		작성하는 메타 데이터<br>
-		팀과 공유하세요!
-		</h3>
-	</td>
-	<td>
-	<table class="table table-borderless">
-<tr>
-	<th align="center">
-		아이디
-	</th>
-	<td>
-		<input type="text" id="id" class="form-control">
-	</td>
-	</tr>
-	<tr>
-	<th align="center">
-	패스워드
-	</th>
-	<td>
-		<input type="password" id="password" class="form-control">
-	</td>
-	</tr>
-<tr>
-	<td colspan="2" align="center">
-		<input type="button" value = "login" id="btnmemberlogin" class="btn btn-primary">
-		<a href="register" class="btn btn-primary">register</a>
-	</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-
-    <!--부트스트랩 js, jquery 추가-->
-    <script src="/js/jquery.min.js"></script>
-    <!--custom js 추가-->
-    <script src="/js/main.js"></script>
+<!--
+<body style="width: 100%; height: 963px; overflow: hidden">
+	<table style="width: 100%; height: 100%">
+		<tr>
+			<td style="width: 60%">
+			<img src="https://source.unsplash.com/random" style="width: 100%; height: auto"></td>
+			<td style="width: 20%; background-color: ghostwhite" align="center">
+				<h1>Meta Storage</h1> <br> <br>
+				<h3>
+					프로젝트 계획할 때<br> 작성하는 메타 데이터<br> 팀과 공유하세요!
+				</h3>
+			</td>
+			<td>
+				<table class="table table-borderless">
+					<tr>
+						<th align="center">아이디</th>
+						<td><input type="text" id="id" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<th align="center">패스워드</th>
+						<td><input type="password" id="password" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><input type="button"
+							value="login" id="btnmemberlogin" class="btn btn-primary">
+							<a href="register" class="btn btn-primary">register</a></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	
+	
+-->
+	<section class="conA">
+		<div class="container">
+			<h1>
+			Team Meta<br>
+			Storage
+			</h1><br>
+			<input type="text" placeholder="id" id="id" class="form-control bg-transparent"><br>
+			<input type="password" placeholder="password" id="password" class="form-control bg-transparent"><br>
+			<input type="button" value="login" id="btnmemberlogin" class="btn bg-transparent">
+			<a href="register" class = "btn bg-transparent">register</a>
+		</div>
+	</section>
+	<!--custom js 추가-->
+	<script src="/js/scripts.js"></script>
+	<script src="/js/main.js"></script>
 </body>
 </html>

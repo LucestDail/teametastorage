@@ -2,6 +2,7 @@ package com.teametastorage.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,16 +10,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
 
-@org.springframework.web.bind.annotation.RestController
+@Controller
 @CrossOrigin
 @RequiredArgsConstructor
 public class RestController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	@GetMapping("/test")
+	public String test() {
+		return "main/test.html";
+	}
 	@GetMapping("/hello")
 	public String hello() {
-		return "testing page";
+		return "main/hello.html";
 	}
 
 	@GetMapping("/")

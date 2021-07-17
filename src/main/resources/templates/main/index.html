@@ -1,46 +1,42 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Index Page</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-</head>
-<body>
-<h1>search</h1><br>
-<table class="table">
-	<tr>
-		<th>
-			검색키워드
-		</th>
-		<td>
-			 <input type="text" id="searchtarget" class="form-control">
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center">
-			<input type="button" value = "meta 검색" id="btnmetasearch" class="btn btn-primary">
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center">
-			
-<a href="insertMeta" class="btn btn-primary">메타데이터 등록</a>
-<a href="getAllMeta" class="btn btn-primary">전체 메타데이터 보기</a>
-<input type="button" class="btn btn-primary" value="돌아가기" onclick="location.href='main'">
-		</td>
-	</tr>
-</table>
- 
-<br>
-    <!--custom js 추가-->
-    <script src="/js/main.js"></script>
-</body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/layout}">
+<meta charset="utf-8">
+<th:block layout:fragment="content">
+    <h1 class="mt-4">Meta Search</h1>
+	<p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+                    <p>
+                        Make sure to keep all page content within the
+                        <code>#page-content-wrapper</code>
+                        . The top navbar is optional, and just for demonstration. Just create an element with the
+                        <code>#sidebarToggle</code>
+                        ID which will toggle the menu when clicked.
+                    </p>
+	<p>
+    <table class="table">
+        <tr>
+            <th>
+                검색키워드
+            </th>
+            <td>
+                 <input type="text" id="searchtarget" class="form-control">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" value = "meta 검색" id="btnmetasearch" class="btn btn-primary">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                
+    <a href="insertMeta" class="btn btn-primary">메타데이터 등록</a>
+    <a href="getAllMeta" class="btn btn-primary">전체 메타데이터 보기</a>
+    <input type="button" class="btn btn-primary" value="돌아가기" onclick="location.href='main'">
+            </td>
+        </tr>
+    </table>
+	</p>
+</th:block>
 </html>

@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<!--부트스트랩 css 추가-->
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-</head>
-<body>
-
-	<h1>
-		<span th:text="${session.member.team}"></span> 팀 게시판
-	</h1>
-	<br>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/layout}">
+<meta charset="utf-8">
+<th:block layout:fragment="content">
+    <h1 class="mt-4"><span th:text="${session.member.team}"></span> 팀 게시판</h1>
+                    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+                    <p>
+                        Make sure to keep all page content within the
+                        <code>#page-content-wrapper</code>
+                        . The top navbar is optional, and just for demonstration. Just create an element with the
+                        <code>#sidebarToggle</code>
+                        ID which will toggle the menu when clicked.
+                    </p>
+<br>
 	<table class="table">
 		<thead>
 			<tr>
@@ -91,5 +90,5 @@
 	<script src="/js/bootstrap.min.js"></script>
 	<!--custom js 추가-->
 	<script src="/js/main.js"></script>
-</body>
+</th:block>
 </html>
