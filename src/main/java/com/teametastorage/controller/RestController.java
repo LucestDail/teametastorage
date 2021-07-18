@@ -31,4 +31,32 @@ public class RestController {
 		mav.setViewName("main/main.html");
 		return mav;
 	}
+	
+	@GetMapping("/policy")
+	public ModelAndView policy(Model mode) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qna/policy.html");
+		return mav;
+	}
+	
+	@GetMapping("/service")
+	public ModelAndView service(Model mode) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qna/service.html");
+		return mav;
+	}
+	
+	@GetMapping("/tech")
+	public ModelAndView tech(Model mode) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qna/tech.html");
+		return mav;
+	}
+	
+	@GetMapping("/usually")
+	public ModelAndView usually(Model mode) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qna/usually.html");
+		return mav;
+	}
 }

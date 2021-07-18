@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.teametastorage.domain.Member;
 import com.teametastorage.domain.Meta;
 import com.teametastorage.dto.MetaCreateRequestDto;
+import com.teametastorage.dto.MetaUpdateRequestDto;
 import com.teametastorage.repository.MetaRepository;
 
 import lombok.AllArgsConstructor;
@@ -64,8 +65,17 @@ public class MetaService {
 
 	public boolean updateMeta(Meta inputMeta, Member sessionMember) {
 		System.out.println("MetaService - updateMeta : " + inputMeta + " : " + sessionMember);
-		metaRepository.update(inputMeta.getMetaSeq(), inputMeta.getNameKor(), inputMeta.getNameEng(),
-				inputMeta.getExplanation(), inputMeta.getType(), sessionMember.getName());
+		MetaUpdateRequestDto dto = new MetaUpdateRequestDto();
+		dto.setExplanation(inputMeta.getExplanation());
+		dto.setMetaSeq(inputMeta.getMetaSeq());
+		dto.setNameEng(inputMeta.getNameEng());
+		dto.setNameKor(inputMeta.getNameKor());
+		dto.setType(inputMeta.getType());
+		dto.setSaveName(sessionMember.getName());
+		dto.setSaveTeam(sessionMember.getTeam());
+//		metaRepository.update(inputMeta.getMetaSeq(), inputMeta.getNameKor(), inputMeta.getNameEng(),
+//				inputMeta.getExplanation(), inputMeta.getType(), sessionMember.getName());
+		metaRepository.saveAndFlush(dto.toEntity());
 		return true;
 	}
 
