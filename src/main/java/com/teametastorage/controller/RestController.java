@@ -1,6 +1,5 @@
 package com.teametastorage.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@org.springframework.web.bind.annotation.RestController
 @CrossOrigin
 @RequiredArgsConstructor
 public class RestController {
@@ -35,28 +34,35 @@ public class RestController {
 	@GetMapping("/policy")
 	public ModelAndView policy(Model mode) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("qna/policy.html");
+		mav.setViewName("qna/policy");
 		return mav;
 	}
 	
 	@GetMapping("/service")
 	public ModelAndView service(Model mode) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("qna/service.html");
+		mav.setViewName("qna/service");
 		return mav;
 	}
 	
 	@GetMapping("/tech")
 	public ModelAndView tech(Model mode) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("qna/tech.html");
+		mav.setViewName("qna/tech");
 		return mav;
 	}
 	
 	@GetMapping("/usually")
 	public ModelAndView usually(Model mode) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("qna/usually.html");
+		mav.setViewName("qna/usually");
+		return mav;
+	}
+	
+	@GetMapping("/contact")
+	public ModelAndView contact(Model mode) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qna/contact");
 		return mav;
 	}
 }

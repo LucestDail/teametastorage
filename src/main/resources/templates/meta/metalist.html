@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!--부트스트랩 css 추가-->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-</head>
-<body>
-
-<h1>you result</h1><br>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/layout}">
+<meta charset="utf-8">
+<th:block layout:fragment="content">
+    <h1 class="mt-4">Meta List</h1>
 <table class = "table">
 	<tr align="center">
 		<td><strong>명칭</strong></td>
@@ -27,8 +20,5 @@
 		</td>
 	</tr>
 </table>
-    <!--부트스트랩 js, jquery 추가-->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-</body>
+</th:block>
 </html>
