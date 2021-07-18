@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!--부트스트랩 css 추가-->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>TeaMetaStorage</title>
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link href="/css/style.css" rel="stylesheet" />
+	<link href="/css/login.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+		.borderless td,
+		.borderless th {
+			border: none;
+		}
+	</style>
 </head>
+
 <body>
-<table class = "table">
-<tr>
-	<th>
-		id
-	</th>
-	<td>
-		<input type="text" id="id">
-	</td>
-	<td>
-	<input type="button" value = "중복체크" id="btnidvalidate" class="btn btn-primary">
-	</td>
-	</tr>
-	<tr>
-	<th>
-		password
-	</th>
-	<td colspan="2">
-		<input type="text" id="password">
-	</td>
-	</tr>
-	<tr>
-	<th>
-		name
-	</th>
-	<td colspan="2">
-		<input type="text" id="name">
-	</td>
-	</tr>
-	<tr>
-	<th>
-		team
-	</th>
-	<td>
-		<input type="text" id="team">
-	</td>
-	<td>
-	<input type="button" value = "팀확인" id="btnteamvalidate" class="btn btn-primary">
-	</td>
-</tr>
-<tr>
-	<td colspan="2" align="center">
-		<input type="button" value = "register" id="btnmemberregister" class="btn btn-primary" disabled>
-	</td>
-</tr>
-</table>
-    <!--부트스트랩 js, jquery 추가-->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <!--custom js 추가-->
-    <script src="/js/main.js"></script>
+	<section class="conA">
+		<div class="container">
+			<table class="table borderless">
+				<tr>
+					<th colspan="2" style="color:white">
+						아이디
+					</th>
+					<td>
+						<input type="text" id="id" class="form-control bg-transparent"
+							style="color:white; font-weight:bold;">
+					</td>
+					<td>
+						<input type="button" value="아이디 중복 체크" id="btnidvalidate" class="btn bg-transparent"
+							style="color:white; font-weight:bold;">
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2" style="color:white">
+						비밀번호
+					</th>
+					<td>
+						<input type="text" id="password" class="form-control bg-transparent"
+							style="color:white; font-weight:bold;">
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<th colspan="2" style="color:white">
+						성함
+					</th>
+					<td>
+						<input type="text" id="name" class="form-control bg-transparent"
+							style="color:white; font-weight:bold;">
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<th colspan="2" style="color:white">
+						팀명
+					</th>
+					<td>
+						<input type="text" id="team" class="form-control bg-transparent"
+							style="color:white; font-weight:bold;">
+					</td>
+					<td>
+						<input type="button" value="팀 확인" id="btnteamvalidate" class="btn bg-transparent"
+							style="color:white; font-weight:bold;">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center">
+						<input type="button" value="회원가입" id="btnmemberregister" class="btn bg-transparent"
+							style="color:white; font-weight:bold;" disabled>
+						<a href="/" class="btn bg-transparent" style="color:white; font-weight:bold;">돌아가기</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/scripts.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/main.js"></script>
 </body>
+
 </html>

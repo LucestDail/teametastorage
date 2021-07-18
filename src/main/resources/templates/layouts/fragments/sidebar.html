@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <th:block th:fragment="sidebarFragment">
 	<div class="border-end bg-white" id="sidebar-wrapper">
-		<div class="sidebar-heading border-bottom bg-transparent">Team Meta<br>Storage</div>
+		<div class="sidebar-heading border-bottom list-group-item-light">Team Meta Storage</div>
 		<div class="list-group list-group-flush">
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/main">메인</a>
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" th:href="@{'getMemberDetail?id='+${session.member.id}}">마이페이지</a>
