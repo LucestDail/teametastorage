@@ -41,4 +41,4 @@ If you have some problem or find some bugs in this project, You can announce wit
 
 
 # License
-This project is released under the [Apache 2.0 License](https://choosealicense.com/licenses/apache-2.0/). If you think there is a problem with this license, please make an issue through the issue section.
+This project is released under the [MIT License](https://choosealicense.com/licenses/mit/). If you think there is a problem with this license, please make an issue through the issue section.
