@@ -44,3 +44,26 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+      
+---
+management:
+    endpoint:
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+spring:
+    boot:
+        admin:
+            client:
+                url: http://ec2-3-36-84-108.ap-northeast-2.compute.amazonaws.com:8000/
+                username: admin
+                password: admin
+                instance:
+                    metadata:
+                        user:
+                            name: admin
+                            password: admin
+                    service-url: http://teametastorage.com
