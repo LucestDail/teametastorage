@@ -3,6 +3,7 @@ package com.teametastorage.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -12,9 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.teametastorage.domain.Board;
-import com.teametastorage.domain.Policy;
-import com.teametastorage.dto.PolicyCreateRequestDto;
-import com.teametastorage.repository.PolicyRepository;
+import com.teametastorage.domain.Qna;
+import com.teametastorage.dto.QnaCreateRequestDto;
+import com.teametastorage.repository.QnaRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -22,25 +23,25 @@ import lombok.AllArgsConstructor;
 @Service
 public class QnaService {
 
-	private PolicyRepository policyRepository;
-
-	public List<Policy> getAllPolicy() {
-		return policyRepository.findAll();
+	private QnaRepository qnaRepository;
+	
+	public Optional<Qna> getPolicy(Long policySeq) {
+		return qnaRepository.findById(policySeq);
 	}
 
-	public Page<?> findPaginated(Pageable pageable, String category) {
-		List<?> listQna = new ArrayList<>();
-		switch (category) {
-		case "Policy":
-			listQna = getAllPolicy();
-			break;
-		default:
-			break;
+	public Page<Qna> findPaginated(Pageable pageable, String category) {
+		List<Qna> listAll = qnaRepository.findAll();
+		List<Qna> listQna = new ArrayList<>();
+		for(Qna target : listAll) {
+			if(target.getCategory().equals(category)) {
+				listQna.add(target);
+			}
 		}
+		Collections.reverse(listQna);
 		int pageSize = pageable.getPageSize();
 		int currentPage = pageable.getPageNumber();
 		int startItem = currentPage * pageSize;
-		List<?> list;
+		List<Qna> list;
 
 		if (listQna.size() < startItem) {
 			list = Collections.emptyList();
@@ -49,14 +50,48 @@ public class QnaService {
 			list = listQna.subList(startItem, toIndex);
 		}
 
-		Page<?> boardPage = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), listQna.size());
+		Page<Qna> boardPage = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), listQna.size());
 
 		return boardPage;
 	}
 
-	public boolean insertPolicy(PolicyCreateRequestDto dto) {
-		// TODO Auto-generated method stub
+	public Qna getPolicy(long seq) {
+		return qnaRepository.getById(seq);
+	}
+
+	public boolean insertQna(String category, QnaCreateRequestDto dto) {
+		switch(category) {
+		case "policy":
+			if(Objects.isNull(qnaRepository.save(dto.toEntityPolicy()))){
+				return false;
+			}
+			return false;
+		case "notice":
+			if(Objects.isNull(qnaRepository.save(dto.toEntityNotice()))){
+				return false;
+			}
+			return false;
+		case "usually":
+			if(Objects.isNull(qnaRepository.save(dto.toEntityUsually()))){
+				return false;
+			}
+			return false;
+		case "tech":
+			if(Objects.isNull(qnaRepository.save(dto.toEntityTech()))){
+				return false;
+			}
+			return false;
+		case "service":
+			if(Objects.isNull(qnaRepository.save(dto.toEntityService()))){
+				return false;
+			}
+			return false;
+		}
 		return false;
+	}
+
+	public Qna getOne(Long seq) {
+		return qnaRepository.getById(seq);
 	}
 
 }

@@ -45,6 +45,18 @@ main = {
         });
         $('#btnpolicyinsert').on('click', function () {
             _this.policyinsert();
+		});
+		$('#btnnoticeinsert').on('click', function () {
+            _this.noticeinsert();
+		});
+		$('#btnserviceinsert').on('click', function () {
+            _this.serviceinsert();
+		});
+		$('#btntechinsert').on('click', function () {
+            _this.techinsert();
+		});
+		$('#btnusuallyinsert').on('click', function () {
+            _this.usuallyinsert();
         });
     },
     msearch : function () {
@@ -379,27 +391,127 @@ main = {
 			content:$('#content').val()
 			}
 		console.log(data);
-		var url="/putPolicy";
+		var url="/qna/putpolicy";
 		$.ajax({
-            type:'POST',
+            type:'PUT',
             url:url,
             dataType:"text",
             contentType:'application/json; charset=utf-8',
             data:JSON.stringify(data),
         })
         .done(function() {
-        if(data === 'true'){
-        		alert("policy insert complete");
-        		location.href="/qna/policy";
-        	}else{
-        		alert("policy insert fail");
-        		location.href="/qna/policy";
-        	}
+			console.log("policy insert complete");
+			location.href="/qna/policy";
         })
         .fail(function (error) {
-        	console.log("policy insert fail");
+        	console.log("policy insert got problem");
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
+			location.href="/qna/policy";
+        });
+    },
+    noticeinsert : function () {
+    	console.log("notice insert activated");
+		var data={
+			title:$('#title').val(),
+			content:$('#content').val()
+			}
+		console.log(data);
+		var url="/qna/putnotice";
+		$.ajax({
+            type:'PUT',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function() {
+			console.log("policy insert complete");
+			location.href="/qna/notice";
+        })
+        .fail(function (error) {
+        	console.log("policy insert got problem");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+			location.href="/qna/notice";
+        });
+    },
+    serviceinsert : function () {
+    	console.log("service insert activated");
+		var data={
+			title:$('#title').val(),
+			content:$('#content').val()
+			}
+		console.log(data);
+		var url="/qna/putservice";
+		$.ajax({
+            type:'PUT',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function() {
+			console.log("policy insert complete");
+			location.href="/qna/service";
+        })
+        .fail(function (error) {
+        	console.log("policy insert got problem");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+			location.href="/qna/service";
+        });
+    },
+    techinsert : function () {
+    	console.log("tech insert activated");
+		var data={
+			title:$('#title').val(),
+			content:$('#content').val()
+			}
+		console.log(data);
+		var url="/qna/puttech";
+		$.ajax({
+            type:'PUT',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function() {
+			console.log("policy insert complete");
+			location.href="/qna/tech";
+        })
+        .fail(function (error) {
+        	console.log("policy insert got problem");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+			location.href="/qna/tech";
+        });
+    },
+	usuallyinsert : function () {
+    	console.log("usually insert activated");
+		var data={
+			title:$('#title').val(),
+			content:$('#content').val()
+			}
+		console.log(data);
+		var url="/qna/putusually";
+		$.ajax({
+            type:'PUT',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function() {
+			console.log("policy insert complete");
+			location.href="/qna/usually";
+        })
+        .fail(function (error) {
+        	console.log("policy insert got problem");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+			location.href="/qna/usually";
         });
     }
 };

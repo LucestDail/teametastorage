@@ -18,11 +18,11 @@ import lombok.ToString;
 @Getter
 @Entity
 @ToString
-public class Policy extends BaseTimeEntity{
+public class Qna extends BaseTimeEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long policySeq;
+	private Long qnaSeq;
 	
 	@Column(length = 500, nullable = false)
 	private String title;
@@ -30,11 +30,16 @@ public class Policy extends BaseTimeEntity{
 	@Column(columnDefinition = "text", nullable = false)
 	private String content;
 	
+	@Column(columnDefinition = "text", nullable = false)
+	private String category;
+	
+	
 	@Builder
-	public Policy(Long policySeq, String title, String content) {
-		this.policySeq = policySeq;
+	public Qna(Long qnaSeq, String title, String content, String category) {
+		this.qnaSeq = qnaSeq;
 		this.title = title;
 		this.content = content;
+		this.category = category;
 	}
 
 }
