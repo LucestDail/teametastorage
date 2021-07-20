@@ -7,14 +7,14 @@
 		<div class="list-group list-group-flush">
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/main">메인</a>
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" th:href="@{'getMemberDetail?id='+${session.member.id}}">마이페이지</a>
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/metasearch">업무 통계</a>
+			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/metastatistic">업무 통계</a>
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/metasearch">업무 검색</a>
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/insertMeta">업무 등록</a>
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/listBoards">팀 게시판</a>
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/listBoards">익명 게시판</a>
+			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="./listBoards">익명 게시판</a>
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" th:href="@{'getTeamDetail?team='+${session.member.team}}">맴버 확인</a>
 			<a th:if="${session.rank.equals('admin')}" class="list-group-item list-group-item-action list-group-item-light p-3" href="/listMembers">맴버 관리</a>
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="https://github.com/LucestDail">문의 및 개선</a>
+			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna/usually">문의 사항</a>
 		</div>
 	</div>
 </th:block>

@@ -43,6 +43,9 @@ main = {
         $('#btnidvalidate').on('click', function () {
             _this.idvalidate();
         });
+        $('#btnpolicyinsert').on('click', function () {
+            _this.policyinsert();
+        });
     },
     msearch : function () {
     	console.log("meta-search activated");
@@ -365,6 +368,36 @@ main = {
         })
         .fail(function (error) {
         	console.log("team validate fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },
+    policyinsert : function () {
+    	console.log("policy insert activated");
+		var data={
+			title:$('#title').val(),
+			content:$('#content').val()
+			}
+		console.log(data);
+		var url="/putPolicy";
+		$.ajax({
+            type:'POST',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function() {
+        if(data === 'true'){
+        		alert("policy insert complete");
+        		location.href="/qna/policy";
+        	}else{
+        		alert("policy insert fail");
+        		location.href="/qna/policy";
+        	}
+        })
+        .fail(function (error) {
+        	console.log("policy insert fail");
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });

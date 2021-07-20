@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -112,6 +114,11 @@ public class MetaController {
 	public ModelAndView loginDeleteMeta(@RequestParam String id) {
 		metaService.deleteMeta(Long.parseLong(id));
 		return new ModelAndView("main/index.html");
+	}
+	
+	@RequestMapping(value = "/metastatistic", method = RequestMethod.GET)
+	public ModelAndView getMetaStatistic() {
+		return new ModelAndView("meta/metastatistic.html");
 	}
 
 }

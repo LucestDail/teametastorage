@@ -1,65 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="~{layouts/layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layouts/layout}">
 <meta charset="utf-8">
 <th:block layout:fragment="content">
-    <h1 class="mt-4">업무 등록</h1>
-                        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-                    <p>
-                        Make sure to keep all page content within the
-                        <code>#page-content-wrapper</code>
-                        . The top navbar is optional, and just for demonstration. Just create an element with the
-                        <code>#sidebarToggle</code>
-                        ID which will toggle the menu when clicked.
-                    </p>
-<table class = "table">
-<tr>
-	<th>
-		변수명칭
-	</th>
-	<td>
-		<input type="text" id="id">
-	</td>
-	</tr>
-	<tr>
-	<th>
-		변수타입
-	</th>
-	<td>
-		<input type="text" id="type">
-	</td>
-	</tr>
-	<tr>
-	<th>
-		영어명칭
-	</th>
-	<td>
-		<input type="text" id="name_eng">
-	</td>
-	</tr>
-	<tr>
-	<th>
-		한글명칭
-	</th>
-	<td>
-		<input type="text" id="name_kor">
-	</td>
-	</tr>
-	<tr>
-	<th>
-		설명
-	</th>
-	<td>
-		<input type="text" id="explanation">
-	</td>
-	</tr>
-	<tr>
-	<td colspan="2" align="center">
-		<input type="button" value = "등록!" id="btnmetainsert" class="btn btn-primary">
-		<input type="button" value ="돌아가기" class="btn btn-primary" onclick="location.href='metasearch'">
-	</td>
-	</tr>
-</table>
+	<h1 class="mt-4">업무 등록</h1>
+	<p>The starting state of the menu will appear collapsed on smaller
+		screens, and will appear non-collapsed on larger screens. When toggled
+		using the button below, the menu will change.</p>
+	<p>
+		Make sure to keep all page content within the
+		<code>#page-content-wrapper</code>
+		. The top navbar is optional, and just for demonstration. Just create
+		an element with the
+		<code>#sidebarToggle</code>
+		ID which will toggle the menu when clicked.
+	</p>
+	<table class="table">
+		<tr>
+			<th>변수명칭</th>
+			<td><input type="text" id="id"></td>
+		</tr>
+		<tr>
+			<th>변수타입</th>
+			<td><input type="text" id="type"></td>
+		</tr>
+		<tr>
+			<th>영어명칭</th>
+			<td><input type="text" id="name_eng"></td>
+		</tr>
+		<tr>
+			<th>한글명칭</th>
+			<td><input type="text" id="name_kor"></td>
+		</tr>
+		<tr>
+			<th>설명</th>
+			<td><input type="text" id="explanation"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="button" value="등록!"
+				id="btnmetainsert" class="btn btn-primary"> <input
+				type="button" value="돌아가기" class="btn btn-primary"
+				onclick="location.href='metasearch'"></td>
+		</tr>
+	</table>
 </th:block>
 </html>

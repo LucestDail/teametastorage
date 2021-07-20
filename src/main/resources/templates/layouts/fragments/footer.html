@@ -3,87 +3,108 @@
 <meta charset="utf-8">
 <!-- Footer -->
 <th:block th:fragment="footerFragment">
-    <footer class="sticky-footer list-group-item-light">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
-            integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-        <section class="footers list-group-item-light pt-5 pb-3">
-            <div class="container pt-5">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-4 footers-one">
-                        <div class="footers-logo">
-                            <img src="img/companyImage.png" alt="Logo"
-                                style="width:120px;">
-                        </div>
-                        <div class="footers-info mt-3">
-                            <p>소규모 팀 단위 업무 및 정보 공유 플랫폼<br>
-                                Team Meta Storage 입니다<br> 
-                            </p>
-                        </div>
-                        <div class="social-icons">
-                            <a href="https://m.facebook.com/5seung5seung"><i id="social-fb"
-                                    class="fa fa-facebook-square fa-2x social"></i></a>
-                            <a href="https://twitter.com/lucestdail"><i id="social-tw"
-                                    class="fa fa-twitter-square fa-2x social"></i></a>
-                            <a href="https://github.com/LucestDail"><i id="social-gp"
-                                    class="fa fa-github-square fa-2x social"></i></a>
-                            <a href="mailto:dhtmdgussksm@gmail.com"><i id="social-em"
-                                    class="fa fa-envelope-square fa-2x social"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2 footers-two">
-                        <h5>업무</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="metasearch">업무 검색</a></li>
-                            <li><a href="getAllMeta">업무 목록</a></li>
-                            <li><a href="insertmeta">업무 등록</a></li>
-                            <li><a href="listBoards">업무 통계</a></li>
-                            <li><a href="listBoards">업무 게시판</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2 footers-three">
-                        <h5>개인</h5>
-                        <ul class="list-unstyled">
-                            <li><a th:href="@{'getMemberDetail?id='+${session.member.id}}">마이 페이지</a></li>
-                            <li><a href="contact.html">개인 쪽지함</a></li>
-                            <li><a href="about.html">내 다이어리</a></li>
-                            <li><a href="about.html">내 저장소</a></li>
-                            <li><a href="about.html">개인 게시판</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2 footers-four">
-                        <h5>팀</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="maintenance.html">팀 페이지</a></li>
-                            <li><a href="contact.html">팀 게시판</a></li>
-                            <li><a href="about.html">팀 연락망</a></li>
-                            <li><a href="about.html">쪽지함</a></li>
-                            <li><a href="about.html">익명 게시판</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2 footers-five">
-                        <h5>문의</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="usually">자주묻는 질문</a></li>
-                            <li><a href="tech">기술지원</a></li>
-                            <li><a href="service">고객지원</a></li>
-                            <li><a href="policy">정책규정</a></li>
-                            <li><a href="contact">회사정보</a></li>
-                        </ul>
-                    </div>
+	<footer class="sticky-footer list-group-item-light">
+		<link
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+			rel="stylesheet"
+			integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+			crossorigin="anonymous">
+		<section class="footers list-group-item-light pt-5 pb-3">
+			<div class="container pt-5">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-4 footers-one">
+						<div class="footers-logo">
+							<img src="img/companyImage.png" alt="Logo" style="width: 120px;">
+						</div>
+						<div class="footers-info mt-3">
+							<p>
+								소규모 팀 단위 업무 및 정보 공유 플랫폼<br> Team Meta Storage 입니다<br>
+							</p>
+						</div>
+						<div class="social-icons">
+							<a href="https://m.facebook.com/5seung5seung"><i
+								id="social-fb" class="fa fa-facebook-square fa-2x social"></i></a> <a
+								href="https://twitter.com/lucestdail"><i id="social-tw"
+								class="fa fa-twitter-square fa-2x social"></i></a> <a
+								href="https://github.com/LucestDail"><i id="social-gp"
+								class="fa fa-github-square fa-2x social"></i></a> <a
+								href="mailto:dhtmdgussksm@gmail.com"><i id="social-em"
+								class="fa fa-envelope-square fa-2x social"></i></a>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-2 footers-two">
+						<h5>업무</h5>
+						<ul class="list-unstyled">
+							<li><a href="/meta/metasearch">업무 검색</a></li>
+							<li><a href="/meta/getAllMeta">업무 목록</a></li>
+							<li><a href="/meta/insertmeta">업무 등록</a></li>
+							<li><a href="/meta/listBoards">업무 통계</a></li>
+							<li><a href="/meta/listBoards">업무 게시판</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-2 footers-three">
+						<h5>개인</h5>
+						<ul class="list-unstyled">
+							<li><a
+								th:href="@{'/member/getMemberDetail?id='+${session.member.id}}">마이
+									페이지</a></li>
+							<li><a
+								th:href="@{'/member/getMemberNote?id='+${session.member.id}}">개인
+									쪽지함</a></li>
+							<li><a
+								th:href="@{'/member/getMemberDiary?id='+${session.member.id}}">내
+									다이어리</a></li>
+							<li><a
+								th:href="@{'/member/getMemberStorage?id='+${session.member.id}}">내
+									저장소</a></li>
+							<li><a
+								th:href="@{'/member/getMemberBoard?id='+${session.member.id}}">개인
+									게시판</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-2 footers-four">
+						<h5>팀</h5>
+						<ul class="list-unstyled">
+							<li><a
+								th:href="@{'/team/getTeamDetail?id='+${session.member.team}}">팀
+									페이지</a></li>
+							<li><a
+								th:href="@{'/team/getTeamBoard?id='+${session.member.team}}">팀
+									게시판</a></li>
+							<li><a
+								th:href="@{'/team/getTeamList?id='+${session.member.team}}">팀
+									연락망</a></li>
+							<li><a
+								th:href="@{'/team/getTeamNote?id='+${session.member.team}}">쪽지함</a></li>
+							<li><a
+								th:href="@{'/team/getTeamUnname?id='+${session.member.team}}">익명
+									게시판</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-2 footers-five">
+						<h5>문의</h5>
+						<ul class="list-unstyled">
+							<li><a href="/qna/getUsually">자주묻는 질문</a></li>
+							<li><a href="/qna/getTech">기술지원</a></li>
+							<li><a href="/qna/getService">고객지원</a></li>
+							<li><a href="/qna/getPolicy">정책규정</a></li>
+							<li><a href="/qna/getContact">회사정보</a></li>
+						</ul>
+					</div>
 
-                </div>
-            </div>
-        </section>
-        <section class="copyright border">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-md-12 pt-3">
-                        <p class="text-muted">© TMS All Right Reserved</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </footer>
+				</div>
+			</div>
+		</section>
+		<section class="copyright border">
+			<div class="container">
+				<div class="row text-center">
+					<div class="col-md-12 pt-3">
+						<p class="text-muted">© TMS All Right Reserved</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</footer>
 </th:block>
 
 </html>
