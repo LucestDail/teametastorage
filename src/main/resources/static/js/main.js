@@ -31,6 +31,9 @@ main = {
         $('#btnboardinsert').on('click', function () {
             _this.boardinsert();
         });
+        $('#btnboarddelete').on('click', function () {
+            _this.boarddelete();
+        });
         $('#btncommentinsert').on('click', function () {
             _this.commentinsert();
         });
@@ -262,12 +265,14 @@ main = {
     	console.log("board insert activated");
 		var data={
 			title:$('#title').val(),
-			content:$('#content').val()
+			content:$('#content').val(),
+			category:$('#category').val()
 			}
+		var currentBoard = $('#category').val();
 		console.log(data);
-		var url="/insertBoard";
+		var url="/board/"+currentBoard;
 		$.ajax({
-            type:'POST',
+            type:'PUT',
             url:url,
             dataType:"text",
             contentType:'application/json; charset=utf-8',
@@ -275,7 +280,7 @@ main = {
         })
         .done(function() {
         	console.log("board insert complete");
-            location.href="boardlist";
+            location.href=url;
         })
         .fail(function (error) {
         	console.log("board insert fail");
@@ -287,11 +292,13 @@ main = {
     	console.log("board update activated");
 		var data={
 			boardSeq:$('#boardSeq').val(),
-			title:$('#title').val(),
-			content:$('#content').val()
+			title:$('#updateTitle').val(),
+			content:$('#updateContent').val()
 			}
+		var currentBoard = $('#category').val();
+		var currentBoardSeq = $('#seq').val();
 		console.log(data);
-		var url="/updateBoard";
+		var url="/board/"+currentBoard + "/" + currentBoardSeq;
 		$.ajax({
             type:'POST',
             url:url,
@@ -301,16 +308,42 @@ main = {
         })
         .done(function(data) {
         	console.log("board update complete");
-            if(data==="success"){
+            if(data==="true"){
 				alert("Update!");
-				location.href="boardlist";
+				location.href=url;
 			}else{
 				alert("Update fail");
-				location.href="boardlist";
+				location.href=url;
 			}
         })
         .fail(function (error) {
         	console.log("board update fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },
+    boarddelete : function () {
+		console.log("board delete activated");
+		var data={
+			}
+		var currentBoard = $('#category').val();
+		var currentBoardSeq = $('#seq').val();
+		console.log(data);
+		var url="/board/"+currentBoard + "/" + currentBoardSeq;
+		console.log(data + url);
+		$.ajax({
+            type:'DELETE',
+            url:url,
+			dataType:"text",
+			contentType:'application/json; charset=utf-8',
+            data:data,
+        })
+        .done(function() {
+			console.log("teamnotice delete complete");
+			location.href="/board/"+currentBoard;
+        })
+        .fail(function (error) {
+        	console.log("fail");
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });

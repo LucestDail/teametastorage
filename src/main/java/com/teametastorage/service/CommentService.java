@@ -39,8 +39,7 @@ public class CommentService {
 		return true;
 	}
 
-	public List<Comment> getAllComment(Board board, Member sessionMember) {
-		System.out.println("CommentService - getAllComment : " + board + " : " + sessionMember);
+	public List<Comment> getAllComment(Board board) {
 		List<Comment> currentCommentList = commentRepository.findAll();
 		List<Comment> targetCommentList = new ArrayList<>();
 		for(Comment targetComment : currentCommentList) {

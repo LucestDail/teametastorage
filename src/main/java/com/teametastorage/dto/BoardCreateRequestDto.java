@@ -37,7 +37,18 @@ public class BoardCreateRequestDto {
 
 	public Board toEntity() {
 		return Board.builder().title(title).content(content).saveTeam(saveTeam).saveName(saveName).saveId(saveId).count(0L).good(0L).category(category).build();
-
+	}
+	public Board toEntityTeam() {
+		return Board.builder().title(title).content(content).saveTeam(saveTeam).saveName(saveName).saveId(saveId).count(0L).good(0L).category("team").build();
+	}	
+	public Board toEntityUnname() {
+		return Board.builder().title(title).content(content).saveTeam(saveTeam).saveName(saveName).saveId(saveId).count(0L).good(0L).category("unname").build();
+	}	
+	public Board toEntityWork() {
+		return Board.builder().title(title).content(content).saveTeam(saveTeam).saveName(saveName).saveId(saveId).count(0L).good(0L).category("work").build();
+	}	
+	public Board toEntityPersonal() {
+		return Board.builder().title(title).content(content).saveTeam(saveTeam).saveName(saveName).saveId(saveId).count(0L).good(0L).category("personal").build();
 	}
 
 }

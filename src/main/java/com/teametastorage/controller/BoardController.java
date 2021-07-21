@@ -88,7 +88,7 @@ public class BoardController {
 		boardService.addCount(Long.parseLong(id));
 		Board board = boardService.getBoardDetail(Long.parseLong(id), team);
 		List<Comment> commentlist = new ArrayList<>();
-		commentlist = commentService.getAllComment(board, sessionMember);
+		commentlist = commentService.getAllComment(board);
 		mav.addObject("board", board);
 		mav.addObject("commentlist", commentlist);
 		mav.setViewName("board/infoboard.html");

@@ -157,7 +157,6 @@ public class TeamController {
 	@RequestMapping(value = "/teamnotice/{team}/{id}", method = RequestMethod.POST)
 	public boolean postTeamNotice(Model model, @PathVariable("team") String team,@PathVariable("id") String id,
 			@RequestBody TeamNoticeUpdateRequestDto dto, HttpServletRequest request) {
-		System.out.println("postTeamNotice is here!" + dto);
 		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		dto.setTeamNoticeSeq(Long.parseLong(id));
 		dto.setSaveId(sessionMember.getId());
@@ -173,7 +172,6 @@ public class TeamController {
 	@RequestMapping(value = "/teamnotice/{team}/{id}", method = RequestMethod.DELETE)
 	public boolean deleteTeamNotice(Model model, @PathVariable("team") String team,@PathVariable("id") String id,
 			HttpServletRequest request) {
-		System.out.println("delete here!");
 		if (teamService.deleteTeamNotice(Long.parseLong(id))) {
 			return true;
 		}
