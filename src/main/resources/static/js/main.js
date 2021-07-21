@@ -354,6 +354,8 @@ main = {
 			boardId:$('#boardSeq').val(),
 			content:$('#content').val()
 			}
+		var currentBoard = $('#category').val();
+		var currentBoardSeq = $('#seq').val();
 		console.log(data);
 		var url="/insertComment";
 		$.ajax({
@@ -365,7 +367,7 @@ main = {
         })
         .done(function() {
         	console.log("comment insert complete");
-			location.href="infoBoard?id="+data.boardId;
+			location.href="/board/"+currentBoard + "/" + currentBoardSeq;
         })
         .fail(function (error) {
         	console.log("comment insert fail");

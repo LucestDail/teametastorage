@@ -57,7 +57,7 @@
 			<td><span th:text="${comment.saveName}"></span></td>
 			<td><span th:text="${comment.content}"></span></td>
 			<td><a th:if="${session.member.id.equals(comment.saveId)}"
-				type="button" th:href="@{'deleteComment?id='+${comment.commentSeq}}"
+				type="button" th:href="@{'/deleteComment?id='+${comment.commentSeq}}"
 				class="btn btn-primary">삭제</a></td>
 		</tr>
 	</table>
