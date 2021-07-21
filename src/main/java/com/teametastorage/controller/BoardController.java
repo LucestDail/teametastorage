@@ -35,8 +35,6 @@ import com.teametastorage.service.BoardService;
 import com.teametastorage.service.CommentService;
 import com.teametastorage.service.GoodService;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
-
 @RestController
 public class BoardController {
 
@@ -48,8 +46,6 @@ public class BoardController {
 	
 	@Autowired
 	GoodService goodService;
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@GetMapping("/insertBoard")
 	public ModelAndView insertBoard() {
@@ -84,19 +80,6 @@ public class BoardController {
 		}
 		return "fail";
 	}
-/*
-	@GetMapping("/boardlist")
-	public ModelAndView boardlist(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		List<Board> boardlist = new ArrayList<>();
-		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		String team = sessionMember.getTeam();
-		boardlist = boardService.getAllBoard(team);
-		mav.addObject("boardlist", boardlist);
-		mav.setViewName("board/listBoards.html");
-		return mav;
-	}
-*/
 	@GetMapping("/infoBoard")
 	public ModelAndView infoBoard(@RequestParam String id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();

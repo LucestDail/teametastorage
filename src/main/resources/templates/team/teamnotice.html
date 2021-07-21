@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/layout}">
+<meta charset="utf-8">
+<th:block layout:fragment="content">
+    <h1 class="mt-4">팀 공지사항</h1>
+                    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+                    <p>
+                        Make sure to keep all page content within the
+                        <code>#page-content-wrapper</code>
+                        . The top navbar is optional, and just for demonstration. Just create an element with the
+                        <code>#sidebarToggle</code>
+                        ID which will toggle the menu when clicked.
+                    </p>
+<br>
+	<table class="table">
+		<thead>
+			<tr>
+				<th th:text="목록" />
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="board:${boardPage}">
+				<td><a th:href="@{'/team/teamnotice/'+${team}+'/'+${board.teamNoticeSeq}}"><span
+						th:text="${board.title}"></span></a></td>
+			</tr>
+			<tr>
+				<td align="right">
+					<button th:if="${session.rank.equals('admin')}" type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+					공지 작성</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<input type="hidden" id="team" th:value="${team}">
+	<nav style="text-align: center;">
+		<ul class="pagination">
+			<li><a th:href="@{'/team/teamnotice/'+${team}(size=${boardPage.size}, page=1)}"
+				aria-label="First"> <span aria-hidden="true">처음</span>
+			</a></li>
+			<li><span th:if="${pageNumberCurrent} > 1"> <a
+					th:href="@{'/team/teamnotice/'+${team}(size=${boardPage.size}, page=${pageNumberForward})}"
+					aria-label="Previous"> <span aria-hidden="true">&lt;</span>
+				</a>
+			</span></li>
+			<li th:if="${boardPage.totalPages > 0}" class="pagination"
+				th:each="pageNumber : ${pageNumbers}"><a
+				th:href="@{'/team/teamnotice/'+${team}(size=${boardPage.size}, page=${pageNumber})}"
+				th:text=${pageNumber}
+				th:class="${pageNumber==boardPage.number + 1} ? active"> </a></li>
+			<li><span th:if="${pageNumberCurrent} < ${pageNumberEnd}">
+					<a
+					th:href="@{'/team/teamnotice/'+${team}(size=${boardPage.size}, page=${pageNumberNext})}"
+					aria-label="Next"> <span aria-hidden="true">&gt;</span>
+				</a>
+			</span></li>
+			<li><a
+				th:href="@{'/team/teamnotice/'+${team}(size=${boardPage.size}, page=${pageNumberEnd})}"
+				aria-label="Last"> <span aria-hidden="true">마지막</span>
+			</a></li>
+		</ul>
+	</nav>
+	 <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">공지 작성</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <th>제목</th>
+                            <td>
+                                <input type="text" id="title" class="form-control">
+                            </td>
+						</tr>
+						<tr>
+                            <th>내용</th>
+                            <td>
+                                <textarea id="content" rows="5" class="form-control"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <input type="button" value="등록" id="btnteamnoticeinsert" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

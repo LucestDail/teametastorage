@@ -18,11 +18,10 @@ import lombok.ToString;
 @Getter
 @Entity
 @ToString
-public class Board extends BaseTimeEntity {
-
+public class TeamNotice extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long boardSeq;
+	private Long teamNoticeSeq;
 
 	@Column(length = 500, nullable = false)
 	private String title;
@@ -39,26 +38,15 @@ public class Board extends BaseTimeEntity {
 	@Column(length = 500, nullable = false)
 	private String saveId;
 	
-	@Column(length = 500, nullable = false)
-	private Long count;
-	
-	@Column(length = 500, nullable = false)
-	private Long good;
-	
-	@Column(length = 500, nullable = false)
-	private String category;
-	
 
 	@Builder
-	public Board(Long boardSeq, String title, String content, String saveTeam, String saveName, String saveId, Long count, Long good, String category) {
-		this.boardSeq = boardSeq;
+	public TeamNotice(Long teamNoticeSeq, String title, String content, String saveTeam, String saveName, String saveId) {
+		this.teamNoticeSeq = teamNoticeSeq;
 		this.title = title;
 		this.content = content;
 		this.saveTeam = saveTeam;
 		this.saveName = saveName;
 		this.saveId = saveId;
-		this.count = count;
-		this.good = good;
-		this.category = category;
-		}
+	}
+
 }

@@ -7,6 +7,8 @@ import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,7 +36,7 @@ public class QnaController {
 
 	@Autowired
 	QnaService qnaService;
-
+	
 	@RequestMapping(value = "/{category}", method = RequestMethod.GET)
 	public ModelAndView getCategoryList(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size, @PathVariable("category") String category,

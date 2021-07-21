@@ -57,6 +57,18 @@ main = {
 		});
 		$('#btnusuallyinsert').on('click', function () {
             _this.usuallyinsert();
+		});
+		$('#btnteamupdate').on('click', function () {
+            _this.teamupdate();
+		});
+		$('#btnteamnoticeinsert').on('click', function () {
+            _this.teamnoticeinsert();
+		});
+		$('#btnteamnoticeupdate').on('click', function () {
+            _this.teamnoticeupdate();
+		});
+		$('#btnteamnoticedelete').on('click', function () {
+            _this.teamnoticedelete();
         });
     },
     msearch : function () {
@@ -513,7 +525,128 @@ main = {
 			alert("something wrong... contact -> 01024299420")
 			location.href="/qna/usually";
         });
-    }
+    },
+    teamupdate : function () {
+    	console.log("team update activated");
+		var data={
+			teamDetailSeq:$('#teamDetailSeq').val(),
+			team:$('#teamId').val(),
+			description:$('#description').val()
+			}
+		console.log(data);
+		var url="/team/teamdetail/"+data.team;
+		$.ajax({
+            type:'POST',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function(data) {
+        	console.log("team update complete");
+            if(data==="success"){
+				alert("Update!");
+				location.href=url;
+			}else{
+				alert("Update fail");
+				location.href=url;
+			}
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },teamnoticeinsert : function () {
+    	console.log("teamnotice insert activated");
+		var data={
+			title:$('#title').val(),
+			content:$('#content').val()
+			}
+		var team = $('#team').val();
+		console.log(data);
+		var url="/team/teamnotice/"+team;
+		$.ajax({
+            type:'PUT',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function(data) {
+        	console.log("teamnotice insert complete");
+            if(data==="true"){
+				alert("Insert!");
+				location.href=url;
+			}else{
+				alert("Insert fail");
+				location.href=url;
+			}
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },teamnoticeupdate : function () {
+    	console.log("teamnotice update activated");
+		var data={
+			teamNoticeSeq:$('#teamNoticeSeq').val(),
+			title:$('#updateTitle').val(),
+			content:$('#updateContent').val()
+			}
+		console.log(data);
+		var noticeSeq = $('#teamNoticeSeq').val();
+		var team = $('#team').val();
+		var url="/team/teamnotice/"+team+"/"+data.teamNoticeSeq;
+		$.ajax({
+            type:'POST',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function(data) {
+        	console.log("board update complete");
+            if(data==="true"){
+				alert("Update!");
+				location.href=url;
+			}else{
+				alert("Update fail");
+				location.href=url;
+			}
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },teamnoticedelete : function () {
+		console.log("teamnotice delete activated");
+		var data={
+			teamNoticeSeq:$('#teamNoticeSeq').val(),
+			}
+		var teamNoticeSeq = $('#teamNoticeSeq').val();
+		var team = $('#team').val();
+		var url="/team/teamnotice/"+team+"/"+teamNoticeSeq;
+		console.log(data + url);
+		$.ajax({
+            type:'DELETE',
+            url:url,
+			dataType:"text",
+			contentType:'application/json; charset=utf-8',
+            data:data,
+        })
+        .done(function() {
+			console.log("teamnotice delete complete");
+			location.href="/team/teamnotice/"+team;
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },
 };
 
 

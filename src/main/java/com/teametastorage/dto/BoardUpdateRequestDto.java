@@ -21,9 +21,10 @@ public class BoardUpdateRequestDto {
 	private String saveId;
 	private Long count;
 	private Long good;
+	private String category;
 
 	@Builder
-	public BoardUpdateRequestDto(Long boardSeq, String title, String content, String saveTeam, String saveName, String saveId, Long count, Long good) {
+	public BoardUpdateRequestDto(Long boardSeq, String title, String content, String saveTeam, String saveName, String saveId, Long count, Long good, String category) {
 		this.boardSeq = boardSeq;
 		this.title = title;
 		this.content = content;
@@ -32,10 +33,11 @@ public class BoardUpdateRequestDto {
 		this.saveId = saveId;
 		this.count = count;
 		this.good = good;
-	}
+		this.category = category;
+		}
 
 	public Board toEntity() {
-		return Board.builder().boardSeq(boardSeq).title(title).content(content).saveTeam(saveTeam).saveName(saveName).saveId(saveId).count(count).good(good)
+		return Board.builder().boardSeq(boardSeq).title(title).content(content).saveTeam(saveTeam).saveName(saveName).saveId(saveId).count(count).good(good).category(category)
 				.build();
 
 	}

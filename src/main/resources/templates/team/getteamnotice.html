@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="~{layouts/layout}">
+<meta charset="utf-8">
+<th:block layout:fragment="content">
+    <h1 class="mt-4">팀 공지사항 상세정보</h1>
+    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger
+        screens. When toggled using the button below, the menu will change.</p>
+    <p>
+        Make sure to keep all page content within the
+        <code>#page-content-wrapper</code>
+        . The top navbar is optional, and just for demonstration. Just create an element with the
+        <code>#sidebarToggle</code>
+        ID which will toggle the menu when clicked.
+    </p>
+    <table class="table">
+        <tr>
+            <th>제목</th>
+            <td><span th:text="${teamnotice.title}"></span></td>
+        </tr>
+        <tr>
+            <th>작성일</th>
+            <td><span th:text="${teamnotice.createdDate}"></span></td>
+        </tr>
+        <tr>
+            <th>공지내용</th>
+            <td><span th:text="${teamnotice.content}"></span></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                
+                
+                <input type="button" class="btn btn-primary" value="돌아가기" onclick="location.href='/main'">
+                <button th:if="${session.rank.equals('admin')}" type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#updatemodal">
+                    수정
+				</button>
+				<button th:if="${session.rank.equals('admin')}" type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#deletemodal">
+                    삭제
+                </button>
+                <script>
+                    var myModal = document.getElementById('myModal')
+                    var myInput = document.getElementById('myInput')
+
+                    myModal.addEventListener('shown.bs.modal', function () {
+                        myInput.focus()
+                    })
+                </script>
+            </td>
+        </tr>
+	</table>
+	<span th:text="${teamnotice.teamNoticeSeq}"></span>
+	<span th:text="${teamnotice.saveTeam}"></span>
+	<input type="hidden" id="teamNoticeSeq" th:value="${teamnotice.teamNoticeSeq}"/>
+	<input type="hidden" id="team" th:value="${teamnotice.saveTeam}" />
+	<!-- Modal -->
+    <div class="modal fade" id="updatemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <th>제목</th>
+                            <td>
+                                <input type="text" id="updateTitle" class="form-control">
+                            </td>
+						</tr>
+						<tr>
+                            <th>내용</th>
+                            <td>
+                                <textarea id="updateContent" rows="5" class="form-control"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <input type="button" value="수정" id="btnteamnoticeupdate" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="modal fade" id="deletemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <th>공지를 삭제하시겠습니까?</th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <input type="button" value="삭제" id="btnteamnoticedelete" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>

@@ -1,14 +1,29 @@
 package com.teametastorage.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.teametastorage.domain.Team;
+import com.teametastorage.domain.TeamDetail;
+import com.teametastorage.domain.TeamNotice;
 import com.teametastorage.dto.TeamCreateRequestDto;
+import com.teametastorage.dto.TeamDetailCreateRequestDto;
+import com.teametastorage.dto.TeamDetailUpdateRequestDto;
+import com.teametastorage.dto.TeamNoticeCreateRequestDto;
+import com.teametastorage.dto.TeamNoticeUpdateRequestDto;
+import com.teametastorage.repository.TeamDetailRepository;
+import com.teametastorage.repository.TeamNoticeRepository;
 import com.teametastorage.repository.TeamRepository;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +33,11 @@ import lombok.AllArgsConstructor;
 public class TeamService {
 
 	private TeamRepository teamRepository;
+	
+	private TeamDetailRepository teamDetailRepository;
+	
+	private TeamNoticeRepository teamNoticeRepository;
+	
 
 	@Transactional
 	public Long createTeam(TeamCreateRequestDto dto) {
@@ -25,6 +45,9 @@ public class TeamService {
 		if (!validateTeam(dto)) {
 			return teamRepository.save(dto.toEntityNone()).getTeamSeq();
 		}
+		TeamDetailCreateRequestDto tddto = new TeamDetailCreateRequestDto();
+		tddto.setTeam(dto.getTeam());
+		createTeamDetail(tddto);
 		return teamRepository.save(dto.toEntityAdmin()).getTeamSeq();
 	}
 
@@ -114,5 +137,82 @@ public class TeamService {
 			return targetTeam.get();
 		}
 		return null;
+	}
+	
+	public boolean createTeamDetail(TeamDetailCreateRequestDto dto) {
+		if(Objects.isNull(teamDetailRepository.save(dto.toEntity()))) {
+			return false;
+		}
+		return true;
+	}
+
+	public TeamDetail getTeamDetail(String team) {
+		List<TeamDetail> teamDetailList = teamDetailRepository.findAll();
+		for(TeamDetail target : teamDetailList) {
+			if(target.getTeam().equals(team)) {
+				return target;
+			}
+		}
+		return null;
+	}
+
+	public boolean updateTeamDetail(TeamDetailUpdateRequestDto dto) {
+		if(Objects.isNull(teamDetailRepository.saveAndFlush(dto.toEntity()))){
+			return false;
+		}
+		return true;
+	}
+
+	public Page<TeamNotice> findPaginated(Pageable pageable, String team) {
+		List<TeamNotice> listAll = teamNoticeRepository.findAll();
+		List<TeamNotice> listQna = new ArrayList<>();
+		for(TeamNotice target : listAll) {
+			if(target.getSaveTeam().equals(team)) {
+				listQna.add(target);
+			}
+		}
+		Collections.reverse(listQna);
+		int pageSize = pageable.getPageSize();
+		int currentPage = pageable.getPageNumber();
+		int startItem = currentPage * pageSize;
+		List<TeamNotice> list;
+
+		if (listQna.size() < startItem) {
+			list = Collections.emptyList();
+		} else {
+			int toIndex = Math.min(startItem + pageSize, listQna.size());
+			list = listQna.subList(startItem, toIndex);
+		}
+
+		Page<TeamNotice> boardPage = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), listQna.size());
+
+		return boardPage;
+	}
+
+	public boolean createTeamNotice(TeamNoticeCreateRequestDto dto) {
+		if(Objects.isNull(teamNoticeRepository.save(dto.toEntity()))) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean updateTeamNotice(TeamNoticeUpdateRequestDto dto) {
+		if(Objects.isNull(teamNoticeRepository.saveAndFlush(dto.toEntity()))) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean deleteTeamNotice(long id) {
+		teamNoticeRepository.deleteById(id);
+		Optional<TeamNotice> chk = teamNoticeRepository.findById(id);
+		if(chk.isPresent()){
+			return false;
+		}
+		return false;
+	}
+
+	public TeamNotice getTeamNotice(long id) {
+		return teamNoticeRepository.getById(id);
 	}
 }

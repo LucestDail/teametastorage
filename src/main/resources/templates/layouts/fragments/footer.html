@@ -57,14 +57,14 @@
 					<div class="col-xs-12 col-sm-6 col-md-2 footers-four">
 						<h5>팀</h5>
 						<ul class="list-unstyled">
-							<li><a th:href="@{'/team/getTeamDetail?id='+${session.member.team}}">팀
+							<li><a th:href="@{'/team/teamdetail/'+${session.member.team}}">팀
 									페이지</a></li>
-							<li><a th:href="@{'/team/getTeamBoard?id='+${session.member.team}}">팀
+							<li><a th:href="@{'/team/teamboard/'+${session.member.team}}">팀
 									게시판</a></li>
-							<li><a th:href="@{'/team/getTeamList?id='+${session.member.team}}">팀
+							<li><a th:href="@{'/team/teamlist/'+${session.member.team}}">팀
 									연락망</a></li>
-							<li><a th:href="@{'/team/getTeamNote?id='+${session.member.team}}">팀 공지사항</a></li>
-							<li><a th:href="@{'/team/getTeamUnname?id='+${session.member.team}}">익명
+							<li><a th:href="@{'/team/teamnotice/'+${session.member.team}}">팀 공지사항</a></li>
+							<li><a th:href="@{'/team/teamunname/'+${session.member.team}}">익명
 									게시판</a></li>
 						</ul>
 					</div>
