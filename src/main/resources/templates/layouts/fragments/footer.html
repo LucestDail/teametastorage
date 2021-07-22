@@ -46,19 +46,13 @@
 						<h5>개인</h5>
 						<ul class="list-unstyled">
 							<li><a
-								th:href="@{'getMemberDetail?id='+${session.member.id}}">마이
+								th:href="@{'/member/detail/'+${session.member.memberSeq}}">마이
 									페이지</a></li>
-							<li><a th:href="@{'getMemberNote?id='+${session.member.id}}">개인
+							<li><a th:href="@{'/member/note/'+${session.member.memberSeq}}">개인
 									쪽지함</a></li>
 							<li><a
-								th:href="@{'getMemberDiary?id='+${session.member.id}}">내
+								th:href="@{'/member/diary/'+${session.member.memberSeq}}">내
 									다이어리</a></li>
-							<li><a
-								th:href="@{'getMemberStorage?id='+${session.member.id}}">내
-									저장소</a></li>
-							<li><a
-								th:href="@{'getMemberBoard?id='+${session.member.id}}">개인
-									게시판</a></li>
 						</ul>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-2 footers-four">

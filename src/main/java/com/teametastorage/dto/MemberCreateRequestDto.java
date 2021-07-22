@@ -18,17 +18,19 @@ public class MemberCreateRequestDto {
 	private String password;
 	private String name;
 	private String team;
+	private String info;
 	
 	@Builder
-	public MemberCreateRequestDto(String id, String password, String name, String team) {
+	public MemberCreateRequestDto(String id, String password, String name, String team, String info) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.team = team;
+		this.info = info;
 	}
 	
 	public Member toEntity() {
-		return Member.builder().id(id).password(password).name(name).team(team).build();
+		return Member.builder().id(id).password(password).name(name).team(team).info("안녕하세요").build();
 	}
 	
 	public TeamCreateRequestDto toEntityTeam() {

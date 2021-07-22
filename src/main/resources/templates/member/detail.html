@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/layout}">
+<meta charset="utf-8">
+<th:block layout:fragment="content">
+    <h1 class="mt-4">마이 페이지</h1>
+<table class = "table">
+	<tr>
+		<th>아이디</th>
+		<td><span th:text="${member.id}"></span></td>
+	</tr>
+	<tr th:if="${session.member.id.equals(member.id)}">
+		<th>패스워드</th>
+		<td><span th:text="${member.password}"></span></td>
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><span th:text="${member.name}"></span></td>
+	</tr>
+	<tr>
+		<th>팀</th>
+		<td><span th:text="${member.team}"></span></td>
+	</tr>
+	<tr>
+		<th>개인정보</th>
+		<td><span th:text="${member.info}"></span></td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<a href="/main" class = "btn btn-primary">돌아가기</a>
+			<button th:if="${session.member.id.equals(member.id)}" type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#updatemodal">
+                    수정
+				</button>
+				<button th:if="${session.member.id.equals(member.id)}" type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#deletemodal">
+                    회원 탈퇴
+				</button>
+		</td>
+	</tr>
+</table>
+<input type="hidden" th:value="${member.id}" id="id">
+<input type="hidden" th:value="${seq}" id="seq">
+<!-- Modal -->
+    <div class="modal fade" id="updatemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">수정</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <th>이름</th>
+                            <td>
+                                <input type="text" id="updateName" class="form-control">
+                            </td>
+						</tr>
+						<tr>
+                            <th>비밀번호</th>
+                            <td>
+                                <input type="password" id="updatePassword" class="form-control">
+                            </td>
+                        </tr>
+						<tr>
+                            <th>팀</th>
+                            <td>
+                                <input type="text" id="updateTeam" class="form-control">
+                            </td>
+						</tr>
+						<tr>
+                            <th>개인정보</th>
+                            <td>
+                                <input type="text" id="updateInfo" class="form-control">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <input type="button" value="수정" id="btnmemberupdate" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="modal fade" id="deletemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">탈퇴</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <th>정말 탈퇴하시겠습니까?</th>
+                        </tr>
+                        <tr>
+                            <td>삭제된 정보는 복구가 불가능합니다.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <input type="button" value="탈퇴" id="btnmemberdelete" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

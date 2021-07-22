@@ -35,6 +35,7 @@ public class MemberController {
 
 	@Autowired
 	MemberService memberService;
+	
 
 	@Autowired
 	TeamService teamService;
@@ -64,7 +65,7 @@ public class MemberController {
 		Team targetTeam = teamService.getTeamObject(targetMember.getTeam(), targetMember.getId());
 		ModelAndView mav = new ModelAndView();
 		if (teamService.deleteTeamMember(targetTeam)) {
-			if (memberService.deleteMember(id)) {
+			if (memberService.deleteMember(targetMember.getMemberSeq())) {
 				if (!rank.equals("admin")) {
 					HttpSession session = request.getSession();
 					session.invalidate();

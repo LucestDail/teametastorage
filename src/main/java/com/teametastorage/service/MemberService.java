@@ -63,20 +63,24 @@ public class MemberService {
 		return findMember;
 	}
 
-	public boolean updateMember(MemberUpdateRequestDto dto) {
-		Member currentMember = getMemberById(dto.getId());
-		memberRepository.update(currentMember.getMemberSeq(), currentMember.getId(), dto.getPassword(), dto.getName(),
-				dto.getTeam());
-		memberRepository.flush();
-		return true;
-	}
-
-	public boolean deleteMember(String id) {
-		memberRepository.deleteById(getMemberById(id).getMemberSeq());
-		if (Objects.isNull(getMemberById(id))) {
+	public boolean deleteMember(Long seq) {
+		memberRepository.deleteById(seq);
+		if (Objects.isNull(getMemberBySeq(seq))) {
 			return true;
 		}
 		return false;
+	}
+
+	public Member getMemberBySeq(Long seq) {
+		
+		return memberRepository.getById(seq);
+	}
+
+	public boolean updateMember(MemberUpdateRequestDto dto) {
+		if(Objects.isNull(memberRepository.saveAndFlush(dto.toEntity()))) {
+			return false;
+		}
+		return true;
 	}
 
 }

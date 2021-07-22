@@ -21,6 +21,9 @@ main = {
         });
         $('#btnmemberupdate').on('click', function () {
             _this.mupdate();
+		});
+		$('#btnmemberdelete').on('click', function () {
+            _this.mdelete();
         });
         $('#btnmetaupdate').on('click', function () {
             _this.metaupdate();
@@ -128,7 +131,7 @@ main = {
         	console.log("mregister complete");
             //location.reload();
 			alert("Welcome!");
-			location.href="./";
+			location.href="/";
         })
         .fail(function (error) {
         	console.log("mregister fail");
@@ -159,7 +162,7 @@ main = {
         	console.log("minsert complete");
             //location.reload();
 			alert("register meta data!");
-			location.href="./metasearch";
+			location.href="/metasearch";
         })
         .fail(function (error) {
         	console.log("register meta data fail");
@@ -204,13 +207,17 @@ main = {
     mupdate : function () {
     	console.log("member update activated");
 		var data={
+			memberSeq:$('#seq').val(),
 			id:$('#id').val(),
-			password:$('#password').val(),
-			name:$('#name').val(),
-			team:$('#team').val()
+			password:$('#updatePassword').val(),
+			name:$('#updateName').val(),
+			team:$('#updateTeam').val(),
+			info:$('#updateInfo').val()
 			}
 		console.log(data);
-		var url="/updateMember";
+		var seq = $('#seq').val();
+		var url="/member/detail/"+seq;
+		console.log(url);
 		$.ajax({
             type:'POST',
             url:url,
@@ -220,18 +227,40 @@ main = {
         })
         .done(function(data) {
         	console.log("mupdate complete");
-            //location.reload();
-            
             if(data==="true"){
 				alert("개인정보가 수정되었습니다. 다시 로그인해주세요.");
-				location.href="./";
+				location.href="/";
 			}else{
 				alert("개인정보 수정 실패. 다시 시도해주세요");
-				location.href="main";
+				location.href=url;
 			}
         })
         .fail(function (error) {
         	console.log("mupdate fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+	},
+	mdelete : function () {
+		console.log("member delete activated");
+		var data={
+			}
+		var seq = $('#seq').val();
+		var url="/member/detail/"+seq;
+		console.log(url);
+		$.ajax({
+            type:'DELETE',
+            url:url,
+			dataType:"text",
+			contentType:'application/json; charset=utf-8',
+            data:data,
+        })
+        .done(function() {
+			console.log("member delete complete");
+			location.href="/";
+        })
+        .fail(function (error) {
+        	console.log("fail");
         	console.log(JSON.stringify(error));
 			alert("something wrong... contact -> 01024299420")
         });
@@ -261,7 +290,7 @@ main = {
 				location.reload();
 			}else{
 				alert("Update fail");
-				location.href="./";
+				location.href="/";
 			}
         })
         .fail(function (error) {

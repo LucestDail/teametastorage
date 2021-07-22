@@ -1,18 +1,17 @@
 package com.teametastorage.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.teametastorage.domain.Member;
+import com.teametastorage.domain.Team;
 import com.teametastorage.dto.MemberUpdateRequestDto;
 import com.teametastorage.service.MemberService;
 import com.teametastorage.service.TeamService;
@@ -27,44 +26,64 @@ public class MemberRestController {
 	@Autowired
 	TeamService teamService;
 	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	/*
-	 * Create(Put)
+	 * member detail utility 
 	 */
-	
-	
-	/*
-	 * Read(Get)
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public ModelAndView getUpdateMember() {
-		return new ModelAndView("member/update.html");
+	@RequestMapping(value = "/detail/{seq}", method = RequestMethod.GET)
+	public ModelAndView detailMember(@PathVariable("seq") String seq) {
+		ModelAndView mav = new ModelAndView();
+		Member currentMember = memberService.getMemberBySeq(Long.parseLong(seq));
+		mav.addObject("member",currentMember);
+		mav.addObject("seq", seq);
+		mav.setViewName("member/detail");
+		return mav;
 	}
 	
-	/*
-	 * Update(Post)
-	 */
-	
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public boolean postUpdatMember(@RequestBody MemberUpdateRequestDto dto, HttpServletRequest request) {
+	@RequestMapping(value = "/detail/{seq}", method = RequestMethod.POST)
+	public boolean updateMember(@RequestBody MemberUpdateRequestDto dto, @PathVariable("seq") String seq, HttpServletRequest request) {
+		System.out.println("dto >>>>>>>>>>>> " + dto);
 		if (memberService.updateMember(dto)) {
-			HttpSession session = request.getSession();
 			return true;
 		}
 		return false;
 	}
 	
+	@RequestMapping(value = "/detail/{seq}", method=RequestMethod.DELETE)
+	public boolean deleteMember(@PathVariable("seq") String seq) {
+		Member targetMember = memberService.getMemberBySeq(Long.parseLong(seq));
+		Team targetTeam = teamService.getTeamObject(targetMember.getTeam(), targetMember.getId());
+		if(teamService.deleteTeamMember(targetTeam)) {
+			if(memberService.deleteMember(Long.parseLong(seq))) {
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
 	
 	/*
-	 * Delete(Delete)
+	 * diary utility
 	 */
-	
-	
-	
+	@RequestMapping(value = "/diary/{seq}", method = RequestMethod.GET)
+	public ModelAndView getDiary(@PathVariable("seq") String seq) {
+		ModelAndView mav = new ModelAndView();
+		Member currentMember = memberService.getMemberBySeq(Long.parseLong(seq));
+		mav.addObject("member",currentMember);
+		mav.addObject("seq", seq);
+		mav.setViewName("member/diary");
+		return mav;
+	}
 
-	
-
-	
-
+	/*
+	 * Note utility
+	 */
+	@RequestMapping(value = "/note/{seq}", method = RequestMethod.GET)
+	public ModelAndView getNote(@PathVariable("seq") String seq) {
+		ModelAndView mav = new ModelAndView();
+		Member currentMember = memberService.getMemberBySeq(Long.parseLong(seq));
+		mav.addObject("member",currentMember);
+		mav.addObject("seq", seq);
+		mav.setViewName("member/note");
+		return mav;
+	}
 }
