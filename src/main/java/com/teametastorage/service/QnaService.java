@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.teametastorage.domain.Board;
 import com.teametastorage.domain.Qna;
 import com.teametastorage.dto.QnaCreateRequestDto;
+import com.teametastorage.dto.QnaUpdateRequestDto;
 import com.teametastorage.repository.QnaRepository;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ import lombok.AllArgsConstructor;
 public class QnaService {
 
 	private QnaRepository qnaRepository;
-	
+
 	public Optional<Qna> getPolicy(Long policySeq) {
 		return qnaRepository.findById(policySeq);
 	}
@@ -32,8 +33,8 @@ public class QnaService {
 	public Page<Qna> findPaginated(Pageable pageable, String category) {
 		List<Qna> listAll = qnaRepository.findAll();
 		List<Qna> listQna = new ArrayList<>();
-		for(Qna target : listAll) {
-			if(target.getCategory().equals(category)) {
+		for (Qna target : listAll) {
+			if (target.getCategory().equals(category)) {
 				listQna.add(target);
 			}
 		}
@@ -60,38 +61,55 @@ public class QnaService {
 	}
 
 	public boolean insertQna(String category, QnaCreateRequestDto dto) {
-		switch(category) {
+		switch (category) {
 		case "policy":
-			if(Objects.isNull(qnaRepository.save(dto.toEntityPolicy()))){
+			if (Objects.isNull(qnaRepository.save(dto.toEntityPolicy()))) {
 				return false;
 			}
-			return false;
+			break;
 		case "notice":
-			if(Objects.isNull(qnaRepository.save(dto.toEntityNotice()))){
+			if (Objects.isNull(qnaRepository.save(dto.toEntityNotice()))) {
 				return false;
 			}
-			return false;
+			break;
 		case "usually":
-			if(Objects.isNull(qnaRepository.save(dto.toEntityUsually()))){
+			if (Objects.isNull(qnaRepository.save(dto.toEntityUsually()))) {
 				return false;
 			}
-			return false;
+			break;
 		case "tech":
-			if(Objects.isNull(qnaRepository.save(dto.toEntityTech()))){
+			if (Objects.isNull(qnaRepository.save(dto.toEntityTech()))) {
 				return false;
 			}
-			return false;
+			break;
 		case "service":
-			if(Objects.isNull(qnaRepository.save(dto.toEntityService()))){
+			if (Objects.isNull(qnaRepository.save(dto.toEntityService()))) {
 				return false;
 			}
+			break;
+		default:
 			return false;
 		}
-		return false;
+		return true;
 	}
 
 	public Qna getOne(Long seq) {
 		return qnaRepository.getById(seq);
+	}
+
+	public boolean updateQna(String category, String seq, QnaUpdateRequestDto dto) {
+		// TODO Auto-generated method stub
+		dto.setQnaSeq(Long.parseLong(seq));
+		dto.setCategory(category);
+		if (Objects.isNull(qnaRepository.saveAndFlush(dto.toEntity()))) {
+			return false;
+		}
+		return true;
+	}
+
+	public void deleteQna(String seq) {
+		qnaRepository.deleteById(Long.parseLong(seq));
+
 	}
 
 }

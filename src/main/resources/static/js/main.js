@@ -72,7 +72,16 @@ main = {
 		});
 		$('#btnteamnoticedelete').on('click', function () {
             _this.teamnoticedelete();
-        });
+		});
+		$('#btnqnainsert').on('click', function () {
+            _this.qnainsert();
+		});
+		$('#btnqnaupdate').on('click', function () {
+            _this.qnaupdate();
+		});
+		$('#btnqnadelete').on('click', function () {
+            _this.qnadelete();
+		});
     },
     msearch : function () {
     	console.log("meta-search activated");
@@ -180,10 +189,10 @@ main = {
 			console.log(data);
 			if(data==="true"){
 				alert("Welcome!");
-				location.href="./main";
+				location.href="/main";
 			}else{
 				alert("login fail");
-				location.href="./";
+				location.href="/";
 			}
         })
         .fail(function (error) {
@@ -675,6 +684,95 @@ main = {
         .done(function() {
 			console.log("teamnotice delete complete");
 			location.href="/team/teamnotice/"+team;
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },qnainsert : function () {
+    	console.log("qna insert activated");
+		var data={
+			title:$('#title').val(),
+			content:$('#content').val()
+			}
+		var category = $('#category').val();
+		
+		var url="/qna/"+category;
+		console.log(data + url);
+		$.ajax({
+            type:'PUT',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function(data) {
+        	console.log("qna insert complete");
+            if(data==="true"){
+				alert("Insert!");
+				location.href=url;
+			}else{
+				alert("Insert fail");
+				location.href=url;
+			}
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },qnaupdate : function () {
+    	console.log("qna update activated");
+		var data={
+			qnaSeq:$('#seq').val(),
+			title:$('#updateTitle').val(),
+			content:$('#updateContent').val()
+			}
+		console.log(data);
+		var seq = $('#seq').val();
+		var category = $('#category').val();
+		var url="/qna/"+category+"/"+seq;
+		$.ajax({
+            type:'POST',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function(data) {
+        	console.log("qna update complete");
+            if(data==="true"){
+				alert("Update!");
+				location.href=url;
+			}else{
+				alert("Update fail");
+				location.href=url;
+			}
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },qnadelete : function () {
+		console.log("qna delete activated");
+		var data={
+			}
+		var seq = $('#seq').val();
+		var category = $('#category').val();
+		var url="/qna/"+category+"/"+seq;
+		console.log(data + url);
+		$.ajax({
+            type:'DELETE',
+            url:url,
+			dataType:"text",
+			contentType:'application/json; charset=utf-8',
+            data:data,
+        })
+        .done(function() {
+			console.log("teamnotice delete complete");
+			location.href="/qna/"+category;
         })
         .fail(function (error) {
         	console.log("fail");
