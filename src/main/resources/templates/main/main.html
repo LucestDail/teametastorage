@@ -8,36 +8,6 @@
         <span th:text="${session.member.team}"></span>팀, <span
             th:text="${session.member.name}"></span>님!
     </h1>
-
-    <table class="table" style="width: 100%;">
-        <tr>
-            <th>메타데이터 검색을 하세요!</th>
-            <td><a href="metasearch" class="btn btn-primary">검색</a><br>
-            </td>
-        </tr>
-        <tr>
-            <th>개인 정보를 확인하세요!</th>
-            <td><a th:href="@{'getMemberDetail?id='+${session.member.id}}"
-                class="btn btn-primary">내정보</a><br>
-        </tr>
-        <tr>
-            <th>팀의 맴버를 확인하세요!</th>
-            <td><a
-                th:href="@{'getTeamDetail?team='+${session.member.team}}"
-                class="btn btn-primary">팀 맴버</a><br></td>
-        </tr>
-        <tr>
-            <th>팀과 의논하세요!</th>
-            <td><a href="listBoards" class="btn btn-primary">팀 게시판</a></td>
-        </tr>
-        <tr th:if="${session.rank.equals('admin')}">
-            <th>팀원을 관리하세요</th>
-            <td><a href="listMembers" class="btn btn-primary">팀원 관리</a></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center"><a href="logout"
-                class="btn btn-primary">로그아웃</a></td>
-        </tr>
-    </table>
+    <div id="calendar" th:id="calendar"></div>
 </th:block>
 </html>

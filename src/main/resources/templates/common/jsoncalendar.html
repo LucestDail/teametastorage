@@ -155,9 +155,8 @@
     
     function addEvent(start, end) {
       	var valid = true;
- 			
- 			var eventStart = moment(startdateandtime.value);
- 			var eventEnd = moment(enddateandtime.value);
+		 var eventStart = moment(startdateandtime.value);
+ 		var eventEnd = moment(enddateandtime.value);
    
 		valid = valid && newtitle.value;
 	 	valid = valid && startdateandtime.value;
@@ -169,12 +168,12 @@
 				eventData = {
 					title: newtitle.value,
 					description: description.value,
-					start: eventStart,
-					finish: eventEnd, 
+					start: startdateandtime.value,
+					finish: enddateandtime.value, 
 				};
 				$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
 			}
-			
+			console.log(eventData);
 			$('#calendar').fullCalendar('unselect');
 			dialog.dialog( "close" );
      
