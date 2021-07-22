@@ -9,7 +9,7 @@ Team meta data storage using springboot, spring jpa, aws ec2 ~ jenkins - docker
 
 If you want to check this project, follow the below building step "How to run this source code" and try this url.
 [This url](http://teametastorage.com/)
-
+you can test it with admin account(ID:admin / PW:admin)
 
 ## How to run this source code
 
