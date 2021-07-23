@@ -15,26 +15,23 @@ import lombok.ToString;
 @ToString
 public class MetaCreateRequestDto {
 
-	private String nameKor;
-	private String nameEng;
-	private String explanation;
+	private String title;
+	private String description;
 	private String saveTeam;
 	private String saveName;
-	private String type;
+	private String saveId;
 
 	@Builder
-	public MetaCreateRequestDto(String nameKor, String nameEng, String explanation, String saveTeam, String saveName,
-			String type) {
-		this.nameKor = nameKor;
-		this.nameEng = nameEng;
-		this.explanation = explanation;
+	public MetaCreateRequestDto(String title, String description, String saveTeam, String saveName, String saveId) {
+		this.title = title;
+		this.description = description;
 		this.saveTeam = saveTeam;
 		this.saveName = saveName;
-		this.type = type;
+		this.saveId = saveId;
 	}
 
-	public Meta toEntity(Member sessionMember) {
-		return Meta.builder().nameKor(nameKor).nameEng(nameEng).explanation(explanation)
-				.saveTeam(sessionMember.getTeam()).saveName(sessionMember.getName()).type(type).build();
+	public Meta toEntity(Member member) {
+		return Meta.builder().title(title).description(description).saveTeam(member.getTeam())
+				.saveName(member.getName()).saveId(member.getId()).build();
 	}
 }

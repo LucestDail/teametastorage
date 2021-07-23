@@ -88,8 +88,6 @@ public class BoardRestController {
 	public ModelAndView infoBoard(HttpServletRequest request,
 			@PathVariable("category") String category, @PathVariable("seq") String seq) {
 		ModelAndView mav = new ModelAndView();
-		Member sessionMember = (Member) request.getSession().getAttribute("member");
-		String team = sessionMember.getTeam();
 		boardService.addCount(Long.parseLong(seq));
 		Board board = boardService.getBoardDetail(Long.parseLong(seq));
 		List<Comment> commentlist = new ArrayList<>();

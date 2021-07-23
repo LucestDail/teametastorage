@@ -1,5 +1,6 @@
 package com.teametastorage.dto;
 
+import com.teametastorage.domain.Member;
 import com.teametastorage.domain.Meta;
 
 import lombok.Builder;
@@ -13,29 +14,27 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class MetaUpdateRequestDto {
-	
+
 	private Long metaSeq;
-	private String nameKor;
-	private String nameEng;
-	private String explanation;
+	private String title;
+	private String description;
 	private String saveTeam;
 	private String saveName;
-	private String type;
+	private String saveId;
 
 	@Builder
-	public MetaUpdateRequestDto(Long metaSeq, String nameKor, String nameEng, String explanation, String saveTeam, String saveName,
-			String type) {
+	public MetaUpdateRequestDto(Long metaSeq, String title, String description, String saveTeam, String saveName,
+			String saveId) {
 		this.metaSeq = metaSeq;
-		this.nameEng = nameEng;
-		this.nameKor = nameKor;
-		this.explanation = explanation;
+		this.title = title;
+		this.description = description;
 		this.saveTeam = saveTeam;
 		this.saveName = saveName;
-		this.type = type;
+		this.saveId = saveId;
 	}
 
-	public Meta toEntity() {
-		return Meta.builder().metaSeq(metaSeq).nameEng(nameEng).nameKor(nameKor).explanation(explanation).saveTeam(saveTeam)
-				.saveName(saveName).type(type).build();
+	public Meta toEntity(Member member) {
+		return Meta.builder().metaSeq(metaSeq).title(title).description(description).saveTeam(member.getTeam())
+				.saveName(member.getName()).saveId(member.getId()).build();
 	}
 }

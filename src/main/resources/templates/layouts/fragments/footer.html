@@ -35,10 +35,10 @@
 					<div class="col-xs-12 col-sm-6 col-md-2 footers-two">
 						<h5>업무</h5>
 						<ul class="list-unstyled">
-							<li><a href="/metasearch">업무 검색</a></li>
-							<li><a href="/getAllMeta">업무 목록</a></li>
-							<li><a href="/insertMeta">업무 등록</a></li>
-							<li><a href="/metastatistic">업무 통계</a></li>
+							<li><a href="/main">업무 확인</a></li>
+							<li><a th:href="@{'/meta/'+${session.member.team}}">과제 목록</a></li>
+							<li><a th:href="@{'/work/'+${session.member.team}}">업무 목록</a></li>
+							<!--<li><a href="/metastatistic">업무 통계</a></li>-->
 							<li><a href="/board/work">업무 게시판</a></li>
 						</ul>
 					</div>
@@ -48,11 +48,11 @@
 							<li><a
 								th:href="@{'/member/detail/'+${session.member.memberSeq}}">마이
 									페이지</a></li>
-							<li><a th:href="@{'/member/note/'+${session.member.memberSeq}}">개인
+							<!--<li><a th:href="@{'/member/note/'+${session.member.memberSeq}}">개인
 									쪽지함</a></li>
 							<li><a
 								th:href="@{'/member/diary/'+${session.member.memberSeq}}">내
-									다이어리</a></li>
+									다이어리</a></li>-->
 						</ul>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-2 footers-four">

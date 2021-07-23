@@ -25,35 +25,27 @@ public class Meta extends BaseTimeEntity {
 	private Long metaSeq;
 
 	@Column(columnDefinition = "text", nullable = false)
-	private String nameKor;
+	private String title;
 
 	@Column(columnDefinition = "text", nullable = false)
-	private String nameEng;
+	private String description;
 
 	@Column(columnDefinition = "text", nullable = false)
-	private String explanation;
-
-	@Column(columnDefinition = "text", nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String saveTeam;
 
 	@Column(columnDefinition = "text", nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String saveName;
 
 	@Column(columnDefinition = "text", nullable = false)
-	private String type;
+	private String saveId;
 
 	@Builder
-	public Meta(Long metaSeq, String nameKor, String nameEng, String explanation, String saveTeam, String saveName,
-			String type) {
+	public Meta(Long metaSeq, String title, String description, String saveTeam, String saveName, String saveId) {
 		this.metaSeq = metaSeq;
-		this.nameKor = nameKor;
-		this.nameEng = nameEng;
-		this.explanation = explanation;
+		this.title = title;
+		this.description = description;
 		this.saveTeam = saveTeam;
 		this.saveName = saveName;
-		this.type = type;
+		this.saveId = saveId;
 	}
-
 }

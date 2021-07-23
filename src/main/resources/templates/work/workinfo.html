@@ -4,33 +4,37 @@
 	layout:decorator="~{layouts/layout}">
 <meta charset="utf-8">
 <th:block layout:fragment="content">
-	<h1 class="mt-4"><span th:text="${meta.title}"></span></h1>
+	<h1 class="mt-4"><span th:text="${work.title}"></span></h1>
 
 	<table class="table">
 		<tr>
 			<th>작성 일시</th>
-			<td><span th:text="${meta.createdDate}"></span></td>
+			<td><span th:text="${work.createdDate}"></span></td>
 		</tr>
 		<tr>
 			<th>최종 수정일</th>
-			<td><span th:text="${meta.modifiedDate}"></span></td>
+			<td><span th:text="${work.modifiedDate}"></span></td>
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td><span th:text="${meta.saveName}"></span></td>
+			<td><span th:text="${work.saveName}"></span></td>
 		</tr>
 		<tr>
-			<th>과제 설명</th>
-			<td><span th:text="${meta.description}"></span></td>
+			<th>업무 설명</th>
+			<td><span th:text="${work.description}"></span></td>
+        </tr>
+        <tr>
+			<th>업무 기간</th>
+			<td><span th:text="${work.start}"></span> ~ <span th:text="${work.finish}"></span></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<a th:href="@{'/meta/'+${team}}" class="btn btn-primary">돌아가기</a>
-				<button th:if="${session.member.id.equals(meta.saveId)}" type="button" class="btn btn-primary"
+				<a th:href="@{'/work/'+${team}}" class="btn btn-primary">돌아가기</a>
+				<button th:if="${session.member.id.equals(work.saveId)}" type="button" class="btn btn-primary"
                     data-bs-toggle="modal" data-bs-target="#updatemodal">
                     수정
 				</button>
-				<button th:if="${session.member.id.equals(meta.saveId)}" type="button" class="btn btn-primary"
+				<button th:if="${session.member.id.equals(work.saveId)}" type="button" class="btn btn-primary"
                     data-bs-toggle="modal" data-bs-target="#deletemodal">
                     삭제
                 </button>
@@ -39,9 +43,9 @@
 	</table>
     <input type="hidden" th:value = "${team}" id = "team">
     <input type="hidden" th:value = "${seq}" id = "seq">
-    <input type="hidden" th:value = "${meta.saveId}" id = "saveId">
-    <input type="hidden" th:value = "${meta.saveTeam}" id = "saveTeam">
-    <input type="hidden" th:value = "${meta.saveName}" id = "saveName">
+    <input type="hidden" th:value = "${work.saveId}" id = "saveId">
+    <input type="hidden" th:value = "${work.saveTeam}" id = "saveTeam">
+    <input type="hidden" th:value = "${work.saveName}" id = "saveName">
 	<!-- Modal -->
     <div class="modal fade" id="updatemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -52,24 +56,46 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table">
+                    <table>
                         <tr>
-                            <th>과제명</th>
+                            <th>
+                                <label for="title">title</label>
+                            </th>
                             <td>
-                                <input type="text" id="updateTitle" class="form-control">
+                                <input type="text" name="newtitle" id="updateTitle" value="New Event"
+                                    class="form-control" />
                             </td>
-						</tr>
-						<tr>
-                            <th>과제 설명</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="description">description:</label> </th>
                             <td>
-                                <textarea id="updateDescription" rows="5" class="form-control"></textarea>
+
+                                <input type="text" name="description" id="updateDescription" value="" class="form-control " />
                             </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="startdateandtime">starts:</label>
+                            </th>
+                            <td>
+                                <input type="datetime-local" id="updateStart" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="enddateandtime">ends:</label>
+                            </th>
+                            <td>
+                                <input type="datetime-local" id="updateFinish" />
+                            </td>
+
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <input type="button" value="수정" id="btnmetaupdate" class="btn btn-primary">
+                    <input type="button" value="수정" id="btnworkupdate" class="btn btn-primary">
                 </div>
             </div>
         </div>
@@ -91,7 +117,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <input type="button" value="삭제" id="btnmetadelete" class="btn btn-primary">
+                    <input type="button" value="삭제" id="btnworkdelete" class="btn btn-primary">
                 </div>
             </div>
         </div>

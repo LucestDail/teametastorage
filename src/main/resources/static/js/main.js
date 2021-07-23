@@ -13,9 +13,7 @@ main = {
 		$('#btnmemberregister').on('click', function () {
             _this.mregister();
         });
-		$('#btnmetainsert').on('click', function () {
-            _this.minsert();
-        });
+		
         $('#btnmemberlogin').on('click', function () {
             _this.mlogin();
         });
@@ -24,9 +22,15 @@ main = {
 		});
 		$('#btnmemberdelete').on('click', function () {
             _this.mdelete();
+		});
+		$('#btnmetainsert').on('click', function () {
+            _this.metainsert();
         });
         $('#btnmetaupdate').on('click', function () {
             _this.metaupdate();
+		});
+		$('#btnmetadelete').on('click', function () {
+            _this.metadelete();
         });
         $('#btnboardupdate').on('click', function () {
             _this.boardupdate();
@@ -84,6 +88,15 @@ main = {
 		});
 		$('#btnqnadelete').on('click', function () {
             _this.qnadelete();
+		});
+		$('#btnworkinsert').on('click', function () {
+            _this.workinsert();
+		});
+		$('#btnworkupdate').on('click', function () {
+            _this.workupdate();
+		});
+		$('#btnworkdelete').on('click', function () {
+            _this.workdelete();
 		});
     },
     msearch : function () {
@@ -802,6 +815,164 @@ main = {
         .done(function() {
 			console.log("teamnotice delete complete");
 			location.href="/qna/"+category;
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },metainsert : function () {
+    	console.log("meta insert activated");
+		var data={
+			title:$('#title').val(),
+			description:$('#description').val()
+			}
+		var team = $('#team').val();
+		var url="/meta/"+team;
+		console.log(url);
+		$.ajax({
+            type:'PUT',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function() {
+			console.log("meta insert complete");
+			alert("작성하였습니다");
+				location.href=url;
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },metaupdate : function () {
+    	console.log("meta update activated");
+		var data={
+			title:$('#updateTitle').val(),
+			description:$('#updateDescription').val()
+			}
+		var seq = $('#seq').val();
+		var team = $('#team').val();
+		var url="/meta/"+team+"/"+seq;
+		console.log(url);
+		$.ajax({
+            type:'POST',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function() {
+			console.log("meta update complete");
+			alert("Update!");
+			location.href=url;
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },metadelete : function () {
+		console.log("meta delete activated");
+		var data={
+			}
+		var seq = $('#seq').val();
+		var team = $('#team').val();
+		var url="/meta/"+team+"/"+seq;
+		console.log(url);
+		$.ajax({
+            type:'DELETE',
+            url:url,
+			dataType:"text",
+			contentType:'application/json; charset=utf-8',
+            data:data,
+        })
+        .done(function() {
+			console.log("meta delete complete");
+			location.href="/meta/"+team;
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },workinsert : function () {
+    	console.log("work insert activated");
+		var data={
+			title:$('#title').val(),
+			description:$('#description').val(),
+			start:$('#start').val(),
+			finish:$('#finish').val()
+			}
+		var team = $('#team').val();
+		var url="/work/"+team;
+		console.log(url);
+		$.ajax({
+            type:'PUT',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function() {
+			console.log("meta insert complete");
+			alert("작성하였습니다");
+				location.href=url;
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },workupdate : function () {
+    	console.log("work update activated");
+		var data={
+			title:$('#updateTitle').val(),
+			description:$('#updateDescription').val(),
+			start:$('#updateStart').val(),
+			finish:$('#updateFinish').val()
+			}
+		var seq = $('#seq').val();
+		var team = $('#team').val();
+		var url="/work/"+team+"/"+seq;
+		console.log(url);
+		$.ajax({
+            type:'POST',
+            url:url,
+            dataType:"text",
+            contentType:'application/json; charset=utf-8',
+            data:JSON.stringify(data),
+        })
+        .done(function() {
+			console.log("work update complete");
+			alert("Update!");
+			location.href=url;
+        })
+        .fail(function (error) {
+        	console.log("fail");
+        	console.log(JSON.stringify(error));
+			alert("something wrong... contact -> 01024299420")
+        });
+    },workdelete : function () {
+		console.log("work delete activated");
+		var data={
+			}
+		var seq = $('#seq').val();
+		var team = $('#team').val();
+		var url="/work/"+team+"/"+seq;
+		console.log(url);
+		$.ajax({
+            type:'DELETE',
+            url:url,
+			dataType:"text",
+			contentType:'application/json; charset=utf-8',
+            data:data,
+        })
+        .done(function() {
+			console.log("work delete complete");
+			location.href="/work/"+team;
         })
         .fail(function (error) {
         	console.log("fail");
