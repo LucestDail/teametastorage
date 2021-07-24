@@ -143,5 +143,17 @@ public class MetaService {
 		return null;
 	}
 
+	public List<Meta> getAllMetaByTitleToList(String team, String keyword) {
+		List<Meta> metaList = getAllMetaByTeam(team);
+		List<Meta> metaTitleStringList = new ArrayList<>();
+		for(Meta one : metaList) {
+			if(one.getTitle().contains(keyword)) {
+				metaTitleStringList.add(one);
+			}
+		}
+		System.out.println(metaTitleStringList);
+		return metaTitleStringList;
+	}
+
 
 }

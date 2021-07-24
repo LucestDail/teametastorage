@@ -520,6 +520,53 @@
             </div>
         </div>
     </div>
+
+
+    <table>
+        <tr>
+            <td>
+                <script type="text/javascript">
+                    $(function () {
+                        $("#metas").autocomplete({
+                            source: function (request, response) {
+                                $.ajax({
+                                    url: "/meta/tms/data/search",
+                                    dataType: "json",
+                                    data: {
+                                        keyword: request.term
+                                    },
+                                    success: function (data) {
+                                        response($.map(data, function (item) {
+                                            return {
+                                                label: item.label,
+                                                value: item.value
+                                            };
+                                        }));
+                                    }
+                                });
+                            },
+                            select: function (event, ui) {
+                                $("#name").val(ui.item.label);
+                                $("#value").val(ui.item.value);
+                                return false;
+                            },
+                            focus: function (event, ui) {
+                                return false;
+                            }
+                        });
+                    });
+                </script>
+                <div class="ui-widget">
+
+                    <label for="metas">도시: </label>
+
+                    <input id="metas">
+
+                </div>
+            </td>
+        </tr>
+
+    </table>
 </th:block>
 
 </html>

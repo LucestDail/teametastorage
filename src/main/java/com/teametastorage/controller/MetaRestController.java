@@ -28,16 +28,16 @@ import com.teametastorage.service.MetaService;
 @RestController
 @RequestMapping("/meta")
 public class MetaRestController {
-	
+
 	@Autowired
 	MetaService metaService;
-	
-	
+
 	/*
-	 * meta read one
+	 * meta read one view + object
 	 */
 	@RequestMapping(value = "/{team}/{seq}", method = RequestMethod.GET)
-	public ModelAndView detailMeta(@PathVariable("seq") String seq, @PathVariable("team") String team, HttpServletRequest request) {
+	public ModelAndView detailMeta(@PathVariable("seq") String seq, @PathVariable("team") String team,
+			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("meta", metaService.getMeta(Long.parseLong(seq)));
 		mav.addObject("team", team);
@@ -45,9 +45,13 @@ public class MetaRestController {
 		mav.setViewName("meta/metainfo");
 		return mav;
 	}
-	
+	@RequestMapping(value = "/{team}/{seq}/data", method = RequestMethod.GET)
+	public Meta meta(@PathVariable("seq") String seq, @PathVariable("team") String team) {
+		return metaService.getMeta(Long.parseLong(seq));
+	}
+
 	/*
-	 * meta read all
+	 * meta read all view + list
 	 */
 	@RequestMapping(value = "/{team}", method = RequestMethod.GET)
 	public ModelAndView detailMetaAll(Model model, @RequestParam("page") Optional<Integer> page,
@@ -75,31 +79,44 @@ public class MetaRestController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/{team}/data", method = RequestMethod.GET)
+	public List<Meta> metaAll(@PathVariable("team") String team) {
+		return metaService.getAllMetaByTeam(team);
+	}
+	
+	@RequestMapping(value = "/{team}/data/search", method = RequestMethod.GET)
+	public List<Meta> metaAllKeyword(@PathVariable("team") String team, @RequestParam("keyword") String keyword){
+		return metaService.getAllMetaByTitleToList(team,keyword);
+	}
+
 	/*
 	 * meta create
 	 */
 	@RequestMapping(value = "/{team}", method = RequestMethod.PUT)
-	public boolean putMeta(@PathVariable("team") String team, @RequestBody MetaCreateRequestDto dto, HttpServletRequest request) {
+	public boolean putMeta(@PathVariable("team") String team, @RequestBody MetaCreateRequestDto dto,
+			HttpServletRequest request) {
 		Member member = (Member) request.getSession().getAttribute("member");
 		return metaService.putMeta(dto, member);
 	}
-	
+
 	/*
 	 * meta update
 	 */
-	
+
 	@RequestMapping(value = "/{team}/{seq}", method = RequestMethod.POST)
-	public boolean postMeta(@PathVariable("team") String team, @PathVariable("seq") String seq, @RequestBody MetaUpdateRequestDto dto, HttpServletRequest request) {
+	public boolean postMeta(@PathVariable("team") String team, @PathVariable("seq") String seq,
+			@RequestBody MetaUpdateRequestDto dto, HttpServletRequest request) {
 		Member member = (Member) request.getSession().getAttribute("member");
 		return metaService.postMeta(dto, seq, member);
 	}
-	
+
 	/*
 	 * meta delete
 	 */
-	
+
 	@RequestMapping(value = "/{team}/{seq}", method = RequestMethod.DELETE)
-	public boolean deleteMeta(@PathVariable("team") String team, @PathVariable("seq") String seq, HttpServletRequest request) {
+	public boolean deleteMeta(@PathVariable("team") String team, @PathVariable("seq") String seq,
+			HttpServletRequest request) {
 		return metaService.deleteMeta(Long.parseLong(seq));
 	}
 }
