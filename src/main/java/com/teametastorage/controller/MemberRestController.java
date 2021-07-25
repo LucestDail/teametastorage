@@ -27,7 +27,7 @@ public class MemberRestController {
 	TeamService teamService;
 	
 	/*
-	 * member detail utility 
+	 * member one
 	 */
 	@RequestMapping(value = "/detail/{seq}", method = RequestMethod.GET)
 	public ModelAndView detailMember(@PathVariable("seq") String seq) {
@@ -39,9 +39,18 @@ public class MemberRestController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
+	public ModelAndView infoMember(@PathVariable("id") String id) {
+		ModelAndView mav = new ModelAndView();
+		Member member = memberService.getMemberById(id);
+		mav.addObject("member",member);
+		mav.addObject("seq", member.getMemberSeq());
+		mav.setViewName("member/detail");
+		return mav;
+	}
+	
 	@RequestMapping(value = "/detail/{seq}", method = RequestMethod.POST)
 	public boolean updateMember(@RequestBody MemberUpdateRequestDto dto, @PathVariable("seq") String seq, HttpServletRequest request) {
-		System.out.println("dto >>>>>>>>>>>> " + dto);
 		if (memberService.updateMember(dto)) {
 			return true;
 		}

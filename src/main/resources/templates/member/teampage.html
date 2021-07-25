@@ -11,7 +11,7 @@
 		<td><strong>이름</strong></td>
 	</tr>
 	<tr th:each="team:${teamlist}" align="center">
-		<td><a th:href="@{'/getMemberDetail?id='+${team.memberId}}"><span th:text="${team.memberId}"></span></a></td>
+		<td><a th:href="@{'/member/info/'+${team.memberId}}"><span th:text="${team.memberId}"></span></a></td>
 		<td><span th:text="${team.name}"></span></td>
 	</tr>
 	<tr>

@@ -26,6 +26,13 @@ public class MainController {
 		mav.setViewName("main/testa");
 		return mav;
 	}
+	
+	@GetMapping("/testb")
+	public ModelAndView testb(Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main/testb");
+		return mav;
+	}
 
 	@GetMapping("/")
 	public ModelAndView login(Model model) {
