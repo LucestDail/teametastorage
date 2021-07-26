@@ -851,12 +851,13 @@ main = {
     	console.log("meta update activated");
 		var data={
 			title:$('#updateTitle').val(),
-			description:$('#updateDescription').val()
+			description:CKEDITOR.instances.updateDescription.getData()
 			}
 		var seq = $('#seq').val();
 		var team = $('#team').val();
 		var url="/meta/"+team+"/"+seq;
 		console.log(url);
+		console.log(data);
 		$.ajax({
             type:'POST',
             url:url,
