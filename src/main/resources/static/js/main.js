@@ -278,40 +278,6 @@ main = {
 			alert("something wrong... contact -> 01024299420")
         });
     },
-    metaupdate : function () {
-    	console.log("meta update activated");
-		var data={
-			metaSeq:$('#metaSeq').val(),
-			nameEng:$('#nameEng').val(),
-			nameKor:$('#nameKor').val(),
-			explanation:$('#explanation').val(),
-			type:$('#type').val()
-			}
-		console.log(data);
-		var url="/metaUpdate";
-		$.ajax({
-            type:'POST',
-            url:url,
-            dataType:"text",
-            contentType:'application/json; charset=utf-8',
-            data:JSON.stringify(data),
-        })
-        .done(function(data) {
-        	console.log("meta update complete");
-            if(data==="success"){
-				alert("Update!");
-				location.reload();
-			}else{
-				alert("Update fail");
-				location.href="/";
-			}
-        })
-        .fail(function (error) {
-        	console.log("meta update fail");
-        	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
-        });
-    },
     boardinsert : function () {
     	console.log("board insert activated");
 		var data={
@@ -825,7 +791,7 @@ main = {
     	console.log("meta insert activated");
 		var data={
 			title:$('#title').val(),
-			description:$('#description').val()
+			description:CKEDITOR.instances.description.getData()
 			}
 		var team = $('#team').val();
 		var url="/meta/"+team;

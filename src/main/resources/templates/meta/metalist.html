@@ -43,7 +43,11 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id="description" rows="5" class="form-control"></textarea>
+							<td><textarea name="description" id="description" rows="5" class="form-control"></textarea>
+							<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+									<script>
+									CKEDITOR.replace( 'description' );
+               				 		</script>
 							</td>
 						</tr>
 					</table>
