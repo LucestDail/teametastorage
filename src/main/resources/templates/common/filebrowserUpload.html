@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
@@ -10,29 +9,15 @@
 <title>TeaMetaStorage</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Bootstrap core JS-->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="/js/scripts.js"></script>
 <script src="/js/main.js"></script>
-<script
-	src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <link href="/css/style.css" rel="stylesheet" />
 <link rel="shortcut icon" href="img/favicon.ico">
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 </head>
 <body>
-
-								<div id="editor"></div>
-							<script>
-								const Editor = toastui.Editor;
-								const editor = new Editor({
-									el : document.querySelector('#editor'),
-									initialEditType : 'markdown',
-									previewStyle : 'vertical'
-								});
-							</script>
+<input type = "file" class = "form-control">
 </body>
 </html>

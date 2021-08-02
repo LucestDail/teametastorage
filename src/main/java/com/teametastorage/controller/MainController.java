@@ -47,5 +47,19 @@ public class MainController {
 		mav.setViewName("main/main");
 		return mav;
 	}
+	
+	@GetMapping("/filebrowserBrowse")
+	public ModelAndView filebrowserBrowse(Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/filebrowserBrowse");
+		return mav;
+	}
+	
+	@GetMapping("/filebrowserUpload")
+	public ModelAndView filebrowserUpload(Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("common/filebrowserUpload");
+		return mav;
+	}
 
 }

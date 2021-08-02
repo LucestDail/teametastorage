@@ -14,7 +14,7 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><span th:text="${board.content}"></span></td>
+			<td><span th:utext="${board.content}"></span></td>
 		</tr>
 		<tr>
 			<th>GOOD</th>
@@ -85,7 +85,15 @@
 						<tr>
                             <th>내용</th>
                             <td>
-                                <textarea id="updateContent" rows="5" class="form-control"></textarea>
+                            <div id="editor"></div>
+							<script>
+								const Editor = toastui.Editor;
+								const editor = new Editor({
+									el : document.querySelector('#editor'),
+									initialEditType : 'markdown',
+									previewStyle : 'vertical'
+								});
+							</script>
                             </td>
                         </tr>
                     </table>

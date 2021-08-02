@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>TeaMetaStorage</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Bootstrap core JS-->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+<script src="/js/main.js"></script>
+<link href="/css/style.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/favicon.ico">
+</head>
+<body>
+	<script>
+    function returnFileUrl() {
+
+        var funcNum = getUrlParam( 'CKEditorFuncNum' );
+        var fileUrl = 'http://c.cksource.com/a/1/img/sample.jpg';
+        window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl, function() {
+            // Get the reference to a dialog window.
+            var dialog = this.getDialog();
+            // Check if this is the Image Properties dialog window.
+            if ( dialog.getName() == 'image' ) {
+                // Get the reference to a text field that stores the "alt" attribute.
+                var element = dialog.getContentElement( 'info', 'txtAlt' );
+                // Assign the new value.
+                if ( element )
+                    element.setValue( 'alt text' );
+            }
+            // Return "false" to stop further execution. In such case CKEditor will ignore the second argument ("fileUrl")
+            // and the "onSelect" function assigned to the button that called the file manager (if defined).
+            // return false;
+        } );
+        window.close();
+    }
+    </script>
+	<button onclick="returnFileUrl()">Select File</button>
+</body>
+</html>

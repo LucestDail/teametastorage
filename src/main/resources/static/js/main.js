@@ -282,7 +282,7 @@ main = {
     	console.log("board insert activated");
 		var data={
 			title:$('#title').val(),
-			content:$('#content').val(),
+			content:editor.getHTML(),
 			category:$('#category').val()
 			}
 		var currentBoard = $('#category').val();
@@ -310,7 +310,7 @@ main = {
 		var data={
 			boardSeq:$('#boardSeq').val(),
 			title:$('#updateTitle').val(),
-			content:$('#updateContent').val()
+			content:editor.getHTML()
 			}
 		var currentBoard = $('#category').val();
 		var currentBoardSeq = $('#seq').val();
@@ -791,7 +791,7 @@ main = {
     	console.log("meta insert activated");
 		var data={
 			title:$('#title').val(),
-			description:CKEDITOR.instances.description.getData()
+			description:editor.getHTML()
 			}
 		var team = $('#team').val();
 		var url="/meta/"+team;
@@ -817,7 +817,7 @@ main = {
     	console.log("meta update activated");
 		var data={
 			title:$('#updateTitle').val(),
-			description:CKEDITOR.instances.updateDescription.getData()
+			description:editor.getHTML()
 			}
 		var seq = $('#seq').val();
 		var team = $('#team').val();
@@ -869,7 +869,7 @@ main = {
     	console.log("work insert activated");
 		var data={
 			title:$('#title').val(),
-			description:$('#description').val(),
+			description:editor.getHTML(),
 			start:$('#start').val(),
 			finish:$('#finish').val()
 			}
@@ -897,7 +897,7 @@ main = {
     	console.log("work update activated");
 		var data={
 			title:$('#updateTitle').val(),
-			description:$('#updateDescription').val(),
+			description:editor.getHTML(),
 			start:$('#updateStart').val(),
 			finish:$('#updateFinish').val()
 			}
