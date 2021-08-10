@@ -3,7 +3,19 @@
 <center><img src="http://teametastorage.com/img/companyImage.png" width="300" height="300"></center>
 
 [![Build Status](http://ec2-3-36-84-108.ap-northeast-2.compute.amazonaws.com:8080/buildStatus/icon?job=teametastorage)](http://ec2-3-36-84-108.ap-northeast-2.compute.amazonaws.com:8080/job/teametastorage/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+![](https://img.shields.io/badge/Maintained-yes-green.svg)
+![](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)
+![](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)
+
+![](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+![](https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)
+![](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ## 목차
 [1. **프로젝트 소개**](#프로젝트-소개)
@@ -121,56 +133,56 @@
     ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810150743bcc.png)
 
   * 내부적으로 Spring MVC 구조를 채택하여 맵핑 후 RESTFul 한 서비스 URL 제공이 가능하도록 구성하였습니다.  
-  * 서버에 접근 가능한 대상은 포트로 구분하여 AWS VPC 를 세팅, 구성하였습니다  
+  * 서버에 접근 가능한 대상은 포트로 구분하여 AWS VPC 를 세팅, 구성하였습니다.  
   * 개발 가용성 및 배포 시간을 단축하기 위하여 Jenkins - Docker 기반 CICD Pipeline 이 구축되었습니다.  
     ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810150736567.png)
   * 어플리케이션 모니터링을 위한 SpringBootAdmin 이 적용되었습니다.  
     ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/2021071909171161a.png)
 
-- 데이터 구조
+- 데이터 구조  
 ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810143808f3b.png)
   * 표준 JPA 기반 테이블 생성이 되었으며, Default Type 은 UTF-8 형식으로 데이터를 입출입, 통제합니다.  
 
 ## 상세 기능
-- 로그인
+- 로그인  
     ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/2021071821444636e.png)
   - 일반적인 로그인 기능입니다.
   - 모바일 활용이 가능하도록 반응형으로 구성하였습니다.(이하 모든 페이지 반응형 구성 완료)
 
-- 회원가입
+- 회원가입  
     ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/2021081014492423c.png)
   - 간단하게 입력이 가능한 정보들로만 구성하였으며, 개인이 특정되는 정보는 받지 않습니다.(정보화법률에 의거 근본적인 분쟁 소지 제거)
   - 최초 팀 가입시에는 해당 팀원이 관리자가 되며, 이후는 해당 관리자 팀원이 승인해야 로그인이 가능합니다.
   
-- 메인(일정 확인)
+- 메인(일정 확인)  
   ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/2021081014492520a.png)
   - 업무 입력 및 과제 입력을 통하여 제작된 일정을 볼 수 있습니다.
   - 최초 진입 페이지입니다.
 
-- 개인정보
+- 개인정보  
   ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810144927c9d.png)
   - 개인정보를 변경이 가능합니다.
 
-- 과제 입력
+- 과제 입력  
   ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810144928d1e.png)
   - 업무에 1:N 으로 구성되는 과제 입력이 가능합니다.
 
-- 업무 입력
+- 업무 입력  
   ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/202108101449305f0.png)
   - 업무를 입력 가능합니다
   - 하위 항목으로 과제가 있으며, 달력에 직접 제시되는 항목입니다.
 
-- 팀 단위 게시판 기능
+- 팀 단위 게시판 기능  
   ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810144931ff6.png)
   - 팀 단위로 REST 한 URL 로 표시되는 기능입니다.
   - 모든 기능은 모달로 제시됩니다.
   
-- 팀원 관리 페이지(팀 관리자)
+- 팀원 관리 페이지(팀 관리자)  
   ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/2021081014493382d.png)
   - 관리자에게만 표시되는 기능입니다.
   - 팀원 가입 허가, 삭제 및 개인 정보 열람이 가능합니다.
 
-- 팀원 확인 페이지
+- 팀원 확인 페이지  
   ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810144934eac.png)
   - 일반 팀 맴버가 확인이 가능한 팀원 목록입니다
   - 일반적인 아이디, 이름만 확인이 가능합니다.
