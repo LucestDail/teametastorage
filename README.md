@@ -82,8 +82,9 @@
 
 ## 설계 구조
 
-- 코드 구조
-![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810143810bae.png)
+- 코드 구조  
+  
+    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810143810bae.png)
   * 프로젝트 구조는 메이븐에서 제시하는 권장 템플릿 구조로 진행하였습니다.
   * com.teametastorage
     * 최초 어플리케이션 진입점이며 main 이 실행됩니다.
@@ -104,9 +105,27 @@
   * .util
     * 데이터 및 기타 로직 관리에 있어서 필요한 기능이 포함됩니다.  
   
-- 운영 구조
-  ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/202108101438116ad.png)
-  * 서버는 기본적으로 AWS IaaS 기반으로 구성되며 이를 통하여 어플리케이션을 설정하였습니다.  
+- 운영 환경 구조
+    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/202108101438116ad.png)
+
+  * 기본적으로 AWS IaaS 기반으로 구성되며 이를 통하여 어플리케이션을 설정하였습니다.  
+  * 어플리케이션 서버는 Micro 기반으로 구성, Devops 서버는 small 을 활용하여 구성하였습니다.(Docker 기반 빌드 시 가용성 고려)  
+    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810150737a19.png)
+
+  * AWS Route 53 을 활용한 DNS 도메인을 적용하였으며, 이를 활용하기 위하여 ELB 를 통한 라우팅 기능을 구성하였습니다.  
+    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/2021081015074055d.png)
+
+  * HTTPS 적용시 현재 일부 기능 활용 및 호환이 제한되는 문제가 식별되어 HTTPS 를 HTTP 로 강제 라우팅 전환하여 서비스를 제공중입니다.  
+    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810150742402.png)
+  * AWS RDS 를 활용하여 추가적인 용량 확보가 용이하도록 클라우딩 데이터베이스 기능을 구성하였습니다.  
+    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810150743bcc.png)
+
+  * 내부적으로 Spring MVC 구조를 채택하여 맵핑 후 RESTFul 한 서비스 URL 제공이 가능하도록 구성하였습니다.  
+  * 서버에 접근 가능한 대상은 포트로 구분하여 AWS VPC 를 세팅, 구성하였습니다  
+  * 개발 가용성 및 배포 시간을 단축하기 위하여 Jenkins - Docker 기반 CICD Pipeline 이 구축되었습니다.  
+    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810150736567.png)
+  * 어플리케이션 모니터링을 위한 SpringBootAdmin 이 적용되었습니다.  
+    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/2021071909171161a.png)
 
 - 데이터 구조
 ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/20210810143808f3b.png)
@@ -119,7 +138,7 @@
   - 모바일 활용이 가능하도록 반응형으로 구성하였습니다.(이하 모든 페이지 반응형 구성 완료)
 
 - 회원가입
-    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/202108101438116ad.png)
+    ![alt](https://blog-imgs-136-origin.fc2.com/d/a/i/dailusia/2021081014492423c.png)
   - 간단하게 입력이 가능한 정보들로만 구성하였으며, 개인이 특정되는 정보는 받지 않습니다.(정보화법률에 의거 근본적인 분쟁 소지 제거)
   - 최초 팀 가입시에는 해당 팀원이 관리자가 되며, 이후는 해당 관리자 팀원이 승인해야 로그인이 가능합니다.
   
