@@ -61,24 +61,35 @@ public class MemberController {
 	@GetMapping("/deleteMember")
 	public ModelAndView loginDeleteMember(@RequestParam String id, HttpServletRequest request) throws Exception {
 		String rank = (String) request.getSession().getAttribute("rank");
+		
 		Member targetMember = memberService.getMemberById(id);
 		Team targetTeam = teamService.getTeamObject(targetMember.getTeam(), targetMember.getId());
 		ModelAndView mav = new ModelAndView();
 		if (teamService.deleteTeamMember(targetTeam)) {
+			System.out.println("teamService.deleteTeamMember activated");
 			if (memberService.deleteMember(targetMember.getMemberSeq())) {
+				System.out.println("memberService.deleteMember");
 				if (!rank.equals("admin")) {
+					System.out.println("rank is not admin");
 					HttpSession session = request.getSession();
 					session.invalidate();
 					mav.setViewName("member/login.html");
 					return mav;
 				} else {
+					System.out.println("rank is admin");
 					List<Team> teamlist = new ArrayList<>();
 					teamlist = teamService.getAllMember(targetMember.getTeam());
+					Member sessionMember = (Member) request.getSession().getAttribute("member");
+					mav.addObject("team", sessionMember.getTeam());
 					mav.addObject("teamlist", teamlist);
 					mav.setViewName("member/listMembers.html");
 					return mav;
 				}
+			}else {
+				System.out.println("!memberService.deleteMember");
 			}
+		}else {
+			System.out.println("!teamService.deleteTeamMember activated");
 		}
 		mav.setViewName("member/mypage.html");
 		return mav;

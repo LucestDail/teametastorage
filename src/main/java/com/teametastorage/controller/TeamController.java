@@ -191,5 +191,24 @@ public class TeamController {
 		mav.setViewName("member/listMembers.html");
 		return mav;
 	}
+	
+	
+	@RequestMapping(value = "/teammanage/{team}", method = RequestMethod.GET)
+	public ModelAndView teamManage(Model model, @PathVariable("team") String team, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		List<Team> teamlist = new ArrayList<>();
+		teamlist = teamService.getAllMember(team);
+		mav.addObject("teamlist", teamlist);
+		mav.setViewName("member/listMembers.html");
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

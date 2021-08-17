@@ -65,10 +65,7 @@ public class MemberService {
 
 	public boolean deleteMember(Long seq) {
 		memberRepository.deleteById(seq);
-		if (Objects.isNull(getMemberBySeq(seq))) {
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	public Member getMemberBySeq(Long seq) {

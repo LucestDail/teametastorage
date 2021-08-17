@@ -22,12 +22,12 @@
 				function delete_confirm(){
 					if(confirm("delete?")){
 						location.href="/deleteMember?id=[[${team.memberId}]]";
-						
 					}else{
 						location.reload();
 					}
 				}
-			</script> <input th:if="${team.rank.equals('none')}" type="button" value="허가"
+			</script>
+			<input th:if="${team.rank.equals('none')}" type="button" value="허가"
 				onclick="join_confirm()" class="btn btn-primary"> <script
 					type="text/javascript">
 				function join_confirm(){

@@ -16,7 +16,7 @@
 			<a class="list-group-item list-group-item-action list-group-item-light p-3"
 				th:href="@{'/team/teamlist/'+${session.member.team}}">맴버 확인</a>
 			<a th:if="${session.rank.equals('admin')}"
-				class="list-group-item list-group-item-action list-group-item-light p-3" href="/listMembers">맴버 관리</a>
+				class="list-group-item list-group-item-action list-group-item-light p-3" th:href="@{'/team/teammanage/'+${session.member.team}}">맴버 관리</a>
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/qna/usually">문의 사항</a>
 		</div>
 	</div>
