@@ -16,6 +16,10 @@
 			<td><span th:text="${work.modifiedDate}"></span></td>
 		</tr>
 		<tr>
+			<th>업무 기간</th>
+			<td><span th:text="${work.start}"></span> ~ <span th:text="${work.finish}"></span></td>
+		</tr>
+		<tr>
 			<th>작성자</th>
 			<td><span th:text="${work.saveName}"></span></td>
 		</tr>
@@ -26,9 +30,14 @@
 			</td>
         </tr>
         <tr>
-			<th>업무 기간</th>
-			<td><span th:text="${work.start}"></span> ~ <span th:text="${work.finish}"></span></td>
-		</tr>
+			<th>과제 목록</th>
+			<td>
+				<ul th:each="eachmeta:${metalistIndex}" class="list-group">
+					<li class='list-group-item'><a th:href="@{'/meta/' + ${eachmeta.saveTeam} + '/' + ${eachmeta.metaSeq}}"><span th:text="${eachmeta.title}"></span></a></li>
+				</ul>
+			</td>
+        </tr>
+        
 		<tr>
 			<td colspan="2" align="center">
 				<a th:href="@{'/work/'+${team}}" class="btn btn-primary">돌아가기</a>
@@ -83,6 +92,74 @@
 									</script>
                             </td>
                         </tr>
+                        <tr>
+							<th><label for="metalist">metalist</label></th>
+							<td>
+
+								<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+								<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+								<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+								<script type="text/javascript" th:inline="javascript">
+										$(function() {
+											var targetdata = null;
+											var targetitem = null;
+											var targetmeta = null;
+											
+											/*<![CDATA[*/
+											var sessionMember = /*[[ ${session.member} ]]*/
+											/*]]*/
+											
+											console.log(sessionMember);
+											var metalist = function(request, response) {
+												$.ajax({
+													data : {
+														keyword : request.term
+													},
+													type : 'GET',
+													url : "/meta/" + sessionMember.team + "/data/search",
+													dataType : "json",
+													success : function(data) {
+														response($.map(data, function(item) {
+															return [ {
+																label : item.title,
+																value : item.title,
+																target : item
+															} ];
+														}));
+														targetdata = data;
+													}
+												});
+											};
+											$("#metaauto").autocomplete({
+												source : metalist,
+												autoFocus : true,
+												select : function(event, ui) {
+													targetmeta = ui.item.target;
+													action_add(targetmeta);
+												}
+											});
+								
+										});
+										function action_add(data) {
+											var text_add = data.title; //입력할 글씨
+											var ul_list = $("#ul_list"); //ul_list선언
+											var metalist = $('#metalist').val() + "";
+											console.log(metalist);
+											ul_list.append("<li class='list-group-item'>" + text_add + "</li>"); //ul_list안쪽에 li추가
+											metalist = metalist + "," + data.metaSeq;
+											console.log(metalist);
+											$('#metalist').attr('value',metalist);
+											console.log($('#metalist').val());
+										}
+									</script>
+								<div class = "ui-front">
+									<input id="metaauto" class="form-control">
+								</div>
+								<ul id="ul_list" class="list-group">
+								</ul>
+								<input type="hidden" id="metalist">
+							</td>
+						</tr>
                         <tr>
                             <th>
                                 <label for="startdateandtime">starts:</label>

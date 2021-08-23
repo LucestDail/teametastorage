@@ -1,5 +1,6 @@
 package com.teametastorage.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ import com.teametastorage.domain.Work;
 import com.teametastorage.dto.WorkCreateRequestDto;
 import com.teametastorage.dto.WorkUpdateRequestDto;
 import com.teametastorage.service.EventService;
+import com.teametastorage.service.MetaService;
 import com.teametastorage.service.WorkService;
 
 @RestController
@@ -37,6 +39,9 @@ public class WorkRestController {
 	
 	@Autowired
 	EventService eventService;
+	
+	@Autowired
+	MetaService metaService;
 	
 	@RequestMapping(value = "/works", method = RequestMethod.GET)
 	public List<Work> allWorks(HttpServletRequest request){
@@ -52,6 +57,19 @@ public class WorkRestController {
 	public ModelAndView getWork(@PathVariable("team") String team, @PathVariable("seq") String seq) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("work", workService.getWork(Long.parseLong(seq)));
+		String metalist = workService.getWork(Long.parseLong(seq)).getMetalist();
+		String[] metalistArray = metalist.split(",");
+		List<Meta> metalistIndex = new ArrayList<>();
+		for(int i = 0; i < metalistArray.length; i++) {
+			if(i == 0) {
+				continue;
+			}else {
+				Meta meta = metaService.getMeta(Long.parseLong(metalistArray[i]));
+				metalistIndex.add(meta);
+			}
+		}
+		System.out.println(metalistIndex);
+		mav.addObject("metalistIndex", metalistIndex);
 		mav.addObject("team", team);
 		mav.addObject("seq", seq);
 		mav.setViewName("work/workinfo");

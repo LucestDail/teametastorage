@@ -23,11 +23,12 @@ public class WorkUpdateRequestDto {
 	private String saveId; 
 	private String saveName; 
 	private String description;
+	private String metalist;
 	private LocalDateTime start; 
 	private LocalDateTime finish;
 
 	@Builder
-	public WorkUpdateRequestDto(Long workSeq, String title, String saveTeam, String saveId, String saveName, String description, LocalDateTime start, LocalDateTime finish) {
+	public WorkUpdateRequestDto(Long workSeq, String title, String saveTeam, String saveId, String saveName, String description, LocalDateTime start, LocalDateTime finish, String metalist) {
 		this.workSeq = workSeq;
 		this.title = title;
 		this.saveTeam = saveTeam;
@@ -36,9 +37,10 @@ public class WorkUpdateRequestDto {
 		this.description = description;
 		this.start = start;
 		this.finish = finish;
+		this.metalist = metalist;
 	}
 
 	public Work toEntity(Member member) {
-		return Work.builder().workSeq(workSeq).title(title).saveTeam(member.getTeam()).saveId(member.getId()).saveName(member.getName()).description(description).start(start).finish(finish).build();
+		return Work.builder().workSeq(workSeq).title(title).saveTeam(member.getTeam()).saveId(member.getId()).saveName(member.getName()).description(description).start(start).finish(finish).metalist(metalist).build();
 	}
 }

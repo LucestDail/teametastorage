@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="~{layouts/layout}">
 <meta charset="utf-8">
 <th:block layout:fragment="content">
@@ -22,60 +23,64 @@
 		th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
 	<script src="http//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
 		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.js}" type="text/javascript"></script>-->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-	<script type="text/javascript">
-		$(function () {
-			var metalist = function (request, response) {
-					$.ajax({
-						data: {
-							keyword: request.term
-						},
-						type:'GET',
-						url: "/meta/tms/data/search",
-						dataType: "json",
-						success: function (data) {
-							response($.map(data, function (item) {
-								return [item.description];
-							}));
-							console.log(data);
-						}
-					});
-				};
+	<script type="text/javascript" th:inline="javascript">
+		$(function() {
+			var targetdata = null;
+			var targetitem = null;
+			var targetmeta = null;
+			
+			/*<![CDATA[*/
+			var sessionMember = /*[[ ${session.member} ]]*/
+			/*]]*/
+			
+			console.log(sessionMember);
+			var metalist = function(request, response) {
+				$.ajax({
+					data : {
+						keyword : request.term
+					},
+					type : 'GET',
+					url : "/meta/" + sessionMember.team + "/data/search",
+					dataType : "json",
+					success : function(data) {
+						response($.map(data, function(item) {
+							return [ {
+								label : item.title,
+								value : item.title,
+								target : item
+							} ];
+						}));
+						targetdata = data;
+					}
+				});
+			};
 			$("#title").autocomplete({
-				source: metalist,
-				select: function (event, ui) {
-					console.log(ui.item.title);
-					console.log(ui.item.metaSeq);
+				source : metalist,
+				autoFocus : true,
+				select : function(event, ui) {
+					targetmeta = ui.item.target;
+					action_add(targetmeta.title);
+					console.log(targetmeta)
 				}
 			});
+
 		});
+		function action_add(data) {
+			var text_add = data; //입력할 글씨
+			var ul_list = $("#ul_list"); //ul_list선언
+			ul_list.append("<li class='list-group-item'>" + text_add + "</li>"); //ul_list안쪽에 li추가
+		}
 	</script>
 	<div>
-		<input id="title" class = "form-control">
+		<input id="title" class="form-control">
 	</div>
-	<br>
+	<ul id="ul_list" class = "list-group">
+	</ul>
 
-
-	<script type="text/javascript">
-		$(function () {
-			var availableCity = ["서울", "부산", "대구", "광주", "울산"];
-			$("#meta").autocomplete({
-				source: availableCity,
-				select: function (event, ui) {
-					console.log(ui.item);
-					console.log(availableCity);
-				}
-			});
-		});
-	</script>
-	<div>
-		<input id="meta" class = "form-control">
-	</div>
 </th:block>
 
 </html>

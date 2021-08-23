@@ -19,16 +19,18 @@ import lombok.ToString;
 @ToString
 public class WorkCreateRequestDto {
 
-	private String title; 
+	private String title;
 	private String saveTeam;
-	private String saveId; 
-	private String saveName; 
+	private String saveId;
+	private String saveName;
 	private String description;
-	private LocalDateTime start; 
+	private String metalist;
+	private LocalDateTime start;
 	private LocalDateTime finish;
-	
+
 	@Builder
-	public WorkCreateRequestDto(String title, String saveTeam, String saveId, String saveName, String description, LocalDateTime start, LocalDateTime finish) {
+	public WorkCreateRequestDto(String title, String saveTeam, String saveId, String saveName, String description,
+			LocalDateTime start, LocalDateTime finish, String metalist) {
 		this.title = title;
 		this.saveTeam = saveTeam;
 		this.saveId = saveId;
@@ -36,10 +38,12 @@ public class WorkCreateRequestDto {
 		this.description = description;
 		this.start = start;
 		this.finish = finish;
+		this.metalist = metalist;
 	}
-	
+
 	public Work toEntity(Member member) {
-		return Work.builder().title(title).saveTeam(member.getTeam()).saveId(member.getId()).saveName(member.getName()).description(description).start(start).finish(finish).build();
+		return Work.builder().title(title).saveTeam(member.getTeam()).saveId(member.getId()).saveName(member.getName())
+				.description(description).start(start).finish(finish).metalist(metalist).build();
 	}
 
 }

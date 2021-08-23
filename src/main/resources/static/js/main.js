@@ -870,6 +870,7 @@ main = {
 		var data={
 			title:$('#title').val(),
 			description:editor.getHTML(),
+			metalist:$('#metalist').val(),
 			start:$('#start').val(),
 			finish:$('#finish').val()
 			}
@@ -898,6 +899,7 @@ main = {
 		var data={
 			title:$('#updateTitle').val(),
 			description:editor.getHTML(),
+			metalist:$('#metalist').val(),
 			start:$('#updateStart').val(),
 			finish:$('#updateFinish').val()
 			}

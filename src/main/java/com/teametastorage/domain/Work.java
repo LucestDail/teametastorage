@@ -42,6 +42,9 @@ public class Work extends BaseTimeEntity{
 	@Column(length = 1000, nullable = false)
 	private String description;
 	
+	@Column(length = 500, nullable = false)
+	private String metalist; 
+	
 	@Column
 	private LocalDateTime start; 
 	
@@ -49,7 +52,7 @@ public class Work extends BaseTimeEntity{
 	private LocalDateTime finish;
 	
 	@Builder
-	public Work(Long workSeq, String title, String saveTeam, String saveId, String saveName, String description, LocalDateTime start, LocalDateTime finish) {
+	public Work(Long workSeq, String title, String saveTeam, String saveId, String saveName, String description, LocalDateTime start, LocalDateTime finish, String metalist) {
 		this.workSeq = workSeq;
 		this.title = title;
 		this.saveTeam = saveTeam;
@@ -58,6 +61,7 @@ public class Work extends BaseTimeEntity{
 		this.description = description;
 		this.start = start;
 		this.finish = finish;
+		this.metalist = metalist;
 	}
 
 }
