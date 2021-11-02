@@ -6,7 +6,9 @@ spring:
 #springboot logback configuration settings
 ---
 spring:
-  profiles: local
+    config:
+      activate:
+        on-profile: local
 logging:
   pattern:
     console: "[%d{yyyy-MM-dd HH:mm:ss.SSS}][%clr(%-10p)][%logger.%method:line%line] - %msg%n"
@@ -15,10 +17,12 @@ logging:
       springframework: INFO
 ---
 spring:
-  profiles: dev
+    config:
+      activate:
+        on-profile: dev
 logging:
   pattern:
-    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line]-%msg%n"
   file:
     name: ./logs/tmsLog.log
     max-history: 30
@@ -28,15 +32,18 @@ logging:
   logback:
     rollingpolicy:
       file-name-pattern: "/logs/abc.%d{yyyy-MM-dd}.%i"
-
-
+---
+logging:
+  file:
+    name: "/var/log/sample-boot-spplication.log"
+  pattern:
+    file: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"
 #local environment
 ---
 spring:
-  profiles: local
   datasource:
-    url: jdbc:mariadb://webservice.ce5zdjsnjhyy.ap-northeast-2.rds.amazonaws.com:3306/teametastorage
-    #url: jdbc:mariadb://192.168.11.21:3306/teametastorage
+    #url: jdbc:mariadb://webservice.ce5zdjsnjhyy.ap-northeast-2.rds.amazonaws.com:3306/teametastorage
+    url: jdbc:mariadb://192.168.11.21:3306/teametastorage
     username: admin
     password: admin1234
     driver-class-name: org.mariadb.jdbc.Driver
@@ -56,6 +63,8 @@ management:
             exposure:
                 include: '*'
 spring:
+    jmx:
+      enabled: true
     boot:
         admin:
             client:
@@ -68,3 +77,17 @@ spring:
                             name: admin
                             password: admin
                     service-url: http://teametastorage.com
+                    
+                    
+---
+spring:
+  boot:
+    admin:
+      client:
+        instance:
+          metadata:
+            tags:
+              environment: "teametastorage"
+info:
+  tags:
+    environment: "teametastorage"
