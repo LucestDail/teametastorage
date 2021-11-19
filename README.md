@@ -42,7 +42,7 @@
     * ID:admin
     * PW:admin
 * 해당 프로젝트는 [MIT 라이센스](https://choosealicense.com/licenses/mit/) 기반 배포 및 운영됩니다.  
-  *  관련 의문사항이나 기타 2차 가공 및 상업적 이용 등은 [이슈 생성](https://github.com/LucestDail/teametastorage/issues)을 통하여 문의 및 진행하시길 바랍니다.
+  *  관련 의문사항이나 기타 2차 가공, 혹은 상업적 이용 등은 [이슈 생성](https://github.com/LucestDail/teametastorage/issues)을 통하여 문의 및 진행하시길 바랍니다.
 
 
 
