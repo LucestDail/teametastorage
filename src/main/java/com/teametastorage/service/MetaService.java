@@ -29,15 +29,11 @@ public class MetaService {
 	private MetaRepository metaRepository;
 
 	public List<Meta> getMetaListByName(String name, String team) {
-		System.out.println("MetaService - getMetaListByName");
 		List<Meta> findMetaList = new ArrayList<>();
-		List<Meta> currentMetaList = metaRepository.findAll();
-		
 		return findMetaList;
 	}
 
 	public List<Meta> getAllMetaByTeam(String team) {
-		System.out.println("MetaService - getAllMetaName : " + team);
 		List<Meta> findMetaList = new ArrayList<>();
 		List<Meta> currentMetaList = metaRepository.findAll();
 		for (Meta targetMeta : currentMetaList) {
@@ -54,12 +50,10 @@ public class MetaService {
 	}
 
 	public Meta getMetaDetail(Long metaSeq) {
-		System.out.println("MetaService - getMetaDetail : " + metaSeq);
 		return metaRepository.getById(metaSeq);
 	}
 
 	public boolean updateMeta(Meta inputMeta, Member sessionMember) {
-		System.out.println("MetaService - updateMeta : " + inputMeta + " : " + sessionMember);
 		MetaUpdateRequestDto dto = new MetaUpdateRequestDto();
 		dto.setSaveName(sessionMember.getName());
 		dto.setSaveTeam(sessionMember.getTeam());
