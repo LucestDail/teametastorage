@@ -42,8 +42,8 @@ logging:
 ---
 spring:
   datasource:
-    url: jdbc:mariadb://webservice.ce5zdjsnjhyy.ap-northeast-2.rds.amazonaws.com:3306/teametastorage
-    #url: jdbc:mariadb://192.168.11.21:3306/teametastorage
+    #url: jdbc:mariadb://webservice.ce5zdjsnjhyy.ap-northeast-2.rds.amazonaws.com:3306/teametastorage
+    url: jdbc:mariadb://192.168.11.21:3306/teametastorage
     username: admin
     password: admin1234
     driver-class-name: org.mariadb.jdbc.Driver
