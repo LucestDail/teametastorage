@@ -76,7 +76,7 @@ spring:
                         user:
                             name: admin
                             password: admin
-                    service-url: http://teametastorage.com
+                    service-url: http://192.168.11.22:8010/
                     
                     
 ---
