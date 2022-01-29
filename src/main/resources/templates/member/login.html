@@ -20,8 +20,8 @@
 				Team Meta<br>
 				Storage
 			</h1><br>
-			<input type="text" placeholder="아이디를 입력하세요" id="id" class="form-control bg-transparent" style="color:white; font-weight:bold;"><br>
-			<input type="password" placeholder="비밀번호를 입력하세요" id="password" class="form-control bg-transparent" style="color:white; font-weight:bold;"><br>
+			<input type="text" placeholder="아이디를 입력하세요" id="id" class="form-control bg-transparent" style="color:white; font-weight:bold;" onKeypress="javascript:if(event.keyCode==13) {document.getElementById('btnmemberlogin').click();}"><br>
+			<input type="password" placeholder="비밀번호를 입력하세요" id="password" class="form-control bg-transparent" style="color:white; font-weight:bold;" onKeypress="javascript:if(event.keyCode==13) {document.getElementById('btnmemberlogin').click();}"><br>
 			<input type="button" value="로그인" id="btnmemberlogin" class="btn bg-transparent" style="color:white; font-weight:bold;">
 			<a href="register" class="btn bg-transparent" style="color:white; font-weight:bold;">회원가입</a>
 		</div>

@@ -37,7 +37,7 @@
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 		data-bs-keyboard="false" tabindex="-1"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel">과제 작성</h5>
@@ -59,7 +59,7 @@
 								const editor = new Editor({
 									el : document.querySelector('#editor'),
 									initialEditType : 'markdown',
-									previewStyle : 'vertical'
+									previewStyle : 'tab'
 								});
 							</script>
 							</td>
@@ -67,7 +67,6 @@
 						<tr>
 							<th><label for="metalist">metalist</label></th>
 							<td>
-
 								<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 								<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 								<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -119,9 +118,7 @@
 											console.log(metalist);
 											ul_list.append("<li class='list-group-item'>" + text_add + "</li>"); //ul_list안쪽에 li추가
 											metalist = metalist + "," + data.metaSeq;
-											console.log(metalist);
 											$('#metalist').attr('value',metalist);
-											console.log($('#metalist').val());
 										}
 									</script>
 								<div class = "ui-front">
