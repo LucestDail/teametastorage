@@ -143,13 +143,13 @@ main = {
         .done(function() {
         	console.log("mregister complete");
             //location.reload();
-			alert("Welcome!");
+			toastr.success('Teametastorage Admin', '환영합니다');
 			location.href="/";
         })
         .fail(function (error) {
         	console.log("mregister fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+        	toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     minsert : function () {
@@ -174,13 +174,13 @@ main = {
         .done(function() {
         	console.log("minsert complete");
             //location.reload();
-			alert("register meta data!");
+			toastr.success('Teametastorage Admin', '메타 등록 완료');
 			location.href="/metasearch";
         })
         .fail(function (error) {
         	console.log("register meta data fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     mlogin : function () {
@@ -204,17 +204,17 @@ main = {
             //location.reload();
 			console.log(data);
 			if(data==="true"){
-				alert("Welcome!");
+				toastr.success('Teametastorage Admin', '환영합니다');
 				location.href="/main";
 			}else{
-				alert("login fail");
+				toastr.warning('로그인 실패');
 				location.href="/";
 			}
         })
         .fail(function (error) {
         	console.log("login fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     mupdate : function () {
@@ -241,17 +241,17 @@ main = {
         .done(function(data) {
         	console.log("mupdate complete");
             if(data==="true"){
-				alert("개인정보가 수정되었습니다. 다시 로그인해주세요.");
+				toastr.success('Teametastorage Admin', '개인정보 수정 완료! 다시 로그인해주세요');
 				location.href="/";
 			}else{
-				alert("개인정보 수정 실패. 다시 시도해주세요");
+				toastr.warning('개인정보 수정 실패! 다시 시도해주세요!');
 				location.href=url;
 			}
         })
         .fail(function (error) {
         	console.log("mupdate fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
 	},
 	mdelete : function () {
@@ -275,7 +275,7 @@ main = {
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     boardinsert : function () {
@@ -302,7 +302,7 @@ main = {
         .fail(function (error) {
         	console.log("board insert fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     boardupdate : function () {
@@ -326,17 +326,17 @@ main = {
         .done(function(data) {
         	console.log("board update complete");
             if(data==="true"){
-				alert("Update!");
+				toastr.success('Teametastorage Admin', '수정 완료!');
 				location.href=url;
 			}else{
-				alert("Update fail");
+				toastr.warning('수정 실패!');
 				location.href=url;
 			}
         })
         .fail(function (error) {
         	console.log("board update fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     boarddelete : function () {
@@ -362,7 +362,7 @@ main = {
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     commentinsert : function () {
@@ -389,7 +389,7 @@ main = {
         .fail(function (error) {
         	console.log("comment insert fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     idvalidate : function () {
@@ -408,17 +408,17 @@ main = {
         })
         .done(function(data) {
         	if(data === 'true'){
-        		alert("ID 사용 가능합니다");
+				toastr.success('Teametastorage Admin', 'ID 사용 가능합니다');
         		document.getElementById('btnmemberregister').disabled = false;
 				document.getElementById('id').setAttribute("readonly", true);
         	}else{
-        		alert("ID가 이미 있습니다");
+				toastr.warning('ID가 이미 있습니다');
         	}
         })
         .fail(function (error) {
         	console.log("id validate fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     teamvalidate : function () {
@@ -437,15 +437,15 @@ main = {
         })
         .done(function(data) {
         	if(data === 'true'){
-        		alert("해당 팀은 없습니다. 가입할 경우 해당 팀을 새로 생성합니다");
+				toastr.success('Teametastorage Admin', '해당 팀은 없습니다. 가입할 경우 해당 팀을 새로 생성합니다');
         	}else{
-        		alert("해당 팀은 이미 있습니다. 가입할 경우 해당 팀장에게 가입 요청을 발송합니다");
+				toastr.warning('해당 팀은 이미 있습니다. 가입할 경우 해당 팀장에게 가입 요청을 발송합니다');
         	}
         })
         .fail(function (error) {
         	console.log("team validate fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
     policyinsert : function () {
@@ -470,7 +470,7 @@ main = {
         .fail(function (error) {
         	console.log("policy insert got problem");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
 			location.href="/qna/policy";
         });
     },
@@ -496,7 +496,7 @@ main = {
         .fail(function (error) {
         	console.log("policy insert got problem");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
 			location.href="/qna/notice";
         });
     },
@@ -522,7 +522,7 @@ main = {
         .fail(function (error) {
         	console.log("policy insert got problem");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
 			location.href="/qna/service";
         });
     },
@@ -548,7 +548,7 @@ main = {
         .fail(function (error) {
         	console.log("policy insert got problem");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
 			location.href="/qna/tech";
         });
     },
@@ -574,7 +574,7 @@ main = {
         .fail(function (error) {
         	console.log("policy insert got problem");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
 			location.href="/qna/usually";
         });
     },
@@ -597,17 +597,17 @@ main = {
         .done(function(data) {
         	console.log("team update complete");
             if(data==="success"){
-				alert("Update!");
+				toastr.success('Teametastorage Admin', '수정 완료!');
 				location.href=url;
 			}else{
-				alert("Update fail");
+				toastr.warning('수정 실패! 다시 시도해주세요!');
 				location.href=url;
 			}
         })
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },teamnoticeinsert : function () {
     	console.log("teamnotice insert activated");
@@ -628,17 +628,17 @@ main = {
         .done(function(data) {
         	console.log("teamnotice insert complete");
             if(data==="true"){
-				alert("Insert!");
+				toastr.success('Teametastorage Admin', '등록 완료!');
 				location.href=url;
 			}else{
-				alert("Insert fail");
+				toastr.warning('등록 실패!');
 				location.href=url;
 			}
         })
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },teamnoticeupdate : function () {
     	console.log("teamnotice update activated");
@@ -661,17 +661,17 @@ main = {
         .done(function(data) {
         	console.log("board update complete");
             if(data==="true"){
-				alert("Update!");
+				toastr.success('Teametastorage Admin', '수정 완료!');
 				location.href=url;
 			}else{
-				alert("Update fail");
+				toastr.warning('수정 실패! 다시 시도해주세요!');
 				location.href=url;
 			}
         })
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },teamnoticedelete : function () {
 		console.log("teamnotice delete activated");
@@ -696,7 +696,7 @@ main = {
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },qnainsert : function () {
     	console.log("qna insert activated");
@@ -718,17 +718,17 @@ main = {
         .done(function(data) {
         	console.log("qna insert complete");
             if(data==="true"){
-				alert("Insert!");
+				toastr.success('Teametastorage Admin', '등록 완료!');
 				location.href=url;
 			}else{
-				alert("Insert fail");
+				toastr.warning('등록 실패! 다시 시도해주세요!');
 				location.href=url;
 			}
         })
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },qnaupdate : function () {
     	console.log("qna update activated");
@@ -751,17 +751,17 @@ main = {
         .done(function(data) {
         	console.log("qna update complete");
             if(data==="true"){
-				alert("Update!");
+				toastr.success('Teametastorage Admin', '수정 완료!');
 				location.href=url;
 			}else{
-				alert("Update fail");
+				toastr.warning('수정 실패! 다시 시도해주세요!');
 				location.href=url;
 			}
         })
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },qnadelete : function () {
 		console.log("qna delete activated");
@@ -785,7 +785,7 @@ main = {
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },metainsert : function () {
     	console.log("meta insert activated");
@@ -805,13 +805,13 @@ main = {
         })
         .done(function() {
 			console.log("meta insert complete");
-			alert("작성하였습니다");
-				location.href=url;
+			toastr.success('Teametastorage Admin', '등록 완료!');
+			location.href=url;
         })
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },metaupdate : function () {
     	console.log("meta update activated");
@@ -833,13 +833,13 @@ main = {
         })
         .done(function() {
 			console.log("meta update complete");
-			alert("Update!");
+			toastr.success('Teametastorage Admin', '수정 완료!');
 			location.href=url;
         })
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },metadelete : function () {
 		console.log("meta delete activated");
@@ -863,7 +863,7 @@ main = {
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },workinsert : function () {
     	console.log("work insert activated");
@@ -886,13 +886,13 @@ main = {
         })
         .done(function() {
 			console.log("meta insert complete");
-			alert("작성하였습니다");
-				location.href=url;
+			toastr.success('Teametastorage Admin', '등록 완료!');
+			location.href=url;
         })
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },workupdate : function () {
     	console.log("work update activated");
@@ -916,13 +916,13 @@ main = {
         })
         .done(function() {
 			console.log("work update complete");
-			alert("Update!");
+			toastr.success('Teametastorage Admin', '수정 완료!');
 			location.href=url;
         })
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },workdelete : function () {
 		console.log("work delete activated");
@@ -946,7 +946,7 @@ main = {
         .fail(function (error) {
         	console.log("fail");
         	console.log(JSON.stringify(error));
-			alert("something wrong... contact -> 01024299420")
+			toastr.error('Teametastorage Admin', '연결 실패');
         });
     },
 };

@@ -42,6 +42,7 @@ logging:
 ---
 spring:
   datasource:
+#    url: jdbc:mariadb://192.168.11.21:3306/teametastorage
     url: jdbc:mariadb://teametastorage.com:8050/teametastorage
     username: admin
     password: admin1234
