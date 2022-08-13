@@ -33,3 +33,4 @@ build/
 .vscode/
 *.class
 /bin
+.DS_Store
