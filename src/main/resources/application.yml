@@ -67,7 +67,7 @@ spring:
     boot:
         admin:
             client:
-                url: http://ec2-43-200-163-42.ap-northeast-2.compute.amazonaws.com:8000
+                url: http://ec2-3-34-122-241.ap-northeast-2.compute.amazonaws.com:8000
                 username: admin
                 password: admin
                 instance:
