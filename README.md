@@ -2,7 +2,7 @@
 
 <center><img src="http://teametastorage.com/img/companyImage.png" width="300" height="300"></center>
 
-[![Build Status](http://192.168.11.21:9000/buildStatus/icon?job=teametastorage)](http://192.168.11.21:9000/job/teametastorage/)
+[![Build Status](http://ec2-43-200-163-42.ap-northeast-2.compute.amazonaws.com:8080/buildStatus/icon?job=tms)](http://ec2-43-200-163-42.ap-northeast-2.compute.amazonaws.com:8080/me/my-views/view/all/job/tms/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![](https://img.shields.io/badge/Maintained-yes-green.svg)
