@@ -76,7 +76,7 @@ spring:
                         user:
                             name: admin
                             password: admin
-                    service-url: http://ec2-52-79-114-110.ap-northeast-2.compute.amazonaws.com:8080/
+                    service-url: http://ec2-3-34-122-241.ap-northeast-2.compute.amazonaws.com:8080/
                     
                     
 ---
