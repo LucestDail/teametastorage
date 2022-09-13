@@ -34,3 +34,6 @@ build/
 *.class
 /bin
 .DS_Store
+
+### Eclise Metedata ###
+/.metadata
