@@ -7,12 +7,15 @@
 	<h1 class="mt-4">
 		<span th:text="${team}"></span> 팀 과제 게시판
 	</h1>
-	<table class="table">
+	<table class="table align-middle mb-0 bg-white">
+		<thead class="bg-light">
 		<tr align="center">
 			<th>과제명</th>
 			<th>작성자</th>
 			<th>작성일</th>
 		</tr>
+		</thead>
+		<tbody>
 		<tr th:each="meta:${boardPage}" align="center">
 			<td><a th:href="@{'/meta/'+${team}+'/'+${meta.metaSeq}}"><span
 					th:text="${meta.title}"></span></a></td>
@@ -25,6 +28,7 @@
 					data-bs-target="#staticBackdrop">작성</button>
 			</td>
 		</tr>
+		</tbody>
 	</table>
 	<input type="hidden" th:value="${team}" id="team">
 	<input type="hidden" th:value="${session.member.id}" id="saveId">
