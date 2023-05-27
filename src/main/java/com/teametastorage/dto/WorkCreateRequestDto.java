@@ -26,24 +26,24 @@ public class WorkCreateRequestDto {
 	private String description;
 	private String metalist;
 	private LocalDateTime start;
-	private LocalDateTime finish;
+	private LocalDateTime end;
 
 	@Builder
 	public WorkCreateRequestDto(String title, String saveTeam, String saveId, String saveName, String description,
-			LocalDateTime start, LocalDateTime finish, String metalist) {
+			LocalDateTime start, LocalDateTime end, String metalist) {
 		this.title = title;
 		this.saveTeam = saveTeam;
 		this.saveId = saveId;
 		this.saveName = saveName;
 		this.description = description;
 		this.start = start;
-		this.finish = finish;
+		this.end = end;
 		this.metalist = metalist;
 	}
 
 	public Work toEntity(Member member) {
 		return Work.builder().title(title).saveTeam(member.getTeam()).saveId(member.getId()).saveName(member.getName())
-				.description(description).start(start).finish(finish).metalist(metalist).build();
+				.description(description).start(start).end(end).metalist(metalist).build();
 	}
 
 }

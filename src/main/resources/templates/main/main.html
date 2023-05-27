@@ -30,14 +30,14 @@ $(document).ready(function() {
 			right: 'month,agendaWeek,agendaDay'
 		},
 		defaultDate: moment().format("YYYY-MM-DD"),
-		editable: true,
+		editable: false,
 		eventLimit: true, // allow "more" link when too many events
 		events: {
 	        url: '/work/works',
 	        type: 'GET',
 	        error: function() {
 	            alert('there was an error while fetching events!');
-	        },
+	        }
 	        //color: 'blue',   // a non-ajax option
 	        //textColor: 'white' // a non-ajax option
 	    }
