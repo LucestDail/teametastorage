@@ -872,7 +872,7 @@ main = {
 			description:editor.getHTML(),
 			metalist:$('#metalist').val(),
 			start:$('#start').val(),
-			finish:$('#finish').val()
+			end:$('#end').val()
 			}
 		var team = $('#team').val();
 		var url="/work/"+team;
@@ -901,7 +901,7 @@ main = {
 			description:editor.getHTML(),
 			metalist:$('#metalist').val(),
 			start:$('#updateStart').val(),
-			finish:$('#updateFinish').val()
+			end:$('#updateEnd').val()
 			}
 		var seq = $('#seq').val();
 		var team = $('#team').val();
