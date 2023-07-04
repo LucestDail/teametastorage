@@ -39,7 +39,7 @@ public class Work extends BaseTimeEntity{
 	@Column(length = 500, nullable = false)
 	private String saveName; 
 	
-	@Column(length = 1000, nullable = false)
+	@Column(columnDefinition = "LONGTEXT")
 	private String description;
 	
 	@Column(length = 500, nullable = false)

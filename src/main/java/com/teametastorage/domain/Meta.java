@@ -27,7 +27,7 @@ public class Meta extends BaseTimeEntity {
 	@Column(columnDefinition = "text", nullable = false)
 	private String title;
 
-	@Column(columnDefinition = "text", nullable = false,length=10000)
+	@Column(columnDefinition = "LONGTEXT")
 	private String description;
 
 	@Column(columnDefinition = "text", nullable = false)

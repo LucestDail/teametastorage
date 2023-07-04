@@ -25,7 +25,14 @@ public class LogInterceptor extends HandlerInterceptorAdapter{
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
-    	super.postHandle(request, response, handler, modelAndView);
+        try{
+            super.postHandle(request, response, handler, modelAndView);
+        }catch(Exception e){
+            if (logger.isInfoEnabled()) {
+                logger.info("(" +request.getRemoteAddr() + " : " + request.getRemotePort()+ ") => " + request.getRequestURI() + " / Thread [" + Thread.currentThread().getId() + "] -> " +super.getClass().getCanonicalName() + " : crash");
+            }
+        }
+    	
     }
 
     @Override
