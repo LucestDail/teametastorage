@@ -2,10 +2,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![](https://img.shields.io/badge/Maintained-yes-green.svg)
-![](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)
-![](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)
-
 ![](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![](https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white)
@@ -34,10 +30,6 @@
 * 개발 효율성을 향상시키기 위하여 다음과 같은 인프라가 활용, 구축되었습니다.  
   * Jenkins 및 Docker 를 이용한 CICD 파이프라인이 구성되었습니다.  
   * Amazon Web Service 환경을 이용한 클라우딩 기술을 활용하여 구축하였습니다.  
-* 현재 프로젝트는 정상 배포중이며, 어플리케이션은 [다음 주소](http://ec2-52-79-114-110.ap-northeast-2.compute.amazonaws.com:8080/)를 통하여 접근이 가능합니다.  
-  * 샘플 관리자 계정은 다음과 같습니다.  
-    * ID:admin
-    * PW:admin
 * 해당 프로젝트는 [MIT 라이센스](https://choosealicense.com/licenses/mit/) 기반 배포 및 운영됩니다.  
   *  관련 의문사항이나 기타 2차 가공, 혹은 상업적 이용 등은 [이슈 생성](https://github.com/LucestDail/teametastorage/issues)을 통하여 문의 및 진행하시길 바랍니다.
 
